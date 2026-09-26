@@ -668,12 +668,24 @@ def content_management(request):
         if request.content_type == 'application/json':
             try:
                 data = json.loads(request.body)
-                if data.get('action') == 'ajax_update_team_order':
-                    order_data = data.get('order_data', [])
+                action = data.get('action')
+                order_data = data.get('order_data', [])
+                
+                if action == 'ajax_update_team_order':
                     for item in order_data:
                         team.objects.filter(id=item['id']).update(display_order=item['order'])
-                    from django.http import JsonResponse
-                    return JsonResponse({'status': 'success'})
+                elif action == 'ajax_update_category_order':
+                    for item in order_data:
+                        Category.objects.filter(id=item['id']).update(display_order=item['order'])
+                elif action == 'ajax_update_banner_order':
+                    for item in order_data:
+                        HomepageBanner.objects.filter(id=item['id']).update(display_order=item['order'])
+                elif action == 'ajax_update_ads_order':
+                    for item in order_data:
+                        HomepageAds.objects.filter(id=item['id']).update(display_order=item['order'])
+                        
+                from django.http import JsonResponse
+                return JsonResponse({'status': 'success'})
             except Exception as e:
                 from django.http import JsonResponse
                 return JsonResponse({'status': 'error', 'message': str(e)}, status=400)

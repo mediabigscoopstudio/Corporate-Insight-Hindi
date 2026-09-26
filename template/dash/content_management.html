@@ -36,54 +36,29 @@
 
     <!-- CATEGORY ORDER -->
     <div class="card border-0 shadow-sm mb-4">
-
-        <div class="card-header bg-white">
-            <h5 class="mb-0">
-                Header Category Order
-            </h5>
-            <small class="text-muted">
-                Set to 0 to hide a category from the navigation menu.
-            </small>
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-0">Header Category Order (Gallery)</h5>
+                <small class="text-muted">Drag and drop to reorder. Toggle the switch to show/hide from the navigation menu.</small>
+            </div>
+            <span id="category-save-status" class="badge bg-success" style="display: none; transition: opacity 0.5s ease;">Saved!</span>
         </div>
 
         <div class="card-body">
-
-            <form method="POST">
-
-                {% csrf_token %}
-
-                <input type="hidden"
-                       name="action"
-                       value="update_category_order">
-
-                <div class="row">
-
-                    {% for i in categories %}
-
-                    <div class="col-md-3 mb-3">
-
-                        <label class="form-label">
-                            {{i.title}}
-                        </label>
-
-                        <input type="number"
-                               class="form-control"
-                               name="order_{{i.id}}"
-                               value="{{i.display_order}}">
-
+            <ul id="category-sortable-list" class="list-group">
+                {% for i in categories %}
+                <li class="list-group-item d-flex justify-content-between align-items-center" style="cursor: grab; border-left: 4px solid var(--bs-primary);" data-id="{{ i.id }}">
+                    <div>
+                        <i class="bi bi-grip-vertical text-muted me-2"></i>
+                        <strong>{{ i.title }}</strong>
                     </div>
-                    {% endfor %}
-
-                </div>
-
-                <button class="btn btn-dark">
-                    Save Order
-                </button>
-
-            </form>
-
+                    <div class="form-check form-switch m-0">
+                        <input class="form-check-input category-visibility-toggle" type="checkbox" role="switch" {% if i.display_order > 0 %}checked{% endif %} title="Show in Menu">
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-
     </div>
 
 
@@ -118,32 +93,22 @@
     <div class="card border-0 shadow-sm mb-4">
 
         <div class="card-header bg-white">
-
             <div class="d-flex justify-content-between align-items-center">
-
-                <h5 class="mb-0">
-                    Homepage Hero Banners
-                </h5>
-
-                <button class="btn btn-dark"
-                        data-bs-toggle="modal"
-                        data-bs-target="#bannerModal">
-
+                <div>
+                    <h5 class="mb-0">Homepage Hero Banners</h5>
+                    <small class="text-muted">Drag and drop cards to reorder banners.</small>
+                    <span id="banner-save-status" class="badge bg-success ms-2" style="display: none; transition: opacity 0.5s ease;">Saved!</span>
+                </div>
+                <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bannerModal">
                     Add Banner
-
                 </button>
-
             </div>
-
         </div>
 
         <div class="card-body">
-
-            <div class="row">
-
+            <div class="row" id="banner-sortable-list">
                 {% for i in banners %}
-
-                <div class="col-xl-3 col-lg-4 mb-4">
+                <div class="col-xl-3 col-lg-4 mb-4 banner-item" style="cursor: grab;" data-id="{{ i.id }}">
 
                     <div class="banner-card">
 
@@ -685,48 +650,97 @@
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var el = document.getElementById('team-sortable-list');
-    if(el) {
-        var sortable = Sortable.create(el, {
+    // Helper function to send sort data
+    function sendSortRequest(action, orderData, statusBadgeId) {
+        fetch(window.location.href, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({
+                action: action,
+                order_data: orderData
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                let statusBadge = document.getElementById(statusBadgeId);
+                if (statusBadge) {
+                    statusBadge.style.display = 'inline-block';
+                    statusBadge.style.opacity = '1';
+                    setTimeout(() => {
+                        statusBadge.style.opacity = '0';
+                        setTimeout(() => { statusBadge.style.display = 'none'; }, 500);
+                    }, 2000);
+                }
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // 1. Team Order
+    var teamEl = document.getElementById('team-sortable-list');
+    if(teamEl) {
+        Sortable.create(teamEl, {
             animation: 150,
             ghostClass: 'bg-light',
             onEnd: function (evt) {
-                // Get all items in their new order
-                let items = el.querySelectorAll('li');
+                let items = teamEl.querySelectorAll('li');
                 let orderData = [];
                 items.forEach((item, index) => {
-                    orderData.push({
-                        id: item.getAttribute('data-id'),
-                        order: index + 1
-                    });
+                    orderData.push({ id: item.getAttribute('data-id'), order: index + 1 });
                 });
+                sendSortRequest('ajax_update_team_order', orderData, 'team-save-status');
+            }
+        });
+    }
 
-                // Send to server
-                fetch(window.location.href, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    body: JSON.stringify({
-                        action: 'ajax_update_team_order',
-                        order_data: orderData
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        let statusBadge = document.getElementById('team-save-status');
-                        statusBadge.style.display = 'inline-block';
-                        statusBadge.style.opacity = '1';
-                        setTimeout(() => {
-                            statusBadge.style.opacity = '0';
-                            setTimeout(() => { statusBadge.style.display = 'none'; }, 500);
-                        }, 2000);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+    // 2. Category Order
+    var catEl = document.getElementById('category-sortable-list');
+    if(catEl) {
+        function getCategoryOrderData() {
+            let items = catEl.querySelectorAll('li');
+            let orderData = [];
+            items.forEach((item, index) => {
+                let isChecked = item.querySelector('.category-visibility-toggle').checked;
+                orderData.push({ id: item.getAttribute('data-id'), order: isChecked ? index + 1 : 0 });
+            });
+            return orderData;
+        }
+
+        Sortable.create(catEl, {
+            animation: 150,
+            ghostClass: 'bg-light',
+            onEnd: function (evt) {
+                sendSortRequest('ajax_update_category_order', getCategoryOrderData(), 'category-save-status');
+            }
+        });
+
+        // Add event listeners to toggles
+        catEl.querySelectorAll('.category-visibility-toggle').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                sendSortRequest('ajax_update_category_order', getCategoryOrderData(), 'category-save-status');
+            });
+        });
+    }
+
+    // 3. Banner Order
+    var bannerEl = document.getElementById('banner-sortable-list');
+    if(bannerEl) {
+        Sortable.create(bannerEl, {
+            animation: 150,
+            ghostClass: 'bg-light',
+            draggable: '.banner-item',
+            onEnd: function (evt) {
+                let items = bannerEl.querySelectorAll('.banner-item');
+                let orderData = [];
+                items.forEach((item, index) => {
+                    orderData.push({ id: item.getAttribute('data-id'), order: index + 1 });
+                });
+                sendSortRequest('ajax_update_banner_order', orderData, 'banner-save-status');
             }
         });
     }
