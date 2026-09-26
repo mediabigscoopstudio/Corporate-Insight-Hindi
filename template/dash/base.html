@@ -6,12 +6,13 @@
         <link rel="shortcut icon" href="/static/main/logo/Vector.webp" type="image/x-icon">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc."/>
-        <meta name="author" content="big scoop studio"/>
+        <meta name="author" content="Pinecode"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link rel="shortcut icon" href="/static/main/assets/vector.png">
         <link href="/static/dash/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
         <link href="/static/dash/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <script src="/static/dash/assets/js/head.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         {% block 'css' %}{% endblock 'css' %}
     </head>
     <body data-menu-color="light" data-sidebar="default">
@@ -172,7 +173,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col fs-13 text-muted text-center">
-                                &copy; <script>document.write(new Date().getFullYear())</script> - Designed by <a href="https://www.bigscoopstudio.com" class="text-reset fw-semibold">Big Scoop Studio</a> 
+                                &copy; <script>document.write(new Date().getFullYear())</script> - Designed by <a href="#" data-bs-toggle="modal" data-bs-target="#pinecodeModal" class="text-reset fw-semibold">Pinecode</a> 
                             </div>
                         </div>
                     </div>
@@ -190,6 +191,27 @@
         <script src="/static/dash/assets/js/pages/crm-dashboard.init.js"></script>
         <script src="/static/dash/assets/js/app.js"></script>
         {% block 'script' %}{% endblock 'script' %}
+
+        <!-- Pinecode Follow Modal -->
+        <div class="modal fade" id="pinecodeModal" tabindex="-1" aria-labelledby="pinecodeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content border-0 shadow" style="border-radius: 16px; overflow: hidden;">
+                <div class="modal-header border-0 pb-0 text-center justify-content-center position-relative">
+                <h5 class="modal-title fw-bold" id="pinecodeModalLabel">Pinecode</h5>
+                <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center pt-2 pb-4 px-4">
+                <div class="mb-3">
+                    <i class="bi bi-code-slash" style="font-size: 3rem; color: #212529;"></i>
+                </div>
+                <p class="mb-4 text-muted" style="font-size: 0.95rem;">This platform is carefully crafted by <strong>Pinecode</strong>. Follow our page for more updates and digital solutions!</p>
+                <a href="https://instagram.com/pinecode.in" target="_blank" class="btn btn-dark w-100 rounded-pill py-2 fw-semibold">
+                    <i class="bi bi-instagram me-2"></i> Follow Pinecode
+                </a>
+                </div>
+            </div>
+            </div>
+        </div>
     </body>
 
 </html>
