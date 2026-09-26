@@ -3,7 +3,25 @@
 {% block 'title' %}हमारे बारे में | Corporate Impact{% endblock 'title' %}
 
 {% block 'meta' %}
+<!-- Primary Meta Tags -->
+<meta name="title" content="हमारे बारे में | Corporate Impact">
 <meta name="description" content="Corporate Impact भारत का सबसे भरोसेमंद मंच है, जहां महत्वाकांक्षा जवाबदेही से मिलती है, और नेतृत्व मानवीय मूल्यों से मिलता है। हमारी कहानी, मिशन और टीम के बारे में जानें।">
+<meta name="keywords" content="Corporate Impact, About Us, हमारे बारे में, बिज़नेस न्यूज़, हिंदी न्यूज़, टीम, मिशन">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="हमारे बारे में | Corporate Impact">
+<meta property="og:description" content="Corporate Impact भारत का सबसे भरोसेमंद मंच है, जहां महत्वाकांक्षा जवाबदेही से मिलती है, और नेतृत्व मानवीय मूल्यों से मिलता है। हमारी कहानी, मिशन और टीम के बारे में जानें।">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="हमारे बारे में | Corporate Impact">
+<meta property="twitter:description" content="Corporate Impact भारत का सबसे भरोसेमंद मंच है, जहां महत्वाकांक्षा जवाबदेही से मिलती है, और नेतृत्व मानवीय मूल्यों से मिलता है। हमारी कहानी, मिशन और टीम के बारे में जानें।">
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
 {% endblock 'meta' %}
 
 {% block 'css' %}

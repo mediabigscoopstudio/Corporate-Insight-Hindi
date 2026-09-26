@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block 'title' %}Corporate Impact{% endblock 'title' %}</title>
+  <title>{% block 'title' %}Corporate Impact | जहां हर कहानी कुछ बदल देती है{% endblock 'title' %}</title>
   <link rel="shortcut icon" href="/static/main/logo/Vector.webp" type="image/x-icon">
-  {% block 'meta' %}{% endblock 'meta' %}
+  
+  {% block 'meta' %}
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Corporate Impact | जहां हर कहानी कुछ बदल देती है">
+  <meta name="description" content="Corporate Impact (कॉर्पोरेट इम्पैक्ट) पर पढ़ें बिज़नेस, लीडरशिप, स्टार्टअप्स, हेल्थ और लाइफस्टाइल से जुड़ी सबसे प्रामाणिक और ताज़ा खबरें (Hindi News)।">
+  <meta name="keywords" content="Corporate Impact, कॉर्पोरेट इम्पैक्ट, बिज़नेस न्यूज़, हिंदी न्यूज़, स्टार्टअप न्यूज़, लीडरशिप, हेल्थ और वैलनेस, कवर स्टोरी, Business News in Hindi, Corporate News">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:title" content="Corporate Impact | जहां हर कहानी कुछ बदल देती है">
+  <meta property="og:description" content="Corporate Impact (कॉर्पोरेट इम्पैक्ट) पर पढ़ें बिज़नेस, लीडरशिप, स्टार्टअप्स, हेल्थ और लाइफस्टाइल से जुड़ी सबसे प्रामाणिक और ताज़ा खबरें।">
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+  <meta property="twitter:title" content="Corporate Impact | जहां हर कहानी कुछ बदल देती है">
+  <meta property="twitter:description" content="Corporate Impact (कॉर्पोरेट इम्पैक्ट) पर पढ़ें बिज़नेस, लीडरशिप, स्टार्टअप्स, हेल्थ और लाइफस्टाइल से जुड़ी सबसे प्रामाणिक और ताज़ा खबरें।">
+  <meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
+  {% endblock 'meta' %}
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Corporate Impact",
+    "url": "{{ request.scheme }}://{{ request.get_host }}",
+    "description": "Corporate Impact (कॉर्पोरेट इम्पैक्ट) पर पढ़ें बिज़नेस, लीडरशिप, स्टार्टअप्स, हेल्थ और लाइफस्टाइल से जुड़ी सबसे प्रामाणिक खबरें।",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Corporate Impact",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ request.scheme }}://{{ request.get_host }}/static/main/logo/Vector.webp"
+      }
+    }
+  }
+  </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 

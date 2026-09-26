@@ -3,9 +3,62 @@
 {% block 'title' %}{{ data.title }} | Corporate Impact{% endblock 'title' %}
 
 {% block 'meta' %}
-<meta name="description" content="{{ data.meta_description|default:data.tldr }}">
+<!-- Primary Meta Tags -->
+<meta name="title" content="{{ data.title }} | Corporate Impact">
+<meta name="description" content="{{ data.meta_description|default:data.tldr|striptags|truncatechars:160 }}">
 <meta name="keywords" content="{{ data.meta_keywords }}">
 <meta name="author" content="{{ data.author.name }}">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="{{ data.title }}">
+<meta property="og:description" content="{{ data.meta_description|default:data.tldr|striptags|truncatechars:160 }}">
+{% if data.cover_image %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ data.cover_image.url }}">
+{% else %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
+{% endif %}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="{{ data.title }}">
+<meta property="twitter:description" content="{{ data.meta_description|default:data.tldr|striptags|truncatechars:160 }}">
+{% if data.cover_image %}
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ data.cover_image.url }}">
+{% else %}
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
+{% endif %}
+
+<!-- JSON-LD Article Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ data.title|escapejs }}",
+  "image": [
+    "{% if data.cover_image %}{{ request.scheme }}://{{ request.get_host }}{{ data.cover_image.url }}{% else %}{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp{% endif %}"
+  ],
+  "datePublished": "{{ data.created_at|date:'c' }}",
+  "dateModified": "{{ data.updated_at|default:data.created_at|date:'c' }}",
+  "author": [{
+      "@type": "Person",
+      "name": "{{ data.author.name|escapejs }}",
+      "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'author' data.author.slug %}"
+  }],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Corporate Impact",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ request.scheme }}://{{ request.get_host }}/static/main/logo/Vector.webp"
+    }
+  },
+  "description": "{{ data.meta_description|default:data.tldr|striptags|truncatechars:160|escapejs }}"
+}
+</script>
 {% endblock 'meta' %}
 
 {% block 'css' %}

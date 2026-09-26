@@ -3,7 +3,25 @@
 {% block 'title' %}सहायता और संपर्क | Corporate Impact{% endblock 'title' %}
 
 {% block 'meta' %}
+<!-- Primary Meta Tags -->
+<meta name="title" content="सहायता और संपर्क | Corporate Impact">
 <meta name="description" content="संपादकीय सहयोग, साझेदारी, विज्ञापन, सहायता या मीडिया अवसरों के लिए Corporate Impact से संपर्क करें। आइए एक सार्थक बातचीत शुरू करें।">
+<meta name="keywords" content="Contact Corporate Impact, संपर्क करें, सहायता, विज्ञापन, साझेदारी, Help, Support">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="सहायता और संपर्क | Corporate Impact">
+<meta property="og:description" content="संपादकीय सहयोग, साझेदारी, विज्ञापन, सहायता या मीडिया अवसरों के लिए Corporate Impact से संपर्क करें। आइए एक सार्थक बातचीत शुरू करें।">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="सहायता और संपर्क | Corporate Impact">
+<meta property="twitter:description" content="संपादकीय सहयोग, साझेदारी, विज्ञापन, सहायता या मीडिया अवसरों के लिए Corporate Impact से संपर्क करें। आइए एक सार्थक बातचीत शुरू करें।">
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
 {% endblock 'meta' %}
 
 {% block 'css' %}

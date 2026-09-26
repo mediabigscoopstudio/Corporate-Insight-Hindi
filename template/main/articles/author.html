@@ -3,7 +3,33 @@
 {% block 'title' %}{{ data.name }} | Corporate Impact{% endblock 'title' %}
 
 {% block 'meta' %}
-<meta name="description" content="Corporate Impact पर {{ data.name }}, {{ data.designation }} द्वारा लेख और विचार पढ़ें।">
+<!-- Primary Meta Tags -->
+<meta name="title" content="{{ data.name }} | Corporate Impact">
+<meta name="description" content="Corporate Impact पर {{ data.name }}, {{ data.designation }} द्वारा लेख और विचार पढ़ें। {{ data.description|striptags|truncatechars:100 }}">
+<meta name="keywords" content="{{ data.name }}, Corporate Impact, Author, Journalist">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="profile">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="{{ data.name }} | Corporate Impact">
+<meta property="og:description" content="Corporate Impact पर {{ data.name }}, {{ data.designation }} द्वारा लेख और विचार पढ़ें।">
+{% if data.image %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ data.image.url }}">
+{% else %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
+{% endif %}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="{{ data.name }} | Corporate Impact">
+<meta property="twitter:description" content="Corporate Impact पर {{ data.name }}, {{ data.designation }} द्वारा लेख और विचार पढ़ें।">
+{% if data.image %}
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ data.image.url }}">
+{% else %}
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
+{% endif %}
 {% endblock 'meta' %}
 
 {% block 'css' %}
