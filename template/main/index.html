@@ -529,6 +529,24 @@
       transform: scale(1.04);
   }
 </style>
+<style>
+  /* =============================================
+     GALLERY MARQUEE
+  ============================================= */
+  .ci-gallery-section { padding: 48px 0; background: var(--ci-cream); overflow: hidden; border-top: 1px solid rgba(0,0,0,0.05); }
+  .gallery-marquee-track { display: flex; width: max-content; animation: gallery-scroll 35s linear infinite; }
+  .gallery-marquee-track:hover { animation-play-state: paused; }
+  .gallery-marquee-group { display: flex; align-items: center; gap: 24px; padding: 0 12px; }
+  .gallery-marquee-img { height: 260px; width: auto; max-width: 80vw; object-fit: contain; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); background: #fff; padding: 6px; transition: transform 0.3s ease; }
+  .gallery-marquee-img:hover { transform: scale(1.02); }
+  @keyframes gallery-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  
+  @media (max-width: 768px) {
+    .ci-gallery-section { padding: 32px 0; }
+    .gallery-marquee-img { height: 160px; }
+    .gallery-marquee-group { gap: 16px; padding: 0 8px; }
+  }
+</style>
 
 {% endblock 'css' %}
 
@@ -1145,6 +1163,30 @@
     </div>
   </div>
 </section>
+
+<!-- =============================================
+     GALLERY SECTION
+============================================= -->
+{% if galleries %}
+<section class="ci-gallery-section">
+  <div class="container-fluid p-0">
+    <!-- Duplicate track for seamless infinite scrolling -->
+    <div class="gallery-marquee-track">
+      <div class="gallery-marquee-group">
+        {% for img in galleries %}
+          <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:img.title }}" class="gallery-marquee-img" title="{{ img.title }}">
+        {% endfor %}
+      </div>
+      <!-- Seamless duplicate -->
+      <div class="gallery-marquee-group" aria-hidden="true">
+        {% for img in galleries %}
+          <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:img.title }}" class="gallery-marquee-img" title="{{ img.title }}">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
 
 
 <!-- =============================================

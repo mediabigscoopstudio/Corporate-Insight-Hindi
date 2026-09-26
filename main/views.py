@@ -22,6 +22,10 @@ def index(request):
         'display_order'
     )
 
+    # GALLERIES
+    from dash.models import Gallery
+    galleries = Gallery.objects.all().order_by('display_order')
+
     # FEATURED VIDEOS ("Watch" strip)
     featured_videos = FeaturedVideo.objects.filter(
         status="Enabled"
@@ -85,6 +89,8 @@ def index(request):
         'hero_banners': hero_banners,
 
         'homepage_ads': homepage_ads,
+
+        'galleries': galleries,
 
         'featured_videos': featured_videos,
     }
