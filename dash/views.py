@@ -664,6 +664,19 @@ def content_management(request):
 
     # ---------------- POST ACTIONS ----------------
     if request.method == "POST":
+        import json
+        if request.content_type == 'application/json':
+            try:
+                data = json.loads(request.body)
+                if data.get('action') == 'ajax_update_team_order':
+                    order_data = data.get('order_data', [])
+                    for item in order_data:
+                        team.objects.filter(id=item['id']).update(display_order=item['order'])
+                    from django.http import JsonResponse
+                    return JsonResponse({'status': 'success'})
+            except Exception as e:
+                from django.http import JsonResponse
+                return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
         action = request.POST.get('action')
 
