@@ -1,0 +1,311 @@
+{% extends "main/base.html" %}
+
+{% block 'title' %}करियर | BIGSTORY Network{% endblock 'title' %}
+
+{% block 'css' %}
+<style>
+  /* =============================================
+     CAREERS LANDING PAGE STYLES
+  ============================================= */
+  .career-page-wrapper {
+    background: var(--ci-paper, #f9f9f9);
+    padding: 80px 0 120px;
+    min-height: 100vh;
+  }
+
+  /* Left Side: Persuasive Content */
+  .cp-content-side {
+    position: sticky;
+    top: 120px;
+    padding-right: 40px;
+  }
+  .cp-eyebrow {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--ci-red);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .cp-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--ci-red);
+  }
+  .cp-title {
+    font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px);
+    font-weight: 900; color: var(--ci-black); line-height: 1.05;
+    letter-spacing: -1px; margin-bottom: 24px;
+  }
+  .cp-desc {
+    font-family: var(--font-sans); font-size: 16px; color: var(--ci-graphite);
+    line-height: 1.7; margin-bottom: 32px;
+  }
+  
+  .cp-quote-box {
+    margin-top: 48px; 
+    border-left: 2px solid var(--ci-red); 
+    padding-left: 16px;
+  }
+  .cp-quote-text {
+    font-family: var(--font-serif); font-style: italic; font-size: 18px; 
+    color: var(--ci-graphite); margin: 0; line-height: 1.6;
+  }
+
+  /* Right Side: The Form Card */
+  .cp-form-card {
+    background: var(--ci-white, #ffffff);
+    border: 1px solid var(--ci-mist, #e0e0e0);
+    border-radius: 6px;
+    padding: 48px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.04);
+  }
+  .cp-section-title {
+    font-family: var(--font-display); font-size: 20px; font-weight: 700;
+    color: var(--ci-black); margin-bottom: 20px; border-bottom: 1px solid var(--ci-mist);
+    padding-bottom: 10px; margin-top: 32px;
+  }
+  .cp-section-title:first-child { margin-top: 0; }
+
+  /* Form Elements */
+  .cp-form-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;
+  }
+  .cp-input-group {
+    display: flex; flex-direction: column;
+  }
+  .cp-input-group.full-width {
+    grid-column: span 2;
+  }
+  .cp-input-group label {
+    font-family: var(--font-sans); font-size: 11px; font-weight: 700;
+    color: var(--ci-black); margin-bottom: 8px; text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .cp-input, .cp-select, .cp-textarea {
+    width: 100%; padding: 14px 16px; background: var(--ci-paper, #f9f9f9);
+    border: 1px solid var(--ci-mist, #e0e0e0); border-radius: 3px;
+    font-family: var(--font-sans); font-size: 14px; color: var(--ci-black);
+    outline: none; transition: all 0.2s;
+  }
+  .cp-input:focus, .cp-select:focus, .cp-textarea:focus {
+    border-color: var(--ci-red); background: #fff; box-shadow: 0 0 0 3px rgba(204,27,27,0.05);
+  }
+  .cp-textarea {
+    resize: vertical; min-height: 100px;
+  }
+  .cp-helper-text {
+    font-family: var(--font-sans); font-size: 11px; color: var(--ci-slate);
+    margin-top: 6px;
+  }
+
+  /* File Input Styling */
+  .cp-file-input-wrapper {
+    position: relative;
+  }
+  .cp-file-input {
+    padding-top: 11px;
+  }
+  .file-error-msg {
+    display: none; color: var(--ci-red); font-family: var(--font-sans); 
+    font-size: 11px; font-weight: 700; margin-top: 6px;
+  }
+
+  /* Checkbox & Button */
+  .cp-checkbox-wrapper {
+    display: flex; align-items: flex-start; gap: 12px; margin: 32px 0;
+    padding: 16px; background: rgba(204,27,27,0.03); border: 1px solid rgba(204,27,27,0.1);
+    border-radius: 4px;
+  }
+  .cp-checkbox-wrapper input[type="checkbox"] {
+    margin-top: 4px; accent-color: var(--ci-red); width: 16px; height: 16px;
+  }
+  .cp-checkbox-wrapper label {
+    font-family: var(--font-sans); font-size: 13px; color: var(--ci-graphite);
+    line-height: 1.5; cursor: pointer; margin: 0;
+  }
+  
+  .cp-submit-btn {
+    background: var(--ci-black); color: #fff; border: none; padding: 18px 32px;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+    border-radius: 3px; transition: background 0.2s, transform 0.2s; width: 100%;
+  }
+  .cp-submit-btn:hover:not(:disabled) {
+    background: var(--ci-red); transform: translateY(-2px);
+  }
+  .cp-submit-btn:disabled {
+    background: var(--ci-mist); cursor: not-allowed; color: var(--ci-slate);
+  }
+
+  /* Responsive */
+  @media (max-width: 991px) {
+    .cp-content-side { position: relative; top: 0; padding-right: 0; margin-bottom: 48px; }
+  }
+  @media (max-width: 768px) {
+    .cp-form-card { padding: 32px 24px; }
+    .cp-form-grid { grid-template-columns: 1fr; }
+    .cp-input-group.full-width { grid-column: span 1; }
+  }
+</style>
+{% endblock 'css' %}
+
+{% block 'body' %}
+<div class="career-page-wrapper">
+  <div class="container">
+    <div class="row">
+      
+      <!-- =============================================
+           LEFT: EDITORIAL & BRAND ALIGNMENT
+      ============================================= -->
+      <div class="col-lg-5">
+        <div class="cp-content-side">
+          <div class="cp-eyebrow">न्यूज़रूम से जुड़ें</div>
+          <h1 class="cp-title">भारतीय मीडिया का भविष्य गढ़ें।</h1>
+          <p class="cp-desc">
+            BIGSTORY Network को अथक कहानीकारों, तीक्ष्ण संपादकों और गहन विश्लेषकों की तलाश है। हम सिर्फ खबरें नहीं देते; हम पूरे तंत्र का नक्शा बनाते हैं।
+          </p>
+          <p class="cp-desc">
+            अगर आपको भारत के कॉर्पोरेट परिदृश्य, स्टार्टअप इकोसिस्टम या नीतिगत बदलावों की गहरी समझ है, तो यहां आपके लिए एक जगह इंतज़ार कर रही है।
+          </p>
+
+          <div class="cp-quote-box">
+            <p class="cp-quote-text">
+              "हम एक ऐसा मीडिया मंच बना रहे हैं जो पाठक की बुद्धिमत्ता का सम्मान करता है। हमें ऐसे लेखक चाहिए जो वही करें।"
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =============================================
+           RIGHT: WRITER APPLICATION FORM
+      ============================================= -->
+      <div class="col-lg-7">
+        <div class="cp-form-card">
+          <!-- enctype="multipart/form-data" is critical for the resume upload -->
+          <form action="/career_form" method="POST" enctype="multipart/form-data" id="careerForm">
+            {% csrf_token %}
+
+            <!-- SECTION: Basic Details -->
+            <div class="cp-section-title">बुनियादी विवरण</div>
+            <div class="cp-form-grid">
+              <div class="cp-input-group">
+                <label>पूरा नाम *</label>
+                <input type="text" name="full_name" class="cp-input" required>
+              </div>
+              <div class="cp-input-group">
+                <label>ईमेल पता *</label>
+                <input type="email" name="email" class="cp-input" required>
+              </div>
+              <div class="cp-input-group">
+                <label>फ़ोन नंबर *</label>
+                <input type="tel" name="phone" class="cp-input" required placeholder="+91">
+              </div>
+              <div class="cp-input-group">
+                <label>वर्तमान स्थान *</label>
+                <input type="text" name="location" class="cp-input" required placeholder="शहर, राज्य">
+              </div>
+            </div>
+
+            <!-- SECTION: Professional Info -->
+            <div class="cp-section-title">व्यावसायिक प्रोफ़ाइल</div>
+            <div class="cp-form-grid">
+              <div class="cp-input-group">
+                <label>अनुभव स्तर *</label>
+                <select name="experience" class="cp-select" required>
+                  <option value="" disabled selected>अनुभव चुनें</option>
+                  <option value="entry">0-2 वर्ष (एंट्री लेवल)</option>
+                  <option value="mid">3-5 वर्ष (मिड-लेवल)</option>
+                  <option value="senior">5-8 वर्ष (सीनियर)</option>
+                  <option value="lead">8+ वर्ष (लीड/एडिटर)</option>
+                </select>
+              </div>
+              <div class="cp-input-group">
+                <label>प्राथमिक ट्रैक *</label>
+                <select name="track" class="cp-select" required>
+                  <option value="" disabled selected>एक ट्रैक चुनें</option>
+                  <option value="editorial">संपादकीय और रिपोर्टिंग</option>
+                  <option value="copy_edit">कॉपी एडिटिंग और डेस्क</option>
+                  <option value="multimedia">मल्टीमीडिया / वीडियो</option>
+                  <option value="research">रिसर्च और डेटा</option>
+                </select>
+              </div>
+              <div class="cp-input-group full-width">
+                <label>विशेषज्ञता के क्षेत्र (बीट्स) *</label>
+                <input type="text" name="beats" class="cp-input" required placeholder="जैसे, D2C, एग्रीटेक, कैपिटल मार्केट्स, पॉलिसी">
+              </div>
+            </div>
+
+            <!-- SECTION: Links & Portfolio -->
+            <div class="cp-section-title">डिजिटल फ़ुटप्रिंट</div>
+            <div class="cp-form-grid">
+              <div class="cp-input-group full-width">
+                <label>पोर्टफ़ोलियो / प्रकाशित लिंक *</label>
+                <input type="url" name="portfolio_links" class="cp-input" required placeholder="अपनी शीर्ष 3 क्लिप्स या Authory/MuckRack प्रोफ़ाइल का लिंक">
+              </div>
+              <div class="cp-input-group">
+                <label>लिंक्डइन प्रोफ़ाइल *</label>
+                <input type="url" name="linkedin" class="cp-input" required placeholder="https://linkedin.com/in/...">
+              </div>
+              <div class="cp-input-group">
+                <label>ट्विटर / X हैंडल</label>
+                <input type="url" name="twitter" class="cp-input" placeholder="https://twitter.com/...">
+              </div>
+            </div>
+
+            <!-- SECTION: Intent & Resume -->
+            <div class="cp-section-title">अंतिम विवरण</div>
+            <div class="cp-form-grid">
+              <div class="cp-input-group full-width">
+                <label>BIGSTORY Network क्यों? *</label>
+                <textarea name="why_bigstory" class="cp-textarea" required placeholder="हमें बताएं कि आप हमारे साथ क्यों जुड़ना चाहते हैं, और न्यूज़रूम में आप क्या अनोखा नज़रिया लाते हैं।"></textarea>
+              </div>
+
+              <!-- Resume Upload with Client-Side Size Validation -->
+              <div class="cp-input-group full-width cp-file-input-wrapper">
+                <label>रिज़्यूमे अपलोड (PDF, अधिकतम 5MB) *</label>
+                <input type="file" name="resume" id="resumeUpload" class="cp-input cp-file-input" accept=".pdf" required>
+                <div class="cp-helper-text">कृपया अपना अपडेटेड CV PDF फ़ॉर्मेट में अपलोड करें।</div>
+                <div id="fileError" class="file-error-msg">फ़ाइल 5MB से बड़ी है। कृपया छोटी फ़ाइल अपलोड करें।</div>
+              </div>
+            </div>
+
+            <!-- SECTION: Consent -->
+            <div class="cp-checkbox-wrapper">
+              <input type="checkbox" name="consent" id="career_consent" required>
+              <label for="career_consent">मैं पुष्टि करता/करती हूं कि दी गई जानकारी सही है और BIGSTORY Network को भर्ती उद्देश्यों के लिए मेरा डेटा प्रोसेस करने की सहमति देता/देती हूं।</label>
+            </div>
+
+            <button type="submit" class="cp-submit-btn" id="submitBtn">आवेदन जमा करें</button>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock 'body' %}
+
+{% block 'script' %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const fileInput = document.getElementById('resumeUpload');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('fileError');
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+
+    // Client-side validation to strictly enforce the 5MB limit
+    fileInput.addEventListener('change', function () {
+      if (this.files && this.files[0]) {
+        if (this.files[0].size > maxSize) {
+          // File is too large
+          errorMsg.style.display = 'block';
+          submitBtn.disabled = true;
+          this.style.borderColor = 'var(--ci-red)';
+        } else {
+          // File is valid
+          errorMsg.style.display = 'none';
+          submitBtn.disabled = false;
+          this.style.borderColor = 'var(--ci-mist)';
+        }
+      }
+    });
+  });
+</script>
+{% endblock 'script' %}

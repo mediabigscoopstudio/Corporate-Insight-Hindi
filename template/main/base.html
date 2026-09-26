@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block 'title' %}Corporate Impact{% endblock 'title' %}</title>
+  <link rel="shortcut icon" href="/static/main/logo/Vector.webp" type="image/x-icon">
+  {% block 'meta' %}{% endblock 'meta' %}
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    /* =========================================
+       BRAND TOKENS
+    ========================================= */
+    :root {
+      --ci-red:       #CC1B1B;
+      --ci-red-dark:  #A01515;
+      --ci-red-light: #E63030;
+      --ci-red-pale:  #FDEAEA;
+      --ci-black:     #0F0F0F;
+      --ci-charcoal:  #1E1E1E;
+      --ci-graphite:  #3A3A3A;
+      --ci-slate:     #6B6B6B;
+      --ci-silver:    #B0B0B0;
+      --ci-mist:      #E8E8E8;
+      --ci-paper:     #F7F5F2;
+      --ci-white:     #FFFFFF;
+      --ci-gold:      #C9A227;
+      --ci-ink:       #1A1A2E;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-serif:   'Source Serif 4', Georgia, serif;
+      --font-sans:    'DM Sans', system-ui, sans-serif;
+    }
+
+    /* =========================================
+       BASE RESET
+    ========================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--ci-paper);
+      color: var(--ci-black);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; padding: 0; margin: 0; }
+
+    /* =========================================
+       MASTHEAD
+    ========================================= */
+    .ci-masthead {
+      background: var(--ci-black);
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      /* Smooth transition for the hide/show effect */
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+
+    /* This class hides the header by pushing it exactly 100% upwards */
+    .ci-masthead--hidden {
+      transform: translateY(-100%);
+    }
+
+    /* --- Top Bar --- */
+    .ci-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 40px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+    }
+    .ci-top-actions {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .ci-top-link {
+      color: rgba(255,255,255,0.5);
+      transition: color 0.15s;
+    }
+    .ci-top-link:hover { color: var(--ci-white); }
+
+    .ci-btn-subscribe {
+      background: var(--ci-red);
+      color: var(--ci-white);
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+      transition: background 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+    .ci-btn-subscribe:hover { background: var(--ci-red-dark); color: var(--ci-white); }
+
+    /* --- Logo (Updated to White Background) --- */
+    .ci-logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 40px;
+      background-color: var(--ci-white);
+      border-bottom: 0.5px solid var(--ci-mist);
+    }
+    .ci-logo-container img {
+      max-height: 68px;
+      height: auto;
+      width: auto;
+      max-width: 100%;
+      display: block;
+    }
+
+    /* --- Category Nav --- */
+    .ci-nav-scroll-wrapper {
+      padding: 0 40px;
+      position: relative;
+    }
+    .ci-nav-links {
+      display: flex;
+      gap: 32px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      white-space: nowrap;
+      padding: 14px 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    .ci-nav-links::-webkit-scrollbar { display: none; }
+    .ci-nav-links li { position: relative; }
+
+    .ci-nav-link {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      padding: 8px 0;
+      display: inline-block;
+      transition: color 0.15s;
+      cursor: pointer;
+    }
+    .ci-nav-link:hover,
+    .ci-nav-link.active { color: var(--ci-white); }
+    .ci-nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--ci-red);
+      border-radius: 1px;
+    }
+
+    /* =========================================
+       MEGA MENU
+    ========================================= */
+    .ci-megamenu-global {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: var(--ci-white);
+      border-top: 2px solid var(--ci-red);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 400;
+      pointer-events: none;
+    }
+    .ci-megamenu-global.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .ci-megamenu-panel {
+      display: none;
+      padding: 32px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .ci-megamenu-panel.is-active { display: block; }
+
+    .ci-menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .ci-menu-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--ci-black);
+    }
+    .ci-menu-card:hover .ci-menu-card-title { color: var(--ci-red); }
+    .ci-menu-card-img {
+      aspect-ratio: 16/9;
+      background: var(--ci-mist);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .ci-menu-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .ci-menu-card-cat {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ci-red);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .ci-menu-card-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+      transition: color 0.15s;
+    }
+
+    /* =========================================
+       MAIN CONTENT AREA
+    ========================================= */
+    .ci-page-body { flex: 1; }
+
+    /* =========================================
+       FOOTER (Updated to Light Theme)
+    ========================================= */
+    .ci-footer {
+      background: var(--ci-paper);
+      color: var(--ci-graphite);
+      padding: 64px 40px 28px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      margin-top: auto;
+      border-top: 1px solid var(--ci-mist);
+    }
+    .ci-footer-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, 1fr);
+      gap: 48px;
+    }
+    .ci-footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .ci-footer-logo img {
+      height: 56px;
+      width: auto;
+      /* Removed inverted filter so the dark logo shows on light background */
+    }
+    .ci-footer-tagline {
+      color: var(--ci-slate);
+      font-size: 12px;
+      line-height: 1.65;
+      max-width: 260px;
+      margin-top: 4px;
+    }
+    .ci-footer-col-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ci-black);
+      margin-bottom: 18px;
+    }
+    .ci-footer-link {
+      display: block;
+      font-size: 13px;
+      color: var(--ci-graphite);
+      margin-bottom: 11px;
+      transition: color 0.15s;
+    }
+    .ci-footer-link:hover { color: var(--ci-red); }
+
+    .ci-footer-bottom {
+      max-width: 1240px;
+      margin: 48px auto 0;
+      padding-top: 22px;
+      border-top: 0.5px solid var(--ci-mist);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--ci-slate);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .ci-footer-bottom a {
+      color: var(--ci-red);
+      text-decoration: none;
+    }
+
+    /* =========================================
+       NEWSLETTER MODAL
+    ========================================= */
+    .ci-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,15,15,0.82);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 24px;
+    }
+    .ci-modal-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .ci-modal {
+      background: var(--ci-white);
+      border-radius: 10px;
+      width: 100%;
+      max-width: 840px;
+      min-height: 460px;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+      transform: translateY(20px) scale(0.98);
+      transition: all 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .ci-modal-overlay.is-open .ci-modal {
+      transform: translateY(0) scale(1);
+    }
+    .ci-modal-close {
+      position: absolute;
+      top: 16px; right: 18px;
+      background: transparent;
+      border: none;
+      font-size: 26px;
+      color: var(--ci-slate);
+      cursor: pointer;
+      z-index: 10;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    .ci-modal-close:hover { color: var(--ci-red); }
+
+    .ci-modal-image {
+      flex: 1;
+      background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800') center/cover no-repeat;
+      position: relative;
+    }
+    .ci-modal-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.08), rgba(0,0,0,0.42));
+    }
+    .ci-modal-content {
+      flex: 1;
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .ci-modal-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ci-red);
+      margin-bottom: 12px;
+    }
+    .ci-modal-title {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--ci-black);
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+    .ci-modal-desc {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ci-graphite);
+      margin-bottom: 28px;
+    }
+    .ci-newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .ci-modal-input {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      padding: 13px 16px;
+      border: 1px solid var(--ci-mist);
+      border-radius: 4px;
+      background: var(--ci-paper);
+      color: var(--ci-black);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .ci-modal-input:focus {
+      border-color: var(--ci-red);
+      background: var(--ci-white);
+    }
+    .ci-modal-submit {
+      width: 100%;
+      padding: 13px;
+      background: var(--ci-red);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .ci-modal-submit:hover { background: var(--ci-red-dark); }
+    .ci-modal-disclaimer {
+      font-size: 11px;
+      color: var(--ci-slate);
+      line-height: 1.5;
+    }
+    .ci-modal-disclaimer a {
+      color: var(--ci-graphite);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .ci-modal-disclaimer a:hover { color: var(--ci-red); }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+    @media (max-width: 992px) {
+      .ci-footer-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .ci-footer-brand { grid-column: span 2; }
+      .ci-footer-tagline { max-width: 100%; }
+      .ci-menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .ci-topbar,
+      .ci-logo-container,
+      .ci-nav-scroll-wrapper,
+      .ci-footer { padding-left: 16px; padding-right: 16px; }
+
+      .ci-date { display: none; }
+      .ci-topbar { justify-content: center; padding-top: 10px; padding-bottom: 10px; }
+      .ci-top-actions { width: 100%; justify-content: space-between; }
+
+      .ci-logo-container { padding-top: 20px; padding-bottom: 20px; }
+      .ci-logo-container img { max-height: 56px !important; }
+
+      .ci-nav-links { gap: 20px; }
+
+      .ci-footer { padding-top: 48px; }
+      .ci-footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .ci-footer-brand { grid-column: span 1; }
+      .ci-footer-tagline { max-width: 100%; }
+      .ci-footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+
+      .ci-modal { flex-direction: column; max-height: 90vh; overflow-y: auto; }
+      .ci-modal-image { flex: none; height: 160px; }
+      .ci-modal-content { padding: 28px 22px; }
+      .ci-modal-title { font-size: 24px; }
+    }
+
+    /* Disable mega menu on touch / small screens */
+    @media (max-width: 992px), (hover: none) {
+      .ci-megamenu-global { display: none !important; }
+    }
+  </style>
+
+  {% block 'css' %}{% endblock 'css' %}
+</head>
+<body>
+
+  <header class="ci-masthead" id="mainHeader">
+
+    <div class="ci-topbar">
+      <span class="ci-date" id="ci-live-date"></span>
+      <div class="ci-top-actions">
+        <a href="/contact" class="ci-top-link">सहायता</a>
+        <button class="ci-btn-subscribe" id="openNewsletterModal">न्यूज़लेटर सब्सक्राइब करें</button>
+      </div>
+    </div>
+
+    <div class="ci-logo-container">
+      <a href="/">
+        <img src="/static/main/logo/logo.webp" alt="Corporate Impact">
+      </a>
+    </div>
+
+    <nav class="ci-nav-scroll-wrapper">
+      <ul class="ci-nav-links" id="categoryNav">
+        {% for item in mega_menu %}
+        <li data-target="panel-{{ item.category.slug }}">
+          <a class="ci-nav-link" href="/category/{{ item.category.slug }}/">
+            {{ item.category.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="ci-megamenu-global" id="megaMenu">
+      {% for item in mega_menu %}
+      <div class="ci-megamenu-panel" id="panel-{{ item.category.slug }}">
+        <div class="ci-menu-grid">
+          {% for article in item.articles %}
+          <a href="/article/{{ article.slug }}/" class="ci-menu-card">
+            <div class="ci-menu-card-img">
+              {% if article.thumbnail_image %}
+                <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}">
+              {% else %}
+                <img src="/static/main/default/default.webp" alt="{{ article.title }}">
+              {% endif %}
+            </div>
+            <div class="ci-menu-card-cat">{{ article.category.title }}</div>
+            <div class="ci-menu-card-title">{{ article.title }}</div>
+          </a>
+          {% empty %}
+          <p style="color:var(--ci-slate);font-size:13px;">कोई लेख उपलब्ध नहीं है।</p>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </header>
+
+  <main class="ci-page-body">
+    {% block 'body' %}{% endblock 'body' %}
+  </main>
+
+  <footer class="ci-footer">
+    <div class="ci-footer-grid" style="grid-template-columns: 1.5fr 1.2fr 1fr 1fr;">
+
+      <div class="ci-footer-brand">
+        <div class="ci-footer-logo">
+          <img src="/static/main/logo/logo.png" alt="Corporate Impact">
+        </div>
+        <p class="ci-footer-tagline">Corporate Impact भारत की प्रमुख द्विभाषी व्यापार पत्रिका है, जो व्यापार, वित्त और उद्योग को नया आकार देने वाली शक्तियों का प्रामाणिक विश्लेषण प्रस्तुत करती है। भारतीय उद्योग जगत की निर्णायक आवाज़।</p>
+        
+        <div style="margin-top: 24px; display: flex; gap: 16px;">
+          <a href="#" aria-label="LinkedIn" class="ci-footer-link" style="font-size: 18px; margin: 0;"><i class="bi bi-linkedin"></i></a>
+          <a href="#" aria-label="Instagram" class="ci-footer-link" style="font-size: 18px; margin: 0;"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="YouTube" class="ci-footer-link" style="font-size: 18px; margin: 0;"><i class="bi bi-youtube"></i></a>
+          <a href="#" aria-label="Facebook" class="ci-footer-link" style="font-size: 18px; margin: 0;"><i class="bi bi-facebook"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="ci-footer-col-title">कार्यालय</div>
+
+        <div style="margin-bottom: 24px;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ci-black); margin-bottom: 8px;">संपादकीय कार्यालय</div>
+          <address style="color: var(--ci-graphite); font-size: 13px; line-height: 1.6; font-style: normal; margin-bottom: 0;">
+            G Nine Publication, 2nd Floor<br>
+            Maruti Courier Building<br>
+            Opp. Punjab National Bank<br>
+            Civil Station Road<br>
+            Raipur (Chhattisgarh) 492009
+          </address>
+        </div>
+
+        <div>
+          <div style="font-size: 11px; font-weight: 700; color: var(--ci-black); margin-bottom: 8px;">मुंबई कार्यालय</div>
+          <address style="color: var(--ci-graphite); font-size: 13px; line-height: 1.6; font-style: normal; margin-bottom: 0;">
+            Flat No. 905, Laxmi Heights<br>
+            Opp. Ambesh Complex, Near Banana Leaf Hotel<br>
+            Prabhakar Dattu Mhatre Road<br>
+            Bhayander (E) - Mumbai 401105
+          </address>
+        </div>
+      </div>
+
+      <div>
+        <div class="ci-footer-col-title">संपर्क करें</div>
+        <div style="margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px;">
+          <a href="mailto:connect@corporateimpact.in" class="ci-footer-link" style="margin: 0; display: flex; align-items: center; gap: 8px;">
+            <i class="bi bi-envelope"></i> connect@corporateimpact.in
+          </a>
+          <a href="mailto:editor@corporateimpact.in" class="ci-footer-link" style="margin: 0; display: flex; align-items: center; gap: 8px;">
+            <i class="bi bi-headset"></i> editor@corporateimpact.in
+          </a>
+          <a href="tel:+917581802616" class="ci-footer-link" style="margin: 0; display: flex; align-items: center; gap: 8px;">
+            <i class="bi bi-telephone"></i> +91 7581802616
+          </a>
+        </div>
+
+        <div class="ci-footer-col-title">कंपनी</div>
+        <a href="/about" class="ci-footer-link">हमारे बारे में</a>
+        <a href="/contact" class="ci-footer-link">संपर्क करें</a>
+        <a href="/career" class="ci-footer-link">करियर</a>
+        <a href="#" class="ci-footer-link">विज्ञापन दें</a>
+        <a href="/static/main/media-kit/Corporate_Impact_MediaKit.pdf" download class="ci-footer-link">मीडिया किट</a>
+      </div>
+
+      <div>
+        <div class="ci-footer-col-title">कानूनी</div>
+        <a href="/terms" class="ci-footer-link">सेवा की शर्तें</a>
+        <a href="/privacy" class="ci-footer-link">गोपनीयता नीति</a>
+        <a href="/cookies" class="ci-footer-link">कुकी नीति</a>
+        <div class="ci-footer-col-title" style="margin-top:20px;">वेबसाइट</div>
+        <a href="/sitemap.xml" class="ci-footer-link">साइटमैप</a>
+      </div>
+
+    </div>
+
+    <div class="ci-footer-bottom">
+      <span>&copy; 2026 Corporate Impact Media Network. सर्वाधिकार सुरक्षित।</span>
+      <span>डिज़ाइन द्वारा <a href="https://www.bigscoopstudio.com" target="_blank">Big Scoop Studio</a></span>
+    </div>
+  </footer>
+
+  <div class="ci-modal-overlay" id="newsletterModal" role="dialog" aria-modal="true" aria-label="न्यूज़लेटर सब्सक्राइब करें">
+    <div class="ci-modal">
+      <button class="ci-modal-close" id="closeNewsletterModal" aria-label="बंद करें">&times;</button>
+
+      <div class="ci-modal-image" aria-hidden="true"></div>
+
+      <div class="ci-modal-content">
+        <div class="ci-modal-eyebrow">द डेली ब्रीफ</div>
+        <h2 class="ci-modal-title">भारतीय उद्योग जगत से आगे रहें</h2>
+        <p class="ci-modal-desc">
+          बाज़ार खुलने से पहले प्रामाणिक विश्लेषण, बाज़ार की हलचल और विशेष नीतिगत अपडेट सीधे अपने इनबॉक्स में पाएं। 50,000+ उद्योग जगत के नेताओं से जुड़ें।
+        </p>
+
+        <form action="/subscribe_form" method="POST" class="ci-newsletter-form">
+          {% csrf_token %}
+          <input
+            type="email"
+            name="email"
+            class="ci-modal-input"
+            placeholder="अपना कार्यालयीन ईमेल पता दर्ज करें"
+            required
+            autocomplete="email"
+          >
+          <button type="submit" class="ci-modal-submit">अभी सब्सक्राइब करें — यह मुफ़्त है</button>
+        </form>
+
+        <p class="ci-modal-disclaimer">
+          सब्सक्राइब करके, आप हमारी
+          <a href="/terms">सेवा की शर्तों</a> और
+          <a href="/privacy">गोपनीयता नीति</a> से सहमत होते हैं।
+          किसी भी समय सदस्यता समाप्त करें।
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ---- Live Date in Topbar ---- */
+    (function () {
+      const el = document.getElementById('ci-live-date');
+      if (!el) return;
+      const days   = ['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
+      const months = ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'];
+      const now    = new Date();
+      el.textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+    })();
+
+    /* ---- Mega Menu ---- */
+    document.addEventListener('DOMContentLoaded', function () {
+      const navItems = document.querySelectorAll('#categoryNav li');
+      const megaMenu = document.getElementById('megaMenu');
+      const panels   = document.querySelectorAll('.ci-megamenu-panel');
+
+      /* Disable on touch / small screens */
+      if (
+        window.matchMedia('(max-width: 992px)').matches ||
+        window.matchMedia('(hover: none)').matches
+      ) return;
+
+      let hideTimeout;
+
+      function showPanel(targetId) {
+        clearTimeout(hideTimeout);
+        panels.forEach(p => p.classList.remove('is-active'));
+        const panel = document.getElementById(targetId);
+        if (panel) {
+          panel.classList.add('is-active');
+          megaMenu.classList.add('is-visible');
+        } else {
+          megaMenu.classList.remove('is-visible');
+        }
+      }
+
+      function scheduleHide() {
+        hideTimeout = setTimeout(function () {
+          megaMenu.classList.remove('is-visible');
+          navItems.forEach(function (i) {
+            i.querySelector('.ci-nav-link').classList.remove('active');
+          });
+        }, 150);
+      }
+
+      navItems.forEach(function (item) {
+        item.addEventListener('mouseenter', function () {
+          navItems.forEach(function (i) {
+            i.querySelector('.ci-nav-link').classList.remove('active');
+          });
+          this.querySelector('.ci-nav-link').classList.add('active');
+          showPanel(this.getAttribute('data-target'));
+        });
+        item.addEventListener('mouseleave', scheduleHide);
+      });
+
+      megaMenu.addEventListener('mouseenter', function () { clearTimeout(hideTimeout); });
+      megaMenu.addEventListener('mouseleave', scheduleHide);
+    });
+
+    /* ---- Newsletter Modal ---- */
+    (function () {
+      const overlay   = document.getElementById('newsletterModal');
+      const openBtns  = document.querySelectorAll('.ci-btn-subscribe, #openNewsletterModal');
+      const closeBtn  = document.getElementById('closeNewsletterModal');
+
+      function openModal() {
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(function () {
+          var inp = overlay.querySelector('.ci-modal-input');
+          if (inp) inp.focus();
+        }, 120);
+      }
+
+      function closeModal() {
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      openBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          openModal();
+        });
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+      });
+    })();
+  </script>
+  <script>
+    /* ---- Smart Header (Hide on Scroll Down) ---- */
+    (function() {
+      const siteHeader = document.getElementById('mainHeader');
+      let lastScrollY = window.scrollY;
+
+      if (siteHeader) {
+        window.addEventListener('scroll', () => {
+          const currentScrollY = window.scrollY;
+          
+          // If scrolling down AND we've scrolled past the header's total height, hide it
+          if (currentScrollY > lastScrollY && currentScrollY > siteHeader.offsetHeight) {
+            siteHeader.classList.add('ci-masthead--hidden');
+          } 
+          // If scrolling up, bring it back
+          else if (currentScrollY < lastScrollY) {
+            siteHeader.classList.remove('ci-masthead--hidden');
+          }
+          
+          lastScrollY = currentScrollY;
+        }, { passive: true }); // Keeps the scroll performance buttery smooth
+      }
+    })();
+  </script>
+
+  {% block 'script' %}{% endblock 'script' %}
+
+</body>
+</html>

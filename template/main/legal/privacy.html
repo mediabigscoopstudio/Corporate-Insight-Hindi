@@ -1,0 +1,318 @@
+{% extends "main/base.html" %}
+
+{% block 'title' %}गोपनीयता नीति | Corporate Impact{% endblock 'title' %}
+
+{% block 'meta' %}
+<meta name="description" content="Corporate Impact के लिए गोपनीयता नीति। जानें कि हम अपने डिजिटल मीडिया नेटवर्क में आपके डेटा को कैसे एकत्र, उपयोग और सुरक्षित करते हैं।">
+{% endblock 'meta' %}
+
+{% block 'css' %}
+<style>
+  /* =========================================
+     LEGAL PAGE SPECIFIC STYLES
+     ========================================= */
+  .ci-legal-wrapper {
+    padding: 64px 40px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  /* Page Header */
+  .ci-legal-header {
+    margin-bottom: 48px;
+    border-bottom: 2px solid var(--ci-black);
+    padding-bottom: 24px;
+  }
+  .ci-legal-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ci-red);
+    margin-bottom: 12px;
+  }
+  .ci-legal-title {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ci-black);
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .ci-legal-meta {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ci-slate);
+  }
+
+  /* Layout Grid */
+  .ci-legal-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* Sticky Sidebar Navigation */
+  .ci-legal-nav {
+    position: sticky;
+    top: 100px;
+    background: var(--ci-white);
+    border: 0.5px solid var(--ci-mist);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .ci-legal-nav-title {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ci-slate);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--ci-mist);
+  }
+  .ci-legal-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .ci-legal-nav-link {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ci-graphite);
+    text-decoration: none;
+    transition: color 0.15s, transform 0.15s;
+    display: inline-block;
+  }
+  .ci-legal-nav-link:hover,
+  .ci-legal-nav-link.active {
+    color: var(--ci-red);
+    transform: translateX(4px);
+  }
+
+  /* Document Content */
+  .ci-legal-content {
+    font-family: var(--font-sans);
+    color: var(--ci-graphite);
+    line-height: 1.7;
+    font-size: 15px;
+    max-width: 760px;
+  }
+  .ci-legal-section {
+    margin-bottom: 48px;
+    scroll-margin-top: 100px;
+  }
+  .ci-legal-section h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ci-black);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ci-legal-section h2::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 20px;
+    background: var(--ci-red);
+    border-radius: 2px;
+  }
+  .ci-legal-section p {
+    margin-bottom: 16px;
+  }
+  .ci-legal-section ul {
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+  .ci-legal-section li {
+    margin-bottom: 8px;
+  }
+  .ci-legal-section a {
+    color: var(--ci-red);
+    text-decoration: underline;
+    text-decoration-color: var(--ci-mist);
+    transition: text-decoration-color 0.15s;
+  }
+  .ci-legal-section a:hover {
+    text-decoration-color: var(--ci-red);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .ci-legal-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .ci-legal-nav {
+      position: static;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      background: transparent;
+      padding: 24px 0;
+    }
+  }
+  @media (max-width: 768px) {
+    .ci-legal-wrapper {
+      padding: 40px 20px;
+    }
+    .ci-legal-title {
+      font-size: 36px;
+    }
+  }
+</style>
+{% endblock 'css' %}
+
+{% block 'body' %}
+<main class="ci-legal-wrapper">
+  
+  <header class="ci-legal-header">
+    <div class="ci-legal-eyebrow">कानूनी जानकारी</div>
+    <h1 class="ci-legal-title">गोपनीयता नीति</h1>
+    <div class="ci-legal-meta">अंतिम अद्यतन: 12 मई, 2026</div>
+  </header>
+
+  <div class="ci-legal-layout">
+
+    <aside class="ci-legal-nav">
+      <div class="ci-legal-nav-title">विषय सूची</div>
+      <ul class="ci-legal-nav-list">
+        <li><a href="#information-we-collect" class="ci-legal-nav-link active">1. हम जो जानकारी एकत्र करते हैं</a></li>
+        <li><a href="#how-we-use" class="ci-legal-nav-link">2. हम आपके डेटा का उपयोग कैसे करते हैं</a></li>
+        <li><a href="#information-sharing" class="ci-legal-nav-link">3. जानकारी साझा करना</a></li>
+        <li><a href="#cookies-tracking" class="ci-legal-nav-link">4. कुकीज़ और ट्रैकिंग</a></li>
+        <li><a href="#data-security" class="ci-legal-nav-link">5. डेटा सुरक्षा और प्रतिधारण</a></li>
+        <li><a href="#your-rights" class="ci-legal-nav-link">6. आपके गोपनीयता अधिकार</a></li>
+        <li><a href="#contact" class="ci-legal-nav-link">7. हमसे संपर्क करें</a></li>
+      </ul>
+    </aside>
+
+    <article class="ci-legal-content">
+      
+      <section id="information-we-collect" class="ci-legal-section">
+        <h2>1. हम जो जानकारी एकत्र करते हैं</h2>
+        <p>Corporate Impact Media Network में, हम आपको प्रीमियम व्यावसायिक पत्रकारिता प्रदान करने के लिए एकत्र किए जाने वाले डेटा के संबंध में पारदर्शिता में विश्वास रखते हैं। हम निम्नलिखित प्रकार की जानकारी एकत्र कर सकते हैं:</p>
+        <ul>
+          <li><strong>व्यक्तिगत जानकारी:</strong> नाम, ईमेल पता, पद का नाम, कंपनी का नाम, और बिलिंग विवरण जो आपके द्वारा हमारे न्यूज़लेटर, प्रीमियम सामग्री की सदस्यता लेने, या हमारे कार्यक्रमों में भाग लेने पर प्रदान किए जाते हैं।</li>
+          <li><strong>उपयोग डेटा:</strong> आप <em>corporateimpact.in</em> के साथ कैसे बातचीत करते हैं, इस बारे में जानकारी, जिसमें पढ़ने का इतिहास, लेखों पर बिताया गया समय, आईपी पता, ब्राउज़र प्रकार, और डिवाइस जानकारी शामिल है।</li>
+          <li><strong>संचार डेटा:</strong> हमारे साथ आपके पत्राचार के रिकॉर्ड, जिसमें ग्राहक सहायता संबंधी पूछताछ या संपादकीय प्रतिक्रिया शामिल है।</li>
+        </ul>
+      </section>
+
+      <section id="how-we-use" class="ci-legal-section">
+        <h2>2. हम आपके डेटा का उपयोग कैसे करते हैं</h2>
+        <p>हम जो जानकारी एकत्र करते हैं उसका उपयोग केवल आपके अनुभव को बेहतर बनाने और आपसे अपेक्षित प्रामाणिक सामग्री प्रदान करने के लिए किया जाता है। विशेष रूप से, हम आपके डेटा का उपयोग निम्नलिखित के लिए करते हैं:</p>
+        <ul>
+          <li>हमारे डिजिटल प्लेटफ़ॉर्म और पत्रकारिता को प्रदान करना, बनाए रखना, और बेहतर बनाना।</li>
+          <li>प्रीमियम सदस्यताओं को संसाधित करना और आपके खाते का प्रबंधन करना।</li>
+          <li>प्रशासनिक ईमेल, न्यूज़लेटर, और आपकी पढ़ने की आदतों (जैसे, मार्केट्स, स्टार्टअप्स, या नीति) के आधार पर व्यक्तिगत सामग्री सिफारिशें भेजना।</li>
+          <li>प्लेटफ़ॉर्म ट्रैफ़िक का विश्लेषण करना और बेहतर पठनीयता तथा प्रदर्शन के लिए हमारे UI/UX को अनुकूलित करना।</li>
+        </ul>
+      </section>
+
+      <section id="information-sharing" class="ci-legal-section">
+        <h2>3. जानकारी साझा करना और प्रकटीकरण</h2>
+        <p>Corporate Impact आपका व्यक्तिगत डेटा तृतीय-पक्ष डेटा दलालों को नहीं बेचता है। हम केवल निम्नलिखित परिस्थितियों में जानकारी साझा करते हैं:</p>
+        <ul>
+          <li><strong>सेवा प्रदाता:</strong> हम अपनी वेबसाइट को सुगम बनाने के लिए विश्वसनीय तृतीय-पक्ष कंपनियों को नियुक्त करते हैं (जैसे, Stripe के माध्यम से भुगतान प्रसंस्करण, ईमेल वितरण, होस्टिंग, और विश्लेषण)। इन साझेदारों को आपके डेटा तक पहुंच केवल हमारी ओर से विशिष्ट कार्य करने के लिए है और वे इसे अन्य प्रयोजनों के लिए प्रकट या उपयोग न करने के लिए बाध्य हैं।</li>
+          <li><strong>कानूनी आवश्यकताएं:</strong> यदि कानून द्वारा आवश्यक हो या सार्वजनिक अधिकारियों (जैसे, अदालत या सरकारी एजेंसी) के वैध अनुरोधों के जवाब में हम आपकी जानकारी प्रकट कर सकते हैं।</li>
+          <li><strong>व्यावसायिक स्थानांतरण:</strong> विलय, अधिग्रहण, या संपत्ति बिक्री की स्थिति में, आपका व्यक्तिगत डेटा स्थानांतरित किया जा सकता है। आपका व्यक्तिगत डेटा स्थानांतरित होने और किसी भिन्न गोपनीयता नीति के अधीन होने से पहले हम सूचना प्रदान करेंगे।</li>
+        </ul>
+      </section>
+
+      <section id="cookies-tracking" class="ci-legal-section">
+        <h2>4. कुकीज़ और ट्रैकिंग तकनीकें</h2>
+        <p>हम अपनी वेबसाइट पर गतिविधि को ट्रैक करने और कुछ जानकारी संग्रहीत करने के लिए कुकीज़ और इसी प्रकार की ट्रैकिंग तकनीकों (जैसे वेब बीकन और पिक्सेल) का उपयोग करते हैं। कुकीज़ हमें आपकी सदस्यता स्थिति, प्राथमिकताओं को याद रखने में मदद करती हैं, और हमारे लाइव ब्रेकिंग न्यूज़ टिकर जैसी सुविधाओं के निर्बाध संचालन को सक्षम बनाती हैं।</p>
+        <p>आप अपने ब्राउज़र को सभी कुकीज़ अस्वीकार करने या यह इंगित करने के लिए निर्देश दे सकते हैं कि कब कोई कुकी भेजी जा रही है। हालांकि, यदि आप कुकीज़ स्वीकार नहीं करते हैं, तो आप हमारी वेबसाइट के कुछ प्रीमियम हिस्सों का उपयोग करने में असमर्थ हो सकते हैं।</p>
+      </section>
+
+      <section id="data-security" class="ci-legal-section">
+        <h2>5. डेटा सुरक्षा और प्रतिधारण</h2>
+        <p>आपके डेटा की सुरक्षा सर्वोपरि है। हम आपकी व्यक्तिगत जानकारी तक अनधिकृत पहुंच, परिवर्तन, प्रकटीकरण, या विनाश से बचाने के लिए एंटरप्राइज़-स्तरीय सुरक्षा उपाय लागू करते हैं।</p>
+        <p>हम आपके व्यक्तिगत डेटा को केवल तब तक बनाए रखेंगे जब तक यह इस गोपनीयता नीति में उल्लिखित प्रयोजनों के लिए आवश्यक है, जैसे हमारे कानूनी दायित्वों का पालन करना, विवादों का समाधान करना, और हमारे कानूनी समझौतों तथा नीतियों को लागू करना।</p>
+      </section>
+
+      <section id="your-rights" class="ci-legal-section">
+        <h2>6. आपके गोपनीयता अधिकार</h2>
+        <p>आपके क्षेत्राधिकार के आधार पर, आपकी व्यक्तिगत जानकारी के संबंध में आपके पास विशिष्ट अधिकार हो सकते हैं। इनमें सामान्यतः निम्नलिखित का अधिकार शामिल है:</p>
+        <ul>
+          <li>हमारे पास मौजूद आपकी व्यक्तिगत जानकारी तक पहुंच का अनुरोध करना।</li>
+          <li>किसी भी गलत या अपूर्ण डेटा में सुधार का अनुरोध करना।</li>
+          <li>अपने व्यक्तिगत डेटा को हटाने का अनुरोध करना ("भुला दिए जाने का अधिकार")।</li>
+          <li>हमारे द्वारा भेजे गए किसी भी ईमेल में "अनसब्सक्राइब" लिंक पर क्लिक करके किसी भी समय मार्केटिंग संचार से बाहर निकलना।</li>
+        </ul>
+      </section>
+
+      <section id="contact" class="ci-legal-section">
+        <h2>7. हमसे संपर्क करें</h2>
+        <p>यदि इस गोपनीयता नीति या हम आपके डेटा को कैसे संभालते हैं, इस बारे में आपके कोई प्रश्न, चिंताएं, या अनुरोध हैं, तो कृपया हमारे डेटा संरक्षण अधिकारी से यहां संपर्क करें:</p>
+        <p><strong>ईमेल:</strong> <a href="mailto:connect@corporateimpact.in">connect@corporateimpact.in</a></p>
+        <p>Corporate Impact Media Network<br>
+        मुंबई | नई दिल्ली | बेंगलुरु</p>
+      </section>
+
+    </article>
+  </div>
+</main>
+{% endblock 'body' %}
+
+{% block 'script' %}
+<script>
+  /* =========================================
+     SCROLL SPY FOR SIDEBAR NAVIGATION
+     ========================================= */
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.ci-legal-section');
+    const navLinks = document.querySelectorAll('.ci-legal-nav-link');
+
+    // Highlight active link based on scroll position
+    window.addEventListener('scroll', () => {
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        // Offset by 150px to account for sticky headers and trigger point
+        if (scrollY >= (sectionTop - 150)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current) && current !== '') {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    navLinks.forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 100, // Offset for sticky topbars
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+</script>
+{% endblock 'script' %}

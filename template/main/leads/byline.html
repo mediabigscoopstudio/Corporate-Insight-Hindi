@@ -1,0 +1,261 @@
+{% extends "main/base.html" %}
+
+{% block 'title' %}योगदान हेतु आवेदन करें | Corporate Impact{% endblock 'title' %}
+
+{% block 'css' %}
+<style>
+  /* =============================================
+     BYLINE LANDING PAGE STYLES
+  ============================================= */
+  .byline-page-wrapper {
+    background: var(--ci-paper, #f9f9f9);
+    padding: 80px 0 120px;
+    min-height: 100vh;
+  }
+
+  /* Left Side: Persuasive Content */
+  .bp-content-side {
+    position: sticky;
+    top: 120px;
+    padding-right: 40px;
+  }
+  .bp-eyebrow {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--ci-red);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .bp-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--ci-red);
+  }
+  .bp-title {
+    font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px);
+    font-weight: 900; color: var(--ci-black); line-height: 1.05;
+    letter-spacing: -1px; margin-bottom: 24px;
+  }
+  .bp-desc {
+    font-family: var(--font-sans); font-size: 16px; color: var(--ci-graphite);
+    line-height: 1.7; margin-bottom: 40px;
+  }
+  .bp-perks {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .bp-perks li {
+    font-family: var(--font-sans); font-size: 15px; color: var(--ci-black);
+    margin-bottom: 16px; display: flex; align-items: flex-start; gap: 12px;
+    line-height: 1.5; font-weight: 500;
+  }
+  .bp-perks li::before {
+    content: '✓'; color: var(--ci-red); font-weight: 900;
+  }
+
+  /* Right Side: The Form Card */
+  .bp-form-card {
+    background: var(--ci-white, #ffffff);
+    border: 1px solid var(--ci-mist, #e0e0e0);
+    border-radius: 6px;
+    padding: 48px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.04);
+  }
+  .bp-section-title {
+    font-family: var(--font-display); font-size: 20px; font-weight: 700;
+    color: var(--ci-black); margin-bottom: 20px; border-bottom: 1px solid var(--ci-mist);
+    padding-bottom: 10px;
+  }
+
+  /* Form Elements */
+  .bp-form-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px;
+  }
+  .bp-input-group {
+    display: flex; flex-direction: column;
+  }
+  .bp-input-group.full-width {
+    grid-column: span 2;
+  }
+  .bp-input-group label {
+    font-family: var(--font-sans); font-size: 11px; font-weight: 700;
+    color: var(--ci-black); margin-bottom: 8px; text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .bp-input, .bp-select, .bp-textarea {
+    width: 100%; padding: 14px 16px; background: var(--ci-paper, #f9f9f9);
+    border: 1px solid var(--ci-mist, #e0e0e0); border-radius: 3px;
+    font-family: var(--font-sans); font-size: 14px; color: var(--ci-black);
+    outline: none; transition: all 0.2s;
+  }
+  .bp-input:focus, .bp-select:focus, .bp-textarea:focus {
+    border-color: var(--ci-red); background: #fff; box-shadow: 0 0 0 3px rgba(204,27,27,0.05);
+  }
+  .bp-textarea {
+    resize: vertical; min-height: 120px;
+  }
+  .bp-helper-text {
+    font-family: var(--font-sans); font-size: 11px; color: var(--ci-slate);
+    margin-top: 6px;
+  }
+
+  /* Checkbox & Button */
+  .bp-checkbox-wrapper {
+    display: flex; align-items: flex-start; gap: 12px; margin-bottom: 32px;
+    padding: 16px; background: rgba(204,27,27,0.03); border: 1px solid rgba(204,27,27,0.1);
+    border-radius: 4px;
+  }
+  .bp-checkbox-wrapper input[type="checkbox"] {
+    margin-top: 4px; accent-color: var(--ci-red); width: 16px; height: 16px;
+  }
+  .bp-checkbox-wrapper label {
+    font-family: var(--font-sans); font-size: 13px; color: var(--ci-graphite);
+    line-height: 1.5; cursor: pointer; margin: 0;
+  }
+  .bp-submit-btn {
+    background: var(--ci-red); color: #fff; border: none; padding: 18px 32px;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+    border-radius: 3px; transition: background 0.2s, transform 0.2s; width: 100%;
+  }
+  .bp-submit-btn:hover {
+    background: var(--ci-red-dark, #a81616); transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 991px) {
+    .bp-content-side { position: relative; top: 0; padding-right: 0; margin-bottom: 48px; }
+  }
+  @media (max-width: 768px) {
+    .bp-form-card { padding: 32px 24px; }
+    .bp-form-grid { grid-template-columns: 1fr; }
+    .bp-input-group.full-width { grid-column: span 1; }
+  }
+</style>
+{% endblock 'css' %}
+
+{% block 'body' %}
+<div class="byline-page-wrapper">
+  <div class="container">
+    <div class="row">
+      
+      <!-- =============================================
+           LEFT: PERSUASIVE CONTENT
+      ============================================= -->
+      <div class="col-lg-5">
+        <div class="bp-content-side">
+          <div class="bp-eyebrow">पब्लिशर पोर्टल</div>
+          <h1 class="bp-title">आपकी पहली बाइलाइन।<br>एक असली पत्रिका में।</h1>
+          <p class="bp-desc">
+            आपके पास कहने के लिए कुछ है। Corporate Impact आपको इसे कहने का मंच देता है — आपके नाम के साथ, एक ऐसी असली प्रकाशित पत्रिका में जिसे उद्योग जगत के दिग्गज हर सुबह पढ़ते हैं।
+          </p>
+
+          <ul class="bp-perks">
+            <li><strong>गेस्ट ऑप-एड:</strong> उच्च-प्रभाव वाले, एकल थॉट लीडरशिप लेखों के लिए निःशुल्क प्रकाशन।</li>
+            <li><strong>रेजिडेंट कॉलमनिस्ट:</strong> निरंतर प्राधिकार, कई लेखों और प्राथमिकता समीक्षा के लिए प्रो स्तर।</li>
+            <li><strong>ब्रांड कोलैब:</strong> पीआर एजेंसियों और कॉर्पोरेट संचार के लिए एंटरप्राइज़ स्केलिंग।</li>
+          </ul>
+
+          <div style="margin-top: 48px; border-left: 2px solid var(--ci-red); padding-left: 16px;">
+            <p style="font-family: var(--font-serif); font-style: italic; font-size: 18px; color: var(--ci-graphite); margin: 0;">
+              "कॉर्पोरेट इंडिया की सबसे शक्तिशाली मुद्रा पूंजी नहीं है। यह विश्वसनीयता है।"
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =============================================
+           RIGHT: THE COMPLETE 14-FIELD FORM
+      ============================================= -->
+      <div class="col-lg-7">
+        <div class="bp-form-card">
+          <form action="{% url 'byline_form' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- SECTION: Contact Information -->
+            <div class="bp-section-title">संपर्क जानकारी</div>
+            <div class="bp-form-grid">
+              <div class="bp-input-group">
+                <label>पूरा नाम *</label>
+                <input type="text" name="name" class="bp-input" required>
+              </div>
+              <div class="bp-input-group">
+                <label>कार्य ईमेल *</label>
+                <input type="email" name="email" class="bp-input" required>
+              </div>
+              <div class="bp-input-group">
+                <label>फ़ोन नंबर</label>
+                <input type="tel" name="phone" class="bp-input" placeholder="+91">
+              </div>
+              <div class="bp-input-group">
+                <label>शहर *</label>
+                <input type="text" name="city" class="bp-input" required>
+              </div>
+            </div>
+
+            <!-- SECTION: Professional Identity -->
+            <div class="bp-section-title">व्यावसायिक पहचान</div>
+            <div class="bp-form-grid">
+              <div class="bp-input-group">
+                <label>संगठन *</label>
+                <input type="text" name="organisation" class="bp-input" required>
+              </div>
+              <div class="bp-input-group">
+                <label>पदनाम *</label>
+                <input type="text" name="designation" class="bp-input" required>
+              </div>
+              <div class="bp-input-group">
+                <label>लिंक्डइन प्रोफ़ाइल URL</label>
+                <input type="url" name="linkedin_url" class="bp-input" placeholder="https://linkedin.com/in/...">
+              </div>
+              <div class="bp-input-group">
+                <label>वेबसाइट / पोर्टफ़ोलियो URL</label>
+                <input type="url" name="website_url" class="bp-input" placeholder="https://...">
+              </div>
+            </div>
+
+            <!-- SECTION: Program Details -->
+            <div class="bp-section-title">प्रोग्राम विवरण</div>
+            <div class="bp-form-grid">
+              <div class="bp-input-group">
+                <label>प्रोग्राम स्तर *</label>
+                <select name="tier" class="bp-select" required>
+                  <option value="op_ed">गेस्ट ऑप-एड (निःशुल्क)</option>
+                  <option value="columnist">रेजिडेंट कॉलमनिस्ट (प्रो)</option>
+                  <option value="brand">ब्रांड कोलैब (एंटरप्राइज़)</option>
+                </select>
+              </div>
+              <div class="bp-input-group">
+                <label>लेखन नमूना (PDF) *</label>
+                <input type="file" name="writing_sample" class="bp-input" accept=".pdf" style="padding-top: 11px;">
+                <div class="bp-helper-text">अधिकतम 5MB फ़ाइल आकार।</div>
+              </div>
+
+              <!-- Brand Collab Specifics (These sit nicely in the grid) -->
+              <div class="bp-input-group">
+                <label>ब्रांड / क्लाइंट का नाम</label>
+                <input type="text" name="brand_name" class="bp-input" placeholder="ब्रांड कोलैब के लिए आवश्यक">
+              </div>
+              <div class="bp-input-group">
+                <label>अपेक्षित मासिक मात्रा</label>
+                <input type="text" name="monthly_volume" class="bp-input" placeholder="जैसे, 2 लेख/माह">
+              </div>
+
+              <!-- Full width Text Area -->
+              <div class="bp-input-group full-width">
+                <label>लेख / कंटेंट आइडिया *</label>
+                <textarea name="topic_idea" class="bp-textarea" required placeholder="आप किस विषय पर लिखना चाहते हैं? हमें एक नज़रिया बताएं, और यह कि हमारे पाठकों को इसे क्यों पढ़ना चाहिए। शुरुआत के लिए कुछ वाक्य ही काफी हैं।"></textarea>
+              </div>
+            </div>
+
+            <!-- SECTION: Consent & Submit -->
+            <div class="bp-checkbox-wrapper">
+              <input type="checkbox" name="consent_publish" id="bl_consent" required>
+              <label for="bl_consent">मैं समझता/समझती हूं कि प्रकाशित लेखों में मेरी बाइलाइन होगी और इन्हें Corporate Impact के प्रिंट, डिजिटल और सोशल चैनलों पर साझा किया जा सकता है।</label>
+            </div>
+
+            <button type="submit" class="bp-submit-btn">आवेदन जमा करें</button>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock 'body' %}

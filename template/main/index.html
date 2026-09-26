@@ -1,0 +1,1452 @@
+{% extends "main/base.html" %}
+
+{% block 'title' %}Corporate Impact | जहां हर कहानी कुछ बदल देती है{% endblock 'title' %}
+
+{% block 'css' %}
+<style>
+
+  /* =============================================
+     SECTION UTILITIES
+  ============================================= */
+  .ci-section-label {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 40px; padding-bottom: 14px;
+    border-bottom: 2px solid var(--ci-black);
+  }
+  .ci-section-label__bar { width: 5px; height: 26px; background: var(--ci-red); border-radius: 2px; flex-shrink: 0; }
+  .ci-section-label__title { font-family: var(--font-display); font-size: 26px; font-weight: 900; color: var(--ci-black); letter-spacing: -0.3px; margin: 0; }
+  .ci-section-label__link { margin-left: auto; font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ci-red); }
+  .ci-eyebrow { font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ci-red); display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .ci-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--ci-red); flex-shrink: 0; }
+
+  /* =============================================
+     2. LIVE WIRE MARQUEE
+  ============================================= */
+  .ci-marquee-section { background: var(--ci-charcoal); padding: 28px 0 36px; overflow: hidden; border-bottom: 3px solid var(--ci-red); }
+  .ci-marquee-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding: 0 24px; }
+  .ci-marquee-label { font-family: var(--font-sans); font-size: 11px; font-weight: 700; color: #fff; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; }
+  .ci-marquee-label::before { content: ''; display: inline-block; width: 7px; height: 7px; background: var(--ci-red); border-radius: 50%; margin-right: 10px; animation: live-pulse 1.5s ease-in-out infinite; }
+  @keyframes live-pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .ci-marquee-track { display: flex; width: max-content; animation: marquee-scroll 55s linear infinite; }
+  .ci-marquee-section:hover .ci-marquee-track { animation-play-state: paused; }
+  @keyframes marquee-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .ci-marquee-group { display: flex; }
+  .ci-marquee-card { display: flex; align-items: center; gap: 14px; width: 360px; padding: 0 28px; border-right: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: #fff; transition: opacity 0.2s; }
+  .ci-marquee-card:hover { opacity: 0.75; }
+  .ci-marquee-img { width: 76px; height: 76px; object-fit: cover; border-radius: 4px; flex-shrink: 0; background: var(--ci-graphite); border: 1px solid rgba(255,255,255,0.08); }
+  .ci-marquee-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; line-height: 1.3; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  @media (max-width:768px) { .ci-marquee-card { width: 290px; padding: 0 18px; } .ci-marquee-img { width: 60px; height: 60px; } .ci-marquee-title { font-size: 13px; } }
+
+  /* =============================================
+     3. SIMPLY TWO
+  ============================================= */
+  .simply-two-section { padding: 72px 0; background: var(--ci-black); }
+  .st-eyebrow { font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ci-gold); display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .st-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--ci-gold); }
+  .st-section-title { font-family: var(--font-display); font-size: clamp(32px,4vw,52px); font-weight: 900; color: #fff; letter-spacing: -1px; margin-bottom: 8px; }
+  .st-section-subtitle { font-family: var(--font-serif); font-size: 16px; font-style: italic; color: rgba(255,255,255,0.45); margin-bottom: 48px; max-width: 480px; }
+  .st-featured { position: relative; border-radius: 4px; overflow: hidden; height: 100%; min-height: 540px; background: var(--ci-charcoal); display: flex; flex-direction: column; justify-content: flex-end; cursor: pointer; text-decoration: none; }
+  .st-featured-bg { position: absolute; inset: 0; background: linear-gradient(160deg,#1a0a0a 0%,var(--ci-charcoal) 100%); }
+  .st-featured-initial { position: absolute; top: -20px; right: -10px; font-family: var(--font-display); font-size: 220px; font-weight: 900; color: rgba(201,162,39,0.07); line-height: 1; pointer-events: none; user-select: none; }
+  .st-featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--ci-gold); z-index: 3; }
+  .st-featured-body { position: relative; z-index: 2; padding: 40px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .st-issue-tag { font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ci-gold); margin-bottom: 16px; }
+  .st-featured-name { font-family: var(--font-display); font-size: 40px; font-weight: 900; color: #fff; letter-spacing: -0.5px; margin-bottom: 4px; }
+  .st-featured-role { font-family: var(--font-serif); font-size: 14px; font-style: italic; color: rgba(255,255,255,0.45); margin-bottom: 20px; }
+  .st-featured-quote { font-family: var(--font-serif); font-size: 18px; font-style: italic; color: rgba(255,255,255,0.72); line-height: 1.55; border-left: 2px solid var(--ci-gold); padding-left: 16px; margin-bottom: 24px; }
+  .st-read-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ci-gold); text-decoration: none; transition: gap 0.2s; }
+  .st-read-link:hover { gap: 14px; color: var(--ci-gold); }
+  .st-read-link::after { content: '→'; }
+  .st-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.07); border-radius: 4px; padding: 28px; text-decoration: none; color: #fff; display: flex; flex-direction: column; position: relative; overflow: hidden; transition: background 0.25s,border-color 0.25s,transform 0.25s; height: 100%; }
+  .st-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(201,162,39,0.3); transform: translateY(-3px); }
+  .st-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ci-gold); transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .st-card:hover::before { transform: scaleX(1); }
+  .st-card-initial { font-family: var(--font-display); font-size: 80px; font-weight: 900; color: rgba(201,162,39,0.1); line-height: 1; position: absolute; top: 8px; right: 12px; pointer-events: none; }
+  .st-card-label { font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ci-gold); margin-bottom: 12px; }
+  .st-card-name { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; letter-spacing: -0.3px; position: relative; z-index: 1; }
+  .st-card-role { font-family: var(--font-serif); font-size: 13px; font-style: italic; color: rgba(255,255,255,0.38); margin-bottom: 14px; }
+  .st-card-quote { font-family: var(--font-serif); font-size: 14px; font-style: italic; color: rgba(255,255,255,0.55); line-height: 1.55; flex-grow: 1; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* =============================================
+     4. ECOSYSTEM
+  ============================================= */
+  .ecosystem-section { background: var(--ci-black); padding: 96px 0; overflow: hidden; position: relative; }
+  .ecosystem-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--ci-red) 0%,transparent 60%); }
+  .ecosystem-intro { max-width: 680px; margin-bottom: 64px; }
+  .ecosystem-title { font-family: var(--font-display); font-size: clamp(40px,5vw,64px); font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 16px; }
+  .ecosystem-title em { font-style: italic; color: var(--ci-red); }
+  .ecosystem-subtitle { font-family: var(--font-serif); font-size: 17px; font-style: italic; color: rgba(255,255,255,0.45); line-height: 1.6; }
+  .pillar-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.07); padding: 36px 28px; height: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; text-decoration: none; color: #fff; transition: background 0.3s,border-color 0.3s,transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .pillar-card::after { content: attr(data-num); font-family: var(--font-display); font-size: 110px; font-weight: 900; color: rgba(255,255,255,0.03); position: absolute; bottom: -16px; right: 10px; line-height: 1; pointer-events: none; transition: color 0.3s; }
+  .pillar-card:hover { background: rgba(204,27,27,0.08); border-color: rgba(204,27,27,0.35); transform: translateY(-6px); color: #fff; }
+  .pillar-card:hover::after { color: rgba(204,27,27,0.07); }
+  .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ci-red); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+  .pillar-card:hover::before { transform: scaleX(1); }
+  .pillar-num { font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: rgba(255,255,255,0.25); margin-bottom: 20px; transition: color 0.3s; }
+  .pillar-card:hover .pillar-num { color: var(--ci-red); }
+  .pillar-icon-wrap { font-size: 32px; margin-bottom: 20px; transition: transform 0.3s; display: block; }
+  .pillar-card:hover .pillar-icon-wrap { transform: scale(1.15); }
+  .pillar-name { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+  .pillar-desc { font-family: var(--font-sans); font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.65; flex-grow: 1; }
+  .pillar-explore { margin-top: 20px; font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ci-red); opacity: 0; transform: translateY(6px); transition: opacity 0.3s,transform 0.3s; }
+  .pillar-card:hover .pillar-explore { opacity: 1; transform: translateY(0); }
+
+  /* =============================================
+     5. BYLINE PROGRAM
+  ============================================= */
+  .byline-section { background: var(--ci-paper); padding: 96px 0; border-top: 1px solid var(--ci-mist); border-bottom: 1px solid var(--ci-mist); }
+  .byline-intro { max-width: 760px; margin-bottom: 64px; }
+  .byline-main-title { font-family: var(--font-display); font-size: clamp(36px,4.5vw,56px); font-weight: 900; color: var(--ci-black); letter-spacing: -1px; line-height: 1.05; margin-bottom: 16px; }
+  .byline-main-desc { font-family: var(--font-sans); font-size: 16px; color: var(--ci-graphite); line-height: 1.75; margin-bottom: 12px; max-width: 640px; }
+  .byline-hindi { font-family: var(--font-serif); font-style: italic; font-size: 15px; color: var(--ci-red); border-left: 2px solid var(--ci-red); padding-left: 16px; margin-top: 20px; line-height: 1.6; }
+  .byline-card { background: var(--ci-white); border: 0.5px solid var(--ci-mist); border-radius: 4px; padding: 40px 32px; height: 100%; display: flex; flex-direction: column; position: relative; transition: box-shadow 0.25s,transform 0.25s; }
+  .byline-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,0.06); }
+  .byline-card--highlight { border: 2px solid var(--ci-red); box-shadow: 0 8px 24px rgba(204,27,27,0.1); }
+  .byline-card--highlight:hover { box-shadow: 0 20px 40px rgba(204,27,27,0.15); }
+  .byline-rec-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--ci-red); color: #fff; font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 18px; white-space: nowrap; border-radius: 2px; }
+  .byline-tier-name { font-family: var(--font-display); font-size: 26px; font-weight: 900; color: var(--ci-black); margin-bottom: 6px; }
+  .byline-tier-desc { font-family: var(--font-sans); font-size: 13px; color: var(--ci-slate); line-height: 1.55; margin-bottom: 24px; min-height: 40px; }
+  .byline-price { font-family: var(--font-display); font-size: 42px; font-weight: 900; color: var(--ci-black); line-height: 1; padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--ci-mist); }
+  .byline-price span { font-family: var(--font-sans); font-size: 14px; font-weight: 400; color: var(--ci-slate); }
+  .byline-list { list-style: none; padding: 0; margin: 0 0 32px; flex-grow: 1; }
+  .byline-list li { font-family: var(--font-sans); font-size: 14px; color: var(--ci-graphite); margin-bottom: 14px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .byline-list li::before { content: '✓'; color: var(--ci-red); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .byline-cta { display: block; width: 100%; padding: 14px; font-family: var(--font-sans); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; text-decoration: none; border-radius: 3px; transition: all 0.2s; }
+  .byline-cta--outline { background: transparent; color: var(--ci-black); border: 1.5px solid var(--ci-black); }
+  .byline-cta--outline:hover { background: var(--ci-black); color: #fff; }
+  .byline-cta--solid { background: var(--ci-red); color: #fff; border: 1.5px solid var(--ci-red); }
+  .byline-cta--solid:hover { background: var(--ci-red-dark); border-color: var(--ci-red-dark); }
+
+  /* =============================================
+     6. HOMEMAKERS
+  ============================================= */
+  .homemakers-section { background: var(--ci-charcoal); padding: 96px 0; position: relative; overflow: hidden; }
+  .homemakers-section::before { content: ''; position: absolute; top: 0; right: 0; width: 45%; height: 100%; background: linear-gradient(135deg,transparent 0%,rgba(204,27,27,0.04) 100%); pointer-events: none; }
+  .hm-split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
+  .hm-main-title { font-family: var(--font-display); font-size: clamp(36px,4.5vw,54px); font-weight: 900; color: #fff; letter-spacing: -1px; line-height: 1.08; margin-bottom: 20px; }
+  .hm-main-title em { font-style: italic; color: var(--ci-red); }
+  .hm-body-text { font-family: var(--font-sans); font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.75; margin-bottom: 14px; }
+  .hm-hindi { font-family: var(--font-serif); font-style: italic; font-size: 14px; color: rgba(204,27,27,0.85); border-left: 2px solid var(--ci-red); padding-left: 16px; margin: 20px 0 32px; line-height: 1.65; }
+  .hm-cta { display: inline-block; background: var(--ci-red); color: #fff; font-family: var(--font-sans); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px 32px; text-decoration: none; border-radius: 3px; transition: background 0.2s,transform 0.2s; }
+  .hm-cta:hover { background: var(--ci-red-dark); transform: translateY(-2px); color: #fff; }
+  .hm-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .hm-card { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 28px 24px; position: relative; overflow: hidden; transition: border-color 0.25s,background 0.25s,transform 0.25s; cursor: pointer; }
+  .hm-card:hover { border-color: rgba(204,27,27,0.4); background: rgba(255,255,255,0.06); transform: translateY(-3px); }
+  .hm-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--ci-red); transform: scaleY(0); transform-origin: top; transition: transform 0.3s; }
+  .hm-card:hover::before { transform: scaleY(1); }
+  .hm-card--tall { grid-row: span 2; background: var(--ci-black); border-color: rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: flex-end; min-height: 300px; }
+  .hm-card--tall:hover { border-color: rgba(201,162,39,0.4); }
+  .hm-card--tall::before { background: var(--ci-gold); }
+  .hm-card-icon { font-size: 30px; margin-bottom: 14px; }
+  .hm-card-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 8px; line-height: 1.3; }
+  .hm-card-desc { font-family: var(--font-sans); font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.65; }
+  @media (max-width:991px) { .hm-split { grid-template-columns: 1fr; gap: 48px; } }
+
+  /* =============================================
+     7. WORK WITH US
+  ============================================= */
+  .workwithus-section { background: var(--ci-black); padding: 96px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+  .wwu-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 56px; }
+  .wwu-title { font-family: var(--font-display); font-size: clamp(40px,5vw,60px); font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1.05; }
+  .wwu-title em { font-style: italic; color: var(--ci-red); }
+  .wwu-desc { font-family: var(--font-sans); font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 28px; }
+  .wwu-mediakit-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--ci-red); color: #fff; font-family: var(--font-sans); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px 28px; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+  .wwu-mediakit-btn:hover { background: var(--ci-red-dark); color: #fff; }
+  .wwu-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(255,255,255,0.05); }
+  .wwu-card { background: #0f0f0f; padding: 36px 28px; position: relative; overflow: hidden; transition: background 0.25s; cursor: pointer; }
+  .wwu-card:hover { background: #1a1a1a; }
+  .wwu-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--ci-red); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+  .wwu-card:hover::after { transform: scaleX(1); }
+  .wwu-num { font-family: var(--font-display); font-size: 52px; font-weight: 900; color: rgba(204,27,27,0.1); line-height: 1; margin-bottom: 14px; }
+  .wwu-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 10px; }
+  .wwu-desc-text { font-family: var(--font-sans); font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.7; }
+  .wwu-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ci-red); text-decoration: none; opacity: 0; transition: opacity 0.3s; font-weight: 700; }
+  .wwu-card:hover .wwu-link { opacity: 1; }
+  @media (max-width:991px) { .wwu-intro { grid-template-columns: 1fr; gap: 40px; } .wwu-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width:576px) { .wwu-grid { grid-template-columns: 1fr; } }
+
+  /* =============================================
+     8. TEAM
+  ============================================= */
+  .team-section { padding: 96px 0; background: var(--ci-paper); border-top: 1px solid var(--ci-mist); }
+  .team-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 24px; }
+  .team-card { background: var(--ci-white); border: 0.5px solid var(--ci-mist); border-radius: 6px; overflow: hidden; text-align: center; transition: transform 0.25s,box-shadow 0.25s; }
+  .team-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.07); }
+  .team-card__img-wrap { aspect-ratio: 1/1; overflow: hidden; background: var(--ci-mist); position: relative; }
+  .team-card__img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .team-card:hover .team-card__img-wrap img { transform: scale(1.05); }
+  .team-card__img-wrap::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: linear-gradient(to top,rgba(15,15,15,0.4),transparent); }
+  .team-card__body { padding: 20px 16px; }
+  .team-card__name { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--ci-black); margin-bottom: 4px; }
+  .team-card__role { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ci-red); }
+  @media (max-width:991px) { .team-grid { grid-template-columns: repeat(3,1fr); } }
+  @media (max-width:576px) { .team-grid { grid-template-columns: repeat(2,1fr); } }
+
+  /* =============================================
+     9. GALLERY
+  ============================================= */
+  .gallery-section { padding: 96px 0; background: var(--ci-black); }
+  .gallery-grid { columns: 3; column-gap: 14px; }
+  .gallery-item { break-inside: avoid; margin-bottom: 14px; overflow: hidden; border-radius: 4px; position: relative; cursor: pointer; }
+  .gallery-item img { width: 100%; display: block; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .gallery-item:hover img { transform: scale(1.04); }
+  .gallery-item__overlay { position: absolute; inset: 0; background: rgba(15,15,15,0); display: flex; align-items: flex-end; padding: 16px; transition: background 0.3s; }
+  .gallery-item:hover .gallery-item__overlay { background: rgba(15,15,15,0.55); }
+  .gallery-item__title { font-family: var(--font-sans); font-size: 12px; font-weight: 600; color: #fff; letter-spacing: 0.04em; opacity: 0; transform: translateY(6px); transition: opacity 0.3s,transform 0.3s; }
+  .gallery-item:hover .gallery-item__title { opacity: 1; transform: translateY(0); }
+  @media (max-width:768px) { .gallery-grid { columns: 2; } }
+  @media (max-width:480px) { .gallery-grid { columns: 1; } }
+
+  /* =============================================
+     10. LATEST ARTICLES
+  ============================================= */
+  .latest-section { padding: 72px 0; background: var(--ci-paper); border-top: 1px solid var(--ci-mist); }
+  .article-grid-card { background: var(--ci-white); border: 0.5px solid var(--ci-mist); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: transform 0.3s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s; }
+  .article-grid-card:hover { transform: translateY(-5px); box-shadow: 0 14px 28px rgba(0,0,0,0.07); }
+  .agc-img-wrap { aspect-ratio: 16/10; width: 100%; overflow: hidden; background: var(--ci-mist); position: relative; }
+  .agc-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .article-grid-card:hover .agc-img-wrap img { transform: scale(1.06); }
+  .agc-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+  .agc-cat { font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ci-red); margin-bottom: 8px; }
+  .agc-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; line-height: 1.25; color: var(--ci-black); margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .agc-desc { font-family: var(--font-sans); font-size: 13px; color: var(--ci-graphite); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 16px; }
+  .agc-meta { margin-top: auto; display: flex; align-items: center; gap: 8px; font-family: var(--font-sans); font-size: 11px; color: var(--ci-slate); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* =============================================
+     11. NEWSLETTER INLINE
+  ============================================= */
+  .newsletter-section { background: var(--ci-charcoal); padding: 96px 0; }
+  .nl-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+  .nl-headline { font-family: var(--font-display); font-size: clamp(38px,4.5vw,58px); font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -1px; margin-bottom: 16px; }
+  .nl-headline em { font-style: italic; color: var(--ci-red); }
+  .nl-sub { font-family: var(--font-sans); font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 36px; max-width: 480px; }
+  .nl-input-row { display: flex; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; margin-bottom: 12px; }
+  .nl-input-row input { flex: 1; background: rgba(255,255,255,0.06); border: none; padding: 15px 18px; font-family: var(--font-sans); font-size: 14px; color: #fff; outline: none; }
+  .nl-input-row input::placeholder { color: rgba(255,255,255,0.3); }
+  .nl-input-row button { background: var(--ci-red); color: #fff; border: none; padding: 15px 24px; font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+  .nl-input-row button:hover { background: var(--ci-red-dark); }
+  .nl-disclaimer { font-family: var(--font-sans); font-size: 11px; color: rgba(255,255,255,0.25); line-height: 1.5; }
+  .nl-disclaimer a { color: rgba(255,255,255,0.4); text-decoration: underline; }
+  .nl-tiers { display: flex; flex-direction: column; gap: 12px; }
+  .nl-tier { border: 0.5px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); transition: border-color 0.2s,background 0.2s; cursor: pointer; }
+  .nl-tier:hover { border-color: rgba(204,27,27,0.35); background: rgba(204,27,27,0.05); }
+  .nl-tier__name { font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+  .nl-tier__desc { font-family: var(--font-serif); font-size: 14px; font-style: italic; color: rgba(255,255,255,0.75); }
+  .nl-tier__tag { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ci-gold); white-space: nowrap; flex-shrink: 0; margin-left: 16px; }
+  @media (max-width:991px) { .nl-inner { grid-template-columns: 1fr; gap: 48px; } }
+  /* =============================================
+     MODAL EXTENSIONS FOR LARGE FORMS
+  ============================================= */
+  /* Ensures the overlay handles centering and background blur */
+  .ci-modal-overlay {
+    position: fixed; inset: 0; background: rgba(15, 15, 15, 0.85);
+    backdrop-filter: blur(4px); z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; transition: all 0.3s ease;
+  }
+  .ci-modal-overlay.active { opacity: 1; visibility: visible; }
+  
+  /* The Modal Container */
+  .ci-modal {
+    background: var(--ci-white, #ffffff); width: 90%; max-width: 900px;
+    max-height: 90vh; border-radius: 4px; display: flex; flex-direction: row;
+    position: relative; overflow: hidden; transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+  }
+  .ci-modal-overlay.active .ci-modal { transform: translateY(0); }
+  
+  .ci-modal-close {
+    position: absolute; top: 16px; right: 20px; background: none; border: none;
+    font-size: 28px; color: var(--ci-black, #0f0f0f); cursor: pointer; z-index: 10;
+    line-height: 1; opacity: 0.5; transition: opacity 0.2s;
+  }
+  .ci-modal-close:hover { opacity: 1; }
+
+  /* Image Section */
+  .ci-modal-image { width: 40%; background-size: cover; background-position: center; }
+  .hm-modal-image { background-image: url('https://images.unsplash.com/photo-1573164574572-cb89e39749b4?auto=format&fit=crop&q=80&w=800'); }
+  .byline-modal-image { background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800'); }
+
+  /* Scrollable Content Area */
+  .ci-modal-content {
+    width: 60%; padding: 48px 40px; display: flex; flex-direction: column;
+    overflow-y: auto; /* Allows scrolling for long forms */
+  }
+
+  /* Form Elements */
+  .ci-modal-eyebrow { font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ci-red); margin-bottom: 8px; }
+  .ci-modal-title { font-family: var(--font-display); font-size: 32px; font-weight: 900; color: var(--ci-black); margin-bottom: 12px; line-height: 1.1; letter-spacing: -0.5px; }
+  .ci-modal-desc { font-family: var(--font-sans); font-size: 14px; color: var(--ci-graphite); line-height: 1.6; margin-bottom: 32px; }
+  
+  .ci-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .ci-input-group { display: flex; flex-direction: column; margin-bottom: 16px; }
+  .ci-input-group label { font-family: var(--font-sans); font-size: 11px; font-weight: 700; color: var(--ci-black); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  
+  .ci-modal-input, .ci-modal-select, .ci-modal-textarea {
+    width: 100%; padding: 12px 14px; background: var(--ci-paper, #f9f9f9); border: 1px solid var(--ci-mist, #e0e0e0);
+    border-radius: 3px; font-family: var(--font-sans); font-size: 14px; color: var(--ci-black); outline: none; transition: border-color 0.2s;
+  }
+  .ci-modal-input:focus, .ci-modal-select:focus, .ci-modal-textarea:focus { border-color: var(--ci-red); background: #fff; }
+  .ci-modal-textarea { resize: vertical; min-height: 80px; }
+  
+  .ci-form-checkbox { display: flex; align-items: flex-start; gap: 10px; margin-top: 8px; }
+  .ci-form-checkbox input[type="checkbox"] { margin-top: 3px; accent-color: var(--ci-red); }
+  .ci-form-checkbox label { font-family: var(--font-sans); font-size: 12px; color: var(--ci-graphite); line-height: 1.5; cursor: pointer; }
+
+  .ci-modal-submit {
+    background: var(--ci-red); color: #fff; border: none; padding: 16px 24px; font-family: var(--font-sans);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+    border-radius: 3px; transition: background 0.2s; width: 100%; margin-top: 24px;
+  }
+  .ci-modal-submit:hover { background: var(--ci-red-dark, #a81616); }
+
+  @media (max-width: 768px) {
+    .ci-modal { flex-direction: column; width: 95%; max-height: 95vh; }
+    .ci-modal-image { width: 100%; height: 180px; }
+    .ci-modal-content { width: 100%; padding: 32px 24px; }
+    .ci-form-grid { grid-template-columns: 1fr; gap: 0; }
+  }
+  /* =====================================
+       THE BYLINE PROGRAM (SPLIT DESIGN)
+       ===================================== */
+    .byline-section {
+        padding: 100px 0;
+        background-color: var(--ci-paper);
+        border-top: 1px solid var(--ci-mist);
+        overflow: hidden;
+    }
+
+    .byline-content {
+        max-width: 560px;
+    }
+
+    .ci-eyebrow {
+        font-family: var(--font-sans);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--ci-red);
+        margin-bottom: 16px;
+        display: block;
+    }
+
+    .byline-main-title {
+        font-family: var(--font-display);
+        font-size: clamp(36px, 4vw, 52px);
+        font-weight: 900;
+        color: var(--ci-black);
+        line-height: 1.1;
+        margin-bottom: 24px;
+        letter-spacing: -0.5px;
+    }
+
+    .byline-main-desc {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        color: var(--ci-graphite);
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .byline-hindi {
+        font-family: var(--font-serif);
+        font-size: 20px;
+        color: var(--ci-black);
+        font-style: italic;
+        margin: 32px 0 40px;
+        padding-left: 24px;
+        border-left: 3px solid var(--ci-red);
+    }
+
+    .byline-hindi span {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--ci-slate);
+        font-style: normal;
+        display: block;
+        margin-top: 8px;
+    }
+
+    .byline-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 36px;
+        background-color: var(--ci-red);
+        color: var(--ci-white);
+        font-family: var(--font-sans);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        border-radius: 2px;
+        border: 1px solid var(--ci-red);
+        transition: all 0.3s ease;
+    }
+
+    .byline-cta-btn:hover {
+        background-color: var(--ci-red-dark);
+        border-color: var(--ci-red-dark);
+        color: var(--ci-white);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(204, 27, 27, 0.2);
+    }
+
+    /* Right Side Image */
+    .byline-image-wrapper {
+        position: relative;
+        width: 100%;
+        /* 4:5 aspect ratio gives it a cinematic, magazine-feature feel */
+        aspect-ratio: 4/5;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 24px 48px rgba(0,0,0,0.08);
+    }
+
+    .byline-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .byline-image-wrapper:hover img {
+        transform: scale(1.03);
+    }
+
+    @media (max-width: 991px) {
+        .byline-content { max-width: 100%; margin-bottom: 40px; }
+        .byline-image-wrapper { aspect-ratio: 16/10; }
+    }
+</style>
+<style>
+  /* =============================================
+     0. FEATURED VIDEOS ("WATCH" STRIP)
+  ============================================= */
+  .ci-watch-section {
+      padding: 48px 0 8px;
+      background-color: var(--ci-paper);
+  }
+  .ci-watch-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+  }
+  .ci-watch-card { display: block; text-decoration: none; color: inherit; }
+  .ci-watch-thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--ci-mist);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+  }
+  .ci-watch-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+  .ci-watch-card:hover .ci-watch-thumb img { transform: scale(1.05); }
+  .ci-watch-play {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: var(--ci-red);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      transition: background 0.2s, transform 0.2s;
+  }
+  .ci-watch-card:hover .ci-watch-play {
+      background: var(--ci-red-dark);
+      transform: translate(-50%, -50%) scale(1.08);
+  }
+  .ci-watch-play::after {
+      content: '';
+      display: block;
+      width: 0; height: 0;
+      margin-left: 4px;
+      border-style: solid;
+      border-width: 11px 0 11px 18px;
+      border-color: transparent transparent transparent #fff;
+  }
+  .ci-watch-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ci-black);
+      margin-top: 14px;
+      transition: color 0.15s;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+  }
+  .ci-watch-card:hover .ci-watch-title { color: var(--ci-red); }
+  @media (max-width: 991px) { .ci-watch-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 576px) { .ci-watch-grid { grid-template-columns: 1fr; } }
+
+  /* =============================================
+     1. HERO SECTION (SPLIT VERTICAL BANNERS)
+  ============================================= */
+  .hero-split-section {
+      padding: 48px 0;
+      background-color: var(--ci-paper);
+  }
+  
+  .hero-split-box {
+      position: relative;
+      width: 100%;
+      /* Exactly matches your 450x650px image dimensions */
+      aspect-ratio: 450 / 650; 
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+      background-color: var(--ci-mist);
+  }
+  
+  .hero-split-item {
+      width: 100%;
+      height: 100%;
+      display: block;
+      text-decoration: none;
+  }
+  
+  .hero-split-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  
+  .hero-split-box:hover .hero-split-img {
+      transform: scale(1.04);
+  }
+</style>
+
+{% endblock 'css' %}
+
+
+{% block 'body' %}
+
+<!-- =============================================
+     0. FEATURED VIDEOS ("WATCH" STRIP)
+============================================= -->
+{% if featured_videos %}
+<section class="ci-watch-section">
+  <div class="container">
+    <div class="ci-section-label">
+      <span class="ci-section-label__bar"></span>
+      <h2 class="ci-section-label__title">देखें</h2>
+    </div>
+    <div class="ci-watch-grid">
+      {% for video in featured_videos %}
+      <a class="ci-watch-card"
+         href="{{ video.watch_url }}"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="यूट्यूब पर देखें: {{ video.title }}">
+        <div class="ci-watch-thumb">
+          <img src="{{ video.thumbnail_url }}"
+               onerror="this.onerror=null;this.src='{{ video.thumbnail_fallback_url }}';"
+               alt="{{ video.title }}"
+               loading="lazy">
+          <span class="ci-watch-play" aria-hidden="true"></span>
+        </div>
+        <div class="ci-watch-title">{{ video.title }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- =============================================
+     1. HERO CAROUSEL
+============================================= -->
+<section class="hero-split-section">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-6 fade-in-up">
+        <div class="hero-split-box">
+          <div id="heroLeftCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="4000">
+            <div class="carousel-inner h-100">
+
+              {% for banner in hero_banners %}
+              <div class="carousel-item h-100 {% if forloop.first %}active{% endif %}">
+                <a href="{{ banner.redirect_url }}" target="_blank" class="hero-split-item">
+                  {% if banner.image %}
+                    <img src="{{ banner.image.url }}" class="hero-split-img" alt="{{ banner.title }}">
+                  {% else %}
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Impact">
+                  {% endif %}
+                </a>
+              </div>
+              {% empty %}
+              <div class="carousel-item active h-100">
+                <a href="#" class="hero-split-item">
+                  <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Impact">
+                </a>
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6 fade-in-up delay-1">
+        <div class="hero-split-box">
+          <div id="heroRightCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="5500">
+            <div class="carousel-inner h-100">
+
+              {% for i in homepage_ads %}
+              <div class="carousel-item h-100 {% if forloop.first %}active{% endif %}">
+                <a href="{{ i.redirect_url }}" target="_blank" class="hero-split-item">
+                  {% if i.image %}
+                    <img src="{{ i.image.url }}" class="hero-split-img" alt="{{ i.title }}">
+                  {% else %}
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="विज्ञापन">
+                  {% endif %}
+                </a>
+              </div>
+              {% empty %}
+              <div class="carousel-item active h-100">
+                <a href="#" class="hero-split-item">
+                  <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="विज्ञापन">
+                </a>
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     2. LIVE WIRE MARQUEE
+============================================= -->
+<section class="ci-marquee-section">
+  <div class="container p-0">
+    <div class="ci-marquee-header">
+      <span class="ci-marquee-label">द लाइव वायर</span>
+    </div>
+  </div>
+  <div class="ci-marquee-track">
+    <!-- Group 1 -->
+    <div class="ci-marquee-group">
+      {% for article in latest_articles|slice:":12" %}
+      <a href="/article/{{ article.slug }}/" class="ci-marquee-card">
+        {% if article.thumbnail_image %}
+          <img src="{{ article.thumbnail_image.url }}" class="ci-marquee-img" alt="{{ article.title }}">
+        {% else %}
+          <div class="ci-marquee-img"></div>
+        {% endif %}
+        <h4 class="ci-marquee-title">{{ article.title }}</h4>
+      </a>
+      {% empty %}
+      <a href="#" class="ci-marquee-card"><div class="ci-marquee-img"></div><h4 class="ci-marquee-title">सेंसेक्स ने 85,000 का आंकड़ा पार किया — रिटेल निवेशकों के लिए इसका क्या मतलब है</h4></a>
+      <a href="#" class="ci-marquee-card"><div class="ci-marquee-img"></div><h4 class="ci-marquee-title">शीर्ष D2C स्टार्टअप्स ने इस तिमाही में लेट-स्टेज फंडिंग हासिल की</h4></a>
+      <a href="#" class="ci-marquee-card"><div class="ci-marquee-img"></div><h4 class="ci-marquee-title">भारत के EV क्षेत्र ने अकेले अप्रैल में ₹4,200 करोड़ का FDI आकर्षित किया</h4></a>
+      <a href="#" class="ci-marquee-card"><div class="ci-marquee-img"></div><h4 class="ci-marquee-title">सेबी ने SME IPO मानदंडों को सख़्त किया — बाज़ार ने सतर्कता के साथ प्रतिक्रिया दी</h4></a>
+      {% endfor %}
+    </div>
+    <!-- Group 2 — exact duplicate for seamless loop -->
+    <div class="ci-marquee-group" aria-hidden="true">
+      {% for article in latest_articles|slice:":12" %}
+      <a href="/article/{{ article.slug }}/" class="ci-marquee-card" tabindex="-1">
+        {% if article.thumbnail_image %}
+          <img src="{{ article.thumbnail_image.url }}" class="ci-marquee-img" alt="{{ article.title }}">
+        {% else %}
+          <div class="ci-marquee-img"></div>
+        {% endif %}
+        <h4 class="ci-marquee-title">{{ article.title }}</h4>
+      </a>
+      {% empty %}
+      <a href="#" class="ci-marquee-card" tabindex="-1"><div class="ci-marquee-img"></div><h4 class="ci-marquee-title">सेंसेक्स ने 85,000 का आंकड़ा पार किया — रिटेल निवेशकों के लिए इसका क्या मतलब है</h4></a>
+      <a href="#" class="ci-marquee-card" tabindex="-1"><div class="ci-marquee-img"></div><h4 class="ci-marquee-title">शीर्ष D2C स्टार्टअप्स ने इस तिमाही में लेट-स्टेज फंडिंग हासिल की</h4></a>
+      <a href="#" class="ci-marquee-card" tabindex="-1"><div class="ci-marquee-img"></div><h4 class="ci-marquee-title">भारत के EV क्षेत्र ने अकेले अप्रैल में ₹4,200 करोड़ का FDI आकर्षित किया</h4></a>
+      <a href="#" class="ci-marquee-card" tabindex="-1"><div class="ci-marquee-img"></div><h4 class="ci-marquee-title">सेबी ने SME IPO मानदंडों को सख़्त किया — बाज़ार ने सतर्कता के साथ प्रतिक्रिया दी</h4></a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     3. SIMPLY TWO — INTERVIEW SECTION
+============================================= -->
+{% if simply_two_category %}
+<section class="simply-two-section">
+
+  <div class="container">
+
+    <div class="st-eyebrow">
+      {{simply_two_category.title}}
+    </div>
+
+    <h2 class="st-section-title">
+      भारत की सबसे सम्मोहक बातचीत।
+    </h2>
+
+    <p class="st-section-subtitle">
+      दो सवाल। कोई फ़िल्टर नहीं। इंटरव्यू का यह फ़ॉर्मैट किसी भी अन्य से तेज़ी से सच तक पहुंचता है।
+    </p>
+
+    <div class="row g-3">
+
+      <!-- FEATURED -->
+      <div class="col-lg-5">
+
+        {% if simply_two_main_grid.featured_article %}
+
+        <div class="st-featured"
+     style="min-height:520px;
+            position:relative;
+            overflow:hidden;">
+
+    <img src="{{simply_two_main_grid.featured_article.thumbnail_image.url}}"
+         alt="{{simply_two_main_grid.featured_article.title}}"
+         style="
+            position:absolute;
+            inset:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            z-index:0;
+         ">
+
+          
+
+          <div class="st-featured-body"
+               style="position:relative;z-index:2;">
+
+            <div class="st-issue-tag">
+
+              {{simply_two_main_grid.featured_article.category.title}}
+
+              ·
+
+              {{simply_two_main_grid.featured_article.created_at|date:"M Y"}}
+
+            </div>
+
+            <div class="st-featured-name">
+
+              {{simply_two_main_grid.featured_article.title}}
+
+            </div>
+
+            <div class="st-featured-role">
+
+              {{simply_two_main_grid.featured_article.author.name}}
+
+            </div>
+
+            <blockquote class="st-featured-quote">
+
+              "{{simply_two_main_grid.featured_article.description}}"
+
+            </blockquote>
+
+            <a href="/article/{{simply_two_main_grid.featured_article.slug}}"
+               class="st-read-link">
+
+              इंटरव्यू पढ़ें
+
+            </a>
+
+          </div>
+
+        </div>
+
+        {% endif %}
+
+      </div>
+
+
+
+      <!-- SIDE CARDS -->
+      <div class="col-lg-7">
+
+        <div class="row g-3 h-100">
+
+          <!-- CARD 1 -->
+          {% if simply_two_main_grid.editor_choice_1 %}
+
+          <div class="col-md-6">
+
+            <a href="/article/{{simply_two_main_grid.editor_choice_1.slug}}"
+               class="st-card"
+               style="min-height:250px;">
+
+              <div class="st-card-initial">
+
+                {{simply_two_main_grid.editor_choice_1.title|slice:":1"}}
+
+              </div>
+
+              <div class="st-card-label">
+
+                {{simply_two_main_grid.editor_choice_1.category.title}}
+
+              </div>
+
+              <div class="st-card-name">
+
+                {{simply_two_main_grid.editor_choice_1.title}}
+
+              </div>
+
+              <div class="st-card-role">
+
+                {{simply_two_main_grid.editor_choice_1.author.name}}
+
+              </div>
+
+              <div class="st-card-quote">
+
+                {{simply_two_main_grid.editor_choice_1.description|truncatechars:120}}
+
+              </div>
+
+              <span class="st-read-link mt-auto">
+
+                इंटरव्यू पढ़ें
+
+              </span>
+
+            </a>
+
+          </div>
+
+          {% endif %}
+
+
+
+          <!-- CARD 2 -->
+          {% if simply_two_main_grid.editor_choice_2 %}
+
+          <div class="col-md-6">
+
+            <a href="/article/{{simply_two_main_grid.editor_choice_2.slug}}"
+               class="st-card"
+               style="min-height:250px;">
+
+              <div class="st-card-initial">
+
+                {{simply_two_main_grid.editor_choice_2.title|slice:":1"}}
+
+              </div>
+
+              <div class="st-card-label">
+
+                {{simply_two_main_grid.editor_choice_2.category.title}}
+
+              </div>
+
+              <div class="st-card-name">
+
+                {{simply_two_main_grid.editor_choice_2.title}}
+
+              </div>
+
+              <div class="st-card-role">
+
+                {{simply_two_main_grid.editor_choice_2.author.name}}
+
+              </div>
+
+              <div class="st-card-quote">
+
+                {{simply_two_main_grid.editor_choice_2.description|truncatechars:120}}
+
+              </div>
+
+              <span class="st-read-link mt-auto">
+
+                इंटरव्यू पढ़ें
+
+              </span>
+
+            </a>
+
+          </div>
+
+          {% endif %}
+
+
+
+          <!-- CARD 3 -->
+          {% if simply_two_main_grid.editor_choice_3 %}
+
+          <div class="col-md-6">
+
+            <a href="/article/{{simply_two_main_grid.editor_choice_3.slug}}"
+               class="st-card"
+               style="min-height:250px;">
+
+              <div class="st-card-initial">
+
+                {{simply_two_main_grid.editor_choice_3.title|slice:":1"}}
+
+              </div>
+
+              <div class="st-card-label">
+
+                {{simply_two_main_grid.editor_choice_3.category.title}}
+
+              </div>
+
+              <div class="st-card-name">
+
+                {{simply_two_main_grid.editor_choice_3.title}}
+
+              </div>
+
+              <div class="st-card-role">
+
+                {{simply_two_main_grid.editor_choice_3.author.name}}
+
+              </div>
+
+              <div class="st-card-quote">
+
+                {{simply_two_main_grid.editor_choice_3.description|truncatechars:120}}
+
+              </div>
+
+              <span class="st-read-link mt-auto">
+
+                इंटरव्यू पढ़ें
+
+              </span>
+
+            </a>
+
+          </div>
+
+          {% endif %}
+
+
+
+          <!-- CARD 4 -->
+          {% if simply_two_main_grid.editor_choice_4 %}
+
+          <div class="col-md-6">
+
+            <a href="/article/{{simply_two_main_grid.editor_choice_4.slug}}"
+               class="st-card"
+               style="min-height:250px;">
+
+              <div class="st-card-initial">
+
+                {{simply_two_main_grid.editor_choice_4.title|slice:":1"}}
+
+              </div>
+
+              <div class="st-card-label">
+
+                {{simply_two_main_grid.editor_choice_4.category.title}}
+
+              </div>
+
+              <div class="st-card-name">
+
+                {{simply_two_main_grid.editor_choice_4.title}}
+
+              </div>
+
+              <div class="st-card-role">
+
+                {{simply_two_main_grid.editor_choice_4.author.name}}
+
+              </div>
+
+              <div class="st-card-quote">
+
+                {{simply_two_main_grid.editor_choice_4.description|truncatechars:120}}
+
+              </div>
+
+              <span class="st-read-link mt-auto">
+
+                इंटरव्यू पढ़ें
+
+              </span>
+
+            </a>
+
+          </div>
+
+          {% endif %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+{% endif %}
+
+
+<!-- =============================================
+     3B. NEWS & VIEWS — AUTO ROTATING
+============================================= -->
+<section class="latest-section news-views-carousel-section">
+  <div class="container">
+    <div class="ci-section-label">
+      <div class="ci-section-label__bar"></div>
+      <h2 class="ci-section-label__title">समाचार और विचार</h2>
+      <a href="{% if news_views_category %}/category/{{ news_views_category.slug }}/{% else %}#{% endif %}" class="ci-section-label__link">सभी देखें →</a>
+    </div>
+    <div id="newsViewsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4500">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <div class="row g-4">
+            {% for article in news_views_articles|slice:":3" %}
+            <div class="col-sm-6 col-lg-4">
+              <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+                <div class="agc-img-wrap">
+                  {% if article.thumbnail_image %}
+                    <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+                  {% else %}
+                    <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
+                  {% endif %}
+                </div>
+                <div class="agc-body">
+                  <div class="agc-cat">{{ article.category.title }}</div>
+                  <div class="agc-title">{{ article.title }}</div>
+                  <div class="agc-desc">{{ article.description }}</div>
+                  <div class="agc-meta">
+                    <span>{{ article.author.name|default:"संपादकीय" }}</span>
+                    <span style="color:var(--ci-silver);">&bull;</span>
+                    <span>{{ article.created_at|date:"M d, Y" }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% empty %}
+            <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600" alt="" loading="lazy"></div><div class="agc-body"><div class="agc-cat">समाचार और विचार</div><div class="agc-title">कॉर्पोरेट अपडेट: उद्योग रुझान और बाज़ार की चालें</div><div class="agc-desc">भारतीय उद्योग जगत को आकार देने वाले नवीनतम समाचारों, बाज़ार अपडेट और व्यावसायिक अंतर्दृष्टि से अवगत रहें।</div><div class="agc-meta"><span>संपादकीय</span><span style="color:var(--ci-silver);">&bull;</span><span>May 14, 2026</span></div></div></a></div>
+            <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=600" alt="" loading="lazy"></div><div class="agc-body"><div class="agc-cat">समाचार और विचार</div><div class="agc-title">ब्रेकिंग न्यूज़: प्रमुख कॉर्पोरेट घोषणाएं</div><div class="agc-desc">भारत की अग्रणी कंपनियों और उद्यमियों के हालिया घटनाक्रम और रणनीतिक फैसले।</div><div class="agc-meta"><span>संपादकीय</span><span style="color:var(--ci-silver);">&bull;</span><span>May 13, 2026</span></div></div></a></div>
+            <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=600" alt="" loading="lazy"></div><div class="agc-body"><div class="agc-cat">समाचार और विचार</div><div class="agc-title">मार्केट स्नैपशॉट: भारतीय व्यापार में यह सप्ताह</div><div class="agc-desc">कॉर्पोरेट भारत को प्रभावित करने वाली घटनाओं, सौदों और फैसलों की त्वरित झलक।</div><div class="agc-meta"><span>संपादकीय</span><span style="color:var(--ci-silver);">&bull;</span><span>May 12, 2026</span></div></div></a></div>
+            {% endfor %}
+          </div>
+        </div>
+
+        {% if news_views_articles|length > 3 %}
+        <div class="carousel-item">
+          <div class="row g-4">
+            {% for article in news_views_articles|slice:"3:6" %}
+            <div class="col-sm-6 col-lg-4">
+              <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+                <div class="agc-img-wrap">
+                  {% if article.thumbnail_image %}
+                    <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+                  {% else %}
+                    <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
+                  {% endif %}
+                </div>
+                <div class="agc-body">
+                  <div class="agc-cat">{{ article.category.title }}</div>
+                  <div class="agc-title">{{ article.title }}</div>
+                  <div class="agc-desc">{{ article.description }}</div>
+                  <div class="agc-meta">
+                    <span>{{ article.author.name|default:"संपादकीय" }}</span>
+                    <span style="color:var(--ci-silver);">&bull;</span>
+                    <span>{{ article.created_at|date:"M d, Y" }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if news_views_articles|length > 6 %}
+        <div class="carousel-item">
+          <div class="row g-4">
+            {% for article in news_views_articles|slice:"6:9" %}
+            <div class="col-sm-6 col-lg-4">
+              <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+                <div class="agc-img-wrap">
+                  {% if article.thumbnail_image %}
+                    <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+                  {% else %}
+                    <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
+                  {% endif %}
+                </div>
+                <div class="agc-body">
+                  <div class="agc-cat">{{ article.category.title }}</div>
+                  <div class="agc-title">{{ article.title }}</div>
+                  <div class="agc-desc">{{ article.description }}</div>
+                  <div class="agc-meta">
+                    <span>{{ article.author.name|default:"संपादकीय" }}</span>
+                    <span style="color:var(--ci-silver);">&bull;</span>
+                    <span>{{ article.created_at|date:"M d, Y" }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if news_views_articles|length > 9 %}
+        <div class="carousel-item">
+          <div class="row g-4">
+            {% for article in news_views_articles|slice:"9:10" %}
+            <div class="col-sm-6 col-lg-4">
+              <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+                <div class="agc-img-wrap">
+                  {% if article.thumbnail_image %}
+                    <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+                  {% else %}
+                    <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
+                  {% endif %}
+                </div>
+                <div class="agc-body">
+                  <div class="agc-cat">{{ article.category.title }}</div>
+                  <div class="agc-title">{{ article.title }}</div>
+                  <div class="agc-desc">{{ article.description }}</div>
+                  <div class="agc-meta">
+                    <span>{{ article.author.name|default:"संपादकीय" }}</span>
+                    <span style="color:var(--ci-silver);">&bull;</span>
+                    <span>{{ article.created_at|date:"M d, Y" }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     4. THE ECOSYSTEM WE MAP
+============================================= -->
+<section class="ecosystem-section">
+  <div class="container">
+    <div class="ecosystem-intro">
+      <div class="ci-eyebrow" style="color:var(--ci-red);">संपादकीय स्तंभ</div>
+      <h2 class="ecosystem-title">वह इकोसिस्टम<br/><em>जिसे हम मैप करते हैं।</em></h2>
+      <p class="ecosystem-subtitle">तेरह क्षेत्र। प्रामाणिक कवरेज। भारतीय उद्योग जगत को नया आकार देने वाली शक्तियों की संपूर्ण तस्वीर।</p>
+    </div>
+    
+    <div class="row g-3">
+      {% for cat in header_categories %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="/category/{{ cat.slug }}/" class="pillar-card" data-num="{{ forloop.counter|stringformat:'02d' }}">
+          <div class="pillar-num">{{ forloop.counter|stringformat:'02d' }}</div>
+          <span class="pillar-icon-wrap">📌</span>
+          <div class="pillar-name">{{ cat.title }}</div>
+          <div class="pillar-desc">{{ cat.title }} से जुड़ी सभी ताज़ा ख़बरें और अपडेट्स पढ़ें।</div>
+          <div class="pillar-explore">देखें →</div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =============================================
+     4B. LATEST STORIES
+============================================= -->
+<section class="latest-section">
+  <div class="container">
+    <div class="ci-section-label">
+      <div class="ci-section-label__bar"></div>
+      <h2 class="ci-section-label__title">नवीनतम कहानियां</h2>
+      <a href="/articles/" class="ci-section-label__link">सभी देखें →</a>
+    </div>
+    <div class="row g-4">
+      {% for article in latest_articles|slice:":6" %}
+      <div class="col-sm-6 col-lg-4">
+        <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+          <div class="agc-img-wrap">
+            {% if article.thumbnail_image %}
+              <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+            {% else %}
+              <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
+            {% endif %}
+          </div>
+          <div class="agc-body">
+            <div class="agc-cat">{{ article.category.title }}</div>
+            <div class="agc-title">{{ article.title }}</div>
+            <div class="agc-desc">{{ article.description }}</div>
+            <div class="agc-meta">
+              <span>{{ article.author.name|default:"संपादकीय" }}</span>
+              <span style="color:var(--ci-silver);">&bull;</span>
+              <span>{{ article.created_at|date:"M d, Y" }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% empty %}
+      <!-- Fallback article cards — shows until articles are published -->
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600" alt="" loading="lazy"></div><div class="agc-body"><div class="agc-cat">बाज़ार</div><div class="agc-title">सेंसेक्स की तेज़ी पूरी कहानी क्यों नहीं है — और निवेशक क्या चूक रहे हैं</div><div class="agc-desc">हेडलाइन के आंकड़ों के पीछे क्षेत्रीय विचलन और विदेशी पूंजी के व्यवहार की एक अधिक जटिल तस्वीर छिपी है।</div><div class="agc-meta"><span>Priya Sharma</span><span style="color:var(--ci-silver);">&bull;</span><span>May 14, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=600" alt="" loading="lazy"></div><div class="agc-body"><div class="agc-cat">स्टार्टअप्स</div><div class="agc-title">₹500 करोड़ के उस दांव के भीतर जो भारत के एग्री-टेक क्षेत्र को अपरिचित बना सकता है</div><div class="agc-desc">तीन संस्थापक, एक विचार, और एक आपूर्ति श्रृंखला चुनौती जिसने इससे पहले कोशिश करने वाले हर किसी को हरा दिया।</div><div class="agc-meta"><span>Arjun Kapoor</span><span style="color:var(--ci-silver);">&bull;</span><span>May 13, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=600" alt="" loading="lazy"></div><div class="agc-body"><div class="agc-cat">नीति</div><div class="agc-title">तीसरे वर्ष में PLI योजना: क्या काम आया, क्या विफल रहा, और आगे क्या है</div><div class="agc-desc">एक पीढ़ी की सबसे महत्वाकांक्षी औद्योगिक नीति का क्षेत्र-दर-क्षेत्र ऑडिट।</div><div class="agc-meta"><span>Editorial Board</span><span style="color:var(--ci-silver);">&bull;</span><span>May 12, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?auto=format&fit=crop&q=80&w=600" alt="" loading="lazy"></div><div class="agc-body"><div class="agc-cat">नेतृत्व</div><div class="agc-title">वह CEO जिसने 18 महीनों में ₹30 करोड़ के घाटे को ₹400 करोड़ के टर्नअराउंड में बदल दिया</div><div class="agc-desc">निधि अग्रवाल कट्टरपंथी पारदर्शिता, पुरानी प्रणालियों को छोड़ने, और लगभग छह बार नौकरी छोड़ने के करीब पहुंचने के बारे में बात करती हैं।</div><div class="agc-meta"><span>Rajiv Menon</span><span style="color:var(--ci-silver);">&bull;</span><span>May 11, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=600" alt="" loading="lazy"></div><div class="agc-body"><div class="agc-cat">डीप टेक</div><div class="agc-title">भारत की AI टैलेंट पाइपलाइन में एक अंतर है। यहां ठीक-ठीक बताया गया है कि यह कहां टूटता है</div><div class="agc-desc">हर साल 1.4 मिलियन इंजीनियरिंग स्नातकों के बावजूद, एंटरप्राइज़ AI अपनाना कार्यान्वयन स्तर पर अटक रहा है।</div><div class="agc-meta"><span>Suresh Pillai</span><span style="color:var(--ci-silver);">&bull;</span><span>May 10, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=600" alt="" loading="lazy"></div><div class="agc-body"><div class="agc-cat">स्थिरता</div><div class="agc-title">ग्रीन बॉन्ड में उछाल आ रहा है। लेकिन क्या भारत की ESG रिपोर्टिंग इसे साबित करने के लिए तैयार है?</div><div class="agc-desc">कंपनियां जो दावा करती हैं और जो साबित कर सकती हैं, उसके बीच का अंतर भारत का अगला बड़ा गवर्नेंस संकट है।</div><div class="agc-meta"><span>Kavya Nair</span><span style="color:var(--ci-silver);">&bull;</span><span>May 9, 2026</span></div></div></a></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     5. THE BYLINE PROGRAM
+============================================= -->
+<section class="byline-section" id="byline-program">
+  <div class="container">
+    <div class="row align-items-center g-lg-5">
+      
+      <div class="col-lg-6 fade-in-up">
+        <div class="byline-content">
+          <div class="ci-eyebrow">प्रकाशक पोर्टल</div>
+          <h2 class="byline-main-title">आपकी पहली बायलाइन।<br/>एक असली पत्रिका में।</h2>
+
+          <p class="byline-main-desc">आपके पास कहने के लिए कुछ है। Corporate Impact आपको इसे कहने का मंच देता है — आपके नाम के साथ, एक असली प्रकाशित पत्रिका में जिसे असली लोग पढ़ते हैं। थॉट लीडरशिप बनाने वाले कार्यकारियों से लेकर अपनी पहली बायलाइन अर्जित करने वाले छात्रों तक, हर महत्वपूर्ण आवाज़ के लिए हमारे पास जगह है।</p>
+
+          <p class="byline-main-desc">पूरे भारत के कार्यकारियों, उद्यमियों, पत्रकारों और छात्रों के लिए खुला है। हिंदी और अंग्रेज़ी। प्रिंट और डिजिटल।</p>
+
+          <div class="byline-hindi">
+            "अपनी पहली बायलाइन — सिर्फ़ एक कदम दूर है।"<br>
+            <span>आपकी पहली बायलाइन बस एक कदम दूर है।</span>
+          </div>
+
+          <a href="/byline" class="byline-cta-btn">योगदान के लिए आवेदन करें</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 fade-in-up delay-1">
+        <div class="byline-image-wrapper">
+          <img src="https://images.pexels.com/photos/4144096/pexels-photo-4144096.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Corporate Impact में प्रकाशित करता छात्र शोधकर्ता">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     6. HOMEMAKER'S CHRONICLES
+============================================= -->
+<section class="homemakers-section">
+  <div class="container">
+    <div class="hm-split">
+      <div class="hm-left">
+        <div class="ci-eyebrow" style="color:var(--ci-red); margin-bottom:16px;">नया कॉलम</div>
+        <h2 class="hm-main-title">उसने घर चलाया।<br/>अब वह <em>सब कुछ</em> चलाती है।</h2>
+        <p class="hm-body-text">गृहिणी की कहानी कभी वैसे नहीं बताई गई जैसी उसे बतानी चाहिए थी। Corporate Impact इसे बदल रहा है। हमारा मानना है कि परिवार को संभालना, बच्चों की परवरिश करना, और घर को एक साथ रखना ही नेतृत्व है — और हम इसे पहचानने के लिए यहां हैं।</p>
+        <p class="hm-body-text"><strong style="color:rgba(255,255,255,0.85);">होममेकर स्पॉटलाइट</strong> उन महिलाओं का उत्सव मनाता है जिन्होंने अपने घरों के भीतर कुछ असाधारण बनाया — और उन लोगों का भी जिन्होंने उस शक्ति को लेकर दरवाज़े से बाहर कदम रखा।</p>
+        <div class="hm-hindi">
+          "घर संभालना भी एक कला है। और हर कला को पहचान मिलनी चाहिए।"<br>
+          <span style="font-size:12px; opacity:0.6; font-style:normal;">घर संभालना भी एक कला है। और हर कला को पहचान मिलनी चाहिए।</span>
+        </div>
+        <button type="button" onclick="location.href='/homemaker'" class="hm-cta">अपनी कहानी साझा करें →</button>
+      </div>
+      <div class="hm-cards">
+        <div class="hm-card hm-card--tall">
+          <div class="hm-card-icon">🌸</div>
+          <div class="hm-card-title">होममेकर स्पॉटलाइट</div>
+          <div class="hm-card-desc">उन महिलाओं की विशेष प्रोफ़ाइलें जिनकी शक्ति, रचनात्मकता, और नेतृत्व घर से शुरू हुआ — और उससे कहीं आगे बढ़ा।</div>
+        </div>
+        <div class="hm-card">
+          <div class="hm-card-icon">✍️</div>
+          <div class="hm-card-title">अपनी कहानी लिखें</div>
+          <div class="hm-card-desc">अपनी यात्रा जमा करें। हम इसे खूबसूरती से बताने में आपकी मदद करेंगे।</div>
+        </div>
+        <div class="hm-card">
+          <div class="hm-card-icon">🏅</div>
+          <div class="hm-card-title">महीने की होममेकर</div>
+          <div class="hm-card-desc">एक असाधारण महिला। हर महीने प्रिंट, डिजिटल और सोशल मीडिया पर प्रदर्शित।</div>
+        </div>
+        <div class="hm-card">
+          <div class="hm-card-icon">🎙️</div>
+          <div class="hm-card-title">बातचीत में</div>
+          <div class="hm-card-desc">उन महिलाओं के साथ विस्तृत इंटरव्यू जिन्होंने "कुछ चलाने" के मायने फिर से परिभाषित किए।</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     7. WORK WITH US / MEDIA KIT
+============================================= -->
+<section class="workwithus-section">
+  <div class="container">
+    <div class="wwu-intro">
+      <div>
+        <div class="ci-eyebrow" style="color:var(--ci-red); margin-bottom:20px;">हमारे साथ काम करें</div>
+        <h2 class="wwu-title">आपकी कहानी,<br/><em>सही ढंग से कही गई।</em></h2>
+      </div>
+      <div>
+        <p class="wwu-desc">हम ऐसे बैनर नहीं बनाते जिन्हें कोई क्लिक न करे। हम ऐसी कहानियां बनाते हैं जिन्हें लोग वाकई पढ़ते, साझा करते और याद रखते हैं। अगर आपके ब्रांड के पास कहने लायक कुछ है, तो हम इसे कहने का सबसे अच्छा तरीका ढूंढेंगे — संपादकीय रूप से, ईमानदारी से, ऐसे अंदाज़ में जो लोगों के साथ रहे।</p>
+        <a href="/static/main/media-kit/Corporate_Impact_MediaKit.pdf" download class="wwu-mediakit-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M2 13h12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          मीडिया किट डाउनलोड करें
+        </a>
+      </div>
+    </div>
+    <div class="wwu-grid">
+      <div class="wwu-card"><div class="wwu-num">01</div><div class="wwu-name">PR फ़ीचर्स और इंटरव्यू</div><div class="wwu-desc-text">अपने क्लाइंट या ब्रांड को हमारे प्रतिष्ठित Simply Two फ़ॉर्मैट में या एक विस्तृत संपादकीय प्रोफ़ाइल के रूप में शामिल कराएं। असली पहुंच, असली विश्वसनीयता।</div><a href="/contact" class="wwu-link">पूछताछ करें →</a></div>
+      <div class="wwu-card"><div class="wwu-num">02</div><div class="wwu-name">ब्रांड स्पॉटलाइट कहानियां</div><div class="wwu-desc-text">हमारी संपादकीय शैली में लिखा गया एक प्रायोजित लेख। यह जानकारी देता है, जोड़ता है, और प्रकाशन के बाद लंबे समय तक आपके दर्शकों की फ़ीड पर बना रहता है।</div><a href="/contact" class="wwu-link">पूछताछ करें →</a></div>
+      <div class="wwu-card"><div class="wwu-num">03</div><div class="wwu-name">डिस्प्ले विज्ञापन</div><div class="wwu-desc-text">साइडबार, श्रेणी, और होमपेज प्लेसमेंट। सीमित स्लॉट। विशेष स्थिति। आपका ब्रांड वहां जहां हमारे पाठक देख रहे हैं।</div><a href="/contact" class="wwu-link">पूछताछ करें →</a></div>
+      <div class="wwu-card"><div class="wwu-num">04</div><div class="wwu-name">मासिक कंटेंट पार्टनर</div><div class="wwu-desc-text">एक निरंतर संबंध — लेख, उल्लेख, सोशल एम्प्लीफिकेशन, न्यूज़लेटर फ़ीचर्स। दीर्घकालिक सोचने वाले ब्रांडों के लिए सर्वोत्तम ROI।</div><a href="/contact" class="wwu-link">पूछताछ करें →</a></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     8. OUR TEAM
+============================================= -->
+<section class="team-section">
+  <div class="container">
+    <div class="ci-section-label">
+      <div class="ci-section-label__bar"></div>
+      <h2 class="ci-section-label__title">कहानियों के पीछे के लोग</h2>
+    </div>
+    <div class="team-grid">
+      {% for member in teams %}
+      <div class="team-card">
+        <div class="team-card__img-wrap">
+          {% if member.image %}
+            <img src="{{ member.image.url }}" alt="{{ member.name }}">
+          {% else %}
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="{{ member.name }}">
+          {% endif %}
+        </div>
+        <div class="team-card__body">
+          <div class="team-card__name">{{ member.name }}</div>
+          <div class="team-card__role">{{ member.designation }}</div>
+        </div>
+      </div>
+      {% empty %}
+      <!-- Fallback team cards — replace with your actual team model data -->
+      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="Rajiv Menon"></div><div class="team-card__body"><div class="team-card__name">Rajiv Menon</div><div class="team-card__role">प्रधान संपादक</div></div></div>
+      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400" alt="Priya Sharma"></div><div class="team-card__body"><div class="team-card__name">Priya Sharma</div><div class="team-card__role">प्रबंध संपादक</div></div></div>
+      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" alt="Arjun Kapoor"></div><div class="team-card__body"><div class="team-card__name">Arjun Kapoor</div><div class="team-card__role">वरिष्ठ संवाददाता</div></div></div>
+      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400" alt="Kavya Nair"></div><div class="team-card__body"><div class="team-card__name">Kavya Nair</div><div class="team-card__role">डिज़ाइन प्रमुख</div></div></div>
+      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" alt="Suresh Pillai"></div><div class="team-card__body"><div class="team-card__name">Suresh Pillai</div><div class="team-card__role">डिजिटल निदेशक</div></div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     11. STORIES IN YOUR INBOX
+============================================= -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="nl-inner">
+      <div>
+        <div class="ci-eyebrow" style="color:var(--ci-red); margin-bottom:20px;">न्यूज़लेटर</div>
+        <h2 class="nl-headline">आपके इनबॉक्स में कहानियां।<br/><em>हर हफ़्ते।</em></h2>
+        <p class="nl-sub">Corporate Impact Weekly — भारत का एकमात्र द्विभाषी व्यापार न्यूज़लेटर। हिंदी। अंग्रेज़ी। एक तीक्ष्ण अंतर्दृष्टि, एक व्यक्तित्व, एक कहानी जो आपको कहीं और नहीं मिलेगी। 50,000+ उद्योग जगत के नेताओं का भरोसा।</p>
+        <form action="/subscribe_form" method="POST" class="nl-input-row">
+          {% csrf_token %}
+          <input type="email" name="email" placeholder="अपना ईमेल पता दर्ज करें" required autocomplete="email">
+          <button type="submit">मुफ़्त सब्सक्राइब करें</button>
+        </form>
+        <p class="nl-disclaimer">
+          सब्सक्राइब करके आप हमारी <a href="/terms">सेवा की शर्तों</a> और <a href="/privacy">गोपनीयता नीति</a> से सहमत होते हैं। किसी भी समय सदस्यता समाप्त करें।
+        </p>
+      </div>
+      <div class="nl-tiers">
+        <div class="nl-tier">
+          <div><div class="nl-tier__name">निःशुल्क संस्करण</div><div class="nl-tier__desc">साप्ताहिक डाइजेस्ट — हिंदी और अंग्रेज़ी कहानियां</div></div>
+          <div class="nl-tier__tag">मुफ़्त</div>
+        </div>
+        <div class="nl-tier">
+          <div><div class="nl-tier__name">प्रीमियम संस्करण</div><div class="nl-tier__desc">विशेष इंटरव्यू, शुरुआती पहुंच, बोनस फ़ीचर्स</div></div>
+          <div class="nl-tier__tag">₹99/माह</div>
+        </div>
+        <div class="nl-tier">
+          <div><div class="nl-tier__name">न्यूज़लेटर प्रायोजक</div><div class="nl-tier__desc">हमारे साप्ताहिक अंक में आपका ब्रांड प्रदर्शित</div></div>
+          <div class="nl-tier__tag">पूछताछ करें</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock 'body' %}
+
+{% block 'script' %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll(
+      '.pillar-card, .byline-card, .hm-card, .wwu-card, .team-card, .article-grid-card'
+    ).forEach(function (el, i) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(22px)';
+      el.style.transition = 'opacity 0.5s ease ' + (i * 0.04) + 's, transform 0.5s ease ' + (i * 0.04) + 's';
+      observer.observe(el);
+    });
+  });
+</script>
+<script>
+  // Function to open a modal by ID
+function openModal(modalId) {
+  document.getElementById(modalId).classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+// Function to close a modal by ID
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
+  document.body.style.overflow = 'auto'; // Restore background scrolling
+}
+
+// Optional: Close modal if user clicks outside the modal box
+window.addEventListener('click', function(event) {
+  if (event.target.classList.contains('ci-modal-overlay')) {
+    event.target.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+});
+</script>
+{% endblock 'script' %}

@@ -1,0 +1,306 @@
+{% extends "main/base.html" %}
+
+{% block 'title' %}नियम और शर्तें | Corporate Impact{% endblock 'title' %}
+
+{% block 'meta' %}
+<meta name="description" content="Corporate Impact के लिए नियम और शर्तें, जो इंडिया इंक की निर्णायक आवाज़ है।">
+{% endblock 'meta' %}
+
+{% block 'css' %}
+<style>
+  /* =========================================
+     LEGAL PAGE SPECIFIC STYLES
+     ========================================= */
+  .ci-legal-wrapper {
+    padding: 64px 40px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  /* Page Header */
+  .ci-legal-header {
+    margin-bottom: 48px;
+    border-bottom: 2px solid var(--ci-black);
+    padding-bottom: 24px;
+  }
+  .ci-legal-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ci-red);
+    margin-bottom: 12px;
+  }
+  .ci-legal-title {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ci-black);
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .ci-legal-meta {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ci-slate);
+  }
+
+  /* Layout Grid */
+  .ci-legal-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* Sticky Sidebar Navigation */
+  .ci-legal-nav {
+    position: sticky;
+    top: 100px; /* Adjust based on your header height */
+    background: var(--ci-white);
+    border: 0.5px solid var(--ci-mist);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .ci-legal-nav-title {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ci-slate);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--ci-mist);
+  }
+  .ci-legal-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .ci-legal-nav-link {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ci-graphite);
+    text-decoration: none;
+    transition: color 0.15s, transform 0.15s;
+    display: inline-block;
+  }
+  .ci-legal-nav-link:hover,
+  .ci-legal-nav-link.active {
+    color: var(--ci-red);
+    transform: translateX(4px);
+  }
+
+  /* Document Content */
+  .ci-legal-content {
+    font-family: var(--font-sans);
+    color: var(--ci-graphite);
+    line-height: 1.7;
+    font-size: 15px;
+    max-width: 760px;
+  }
+  .ci-legal-section {
+    margin-bottom: 48px;
+    scroll-margin-top: 100px; /* Accounts for sticky headers when jumping to sections */
+  }
+  .ci-legal-section h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ci-black);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ci-legal-section h2::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 20px;
+    background: var(--ci-red);
+    border-radius: 2px;
+  }
+  .ci-legal-section p {
+    margin-bottom: 16px;
+  }
+  .ci-legal-section ul {
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+  .ci-legal-section li {
+    margin-bottom: 8px;
+  }
+  .ci-legal-section a {
+    color: var(--ci-red);
+    text-decoration: underline;
+    text-decoration-color: var(--ci-mist);
+    transition: text-decoration-color 0.15s;
+  }
+  .ci-legal-section a:hover {
+    text-decoration-color: var(--ci-red);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .ci-legal-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .ci-legal-nav {
+      position: static;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      background: transparent;
+      padding: 24px 0;
+    }
+  }
+  @media (max-width: 768px) {
+    .ci-legal-wrapper {
+      padding: 40px 20px;
+    }
+    .ci-legal-title {
+      font-size: 36px;
+    }
+  }
+</style>
+{% endblock 'css' %}
+
+{% block 'body' %}
+<main class="ci-legal-wrapper">
+  
+  <header class="ci-legal-header">
+    <div class="ci-legal-eyebrow">कानूनी जानकारी</div>
+    <h1 class="ci-legal-title">नियम और शर्तें</h1>
+    <div class="ci-legal-meta">अंतिम अद्यतन: 12 मई, 2026</div>
+  </header>
+
+  <div class="ci-legal-layout">
+
+    <aside class="ci-legal-nav">
+      <div class="ci-legal-nav-title">विषय सूची</div>
+      <ul class="ci-legal-nav-list">
+        <li><a href="#acceptance" class="ci-legal-nav-link active">1. शर्तों की स्वीकृति</a></li>
+        <li><a href="#intellectual-property" class="ci-legal-nav-link">2. बौद्धिक संपदा</a></li>
+        <li><a href="#user-conduct" class="ci-legal-nav-link">3. उपयोगकर्ता आचरण</a></li>
+        <li><a href="#premium-subscriptions" class="ci-legal-nav-link">4. प्रीमियम सदस्यताएं</a></li>
+        <li><a href="#disclaimers" class="ci-legal-nav-link">5. अस्वीकरण</a></li>
+        <li><a href="#limitation-of-liability" class="ci-legal-nav-link">6. दायित्व की सीमा</a></li>
+        <li><a href="#contact" class="ci-legal-nav-link">7. हमसे संपर्क करें</a></li>
+      </ul>
+    </aside>
+
+    <article class="ci-legal-content">
+      
+      <section id="acceptance" class="ci-legal-section">
+        <h2>1. शर्तों की स्वीकृति</h2>
+        <p><strong>corporateimpact.in</strong> ("वेबसाइट") तक पहुंच बनाकर और उसका उपयोग करके, जिसमें Corporate Impact Media Network द्वारा संचालित सभी संबद्ध मीडिया, पत्रिकाएं, न्यूज़लेटर और डिजिटल प्लेटफ़ॉर्म शामिल हैं, आप इस समझौते की शर्तों और प्रावधानों से बाध्य होना स्वीकार करते हैं और उस पर सहमति देते हैं। इसके अतिरिक्त, इस वेबसाइट की विशेष सेवाओं का उपयोग करते समय, आप ऐसी सेवाओं पर लागू किसी भी पोस्ट किए गए दिशानिर्देश या नियम के अधीन होंगे।</p>
+        <p>इस सेवा में किसी भी प्रकार की भागीदारी इस समझौते की स्वीकृति मानी जाएगी। यदि आप उपरोक्त का पालन करने के लिए सहमत नहीं हैं, तो कृपया इस सेवा का उपयोग न करें।</p>
+      </section>
+
+      <section id="intellectual-property" class="ci-legal-section">
+        <h2>2. बौद्धिक संपदा अधिकार</h2>
+        <p>वेबसाइट और उसकी मौलिक सामग्री, विशेषताएं, पत्रकारिता, डेटा विश्लेषण, और कार्यक्षमता Corporate Impact के स्वामित्व में हैं और अंतरराष्ट्रीय कॉपीराइट, ट्रेडमार्क, पेटेंट, व्यापार रहस्य, तथा अन्य बौद्धिक संपदा या स्वामित्व अधिकार कानूनों द्वारा संरक्षित हैं।</p>
+        <ul>
+          <li>आप हमारी पूर्व लिखित सहमति के बिना हमारी वेबसाइट पर मौजूद किसी भी सामग्री को पुनः प्रस्तुत, वितरित, संशोधित, उससे व्युत्पन्न कार्य निर्मित, सार्वजनिक रूप से प्रदर्शित, या व्यावसायिक रूप से उपयोग नहीं कर सकते।</li>
+          <li>Corporate Impact का लोगो, वर्डमार्क, और विशिष्ट ब्रांड संपत्तियां ट्रेडमार्क कानूनों के तहत सख्ती से संरक्षित हैं।</li>
+        </ul>
+      </section>
+
+      <section id="user-conduct" class="ci-legal-section">
+        <h2>3. उपयोगकर्ता आचरण और टिप्पणियां</h2>
+        <p>Corporate Impact व्यावसायिक पेशेवरों के एक प्रामाणिक और सम्मानजनक समुदाय को बढ़ावा देता है। हमारे प्लेटफ़ॉर्म के साथ बातचीत करते समय, आप ऐसी किसी भी सामग्री को पोस्ट, अपलोड, या वितरित न करने के लिए सहमत होते हैं जो:</p>
+        <ul>
+          <li>गैरकानूनी, मानहानिकारक, अपमानजनक, आपत्तिजनक हो, या अवैध गतिविधियों को बढ़ावा देती हो।</li>
+          <li>किसी भी पक्ष के पेटेंट, ट्रेडमार्क, व्यापार रहस्य, कॉपीराइट, या अन्य स्वामित्व अधिकारों का उल्लंघन करती हो।</li>
+          <li>अवांछित या अनधिकृत विज्ञापन, प्रचार सामग्री, या "स्पैम" शामिल करती हो।</li>
+        </ul>
+        <p>हम अपने पूर्ण विवेकाधिकार पर किसी भी उपयोगकर्ता-जनित सामग्री को नियंत्रित करने, संपादित करने, या हटाने का अधिकार सुरक्षित रखते हैं।</p>
+      </section>
+
+      <section id="premium-subscriptions" class="ci-legal-section">
+        <h2>4. प्रीमियम सदस्यताएं और बिलिंग</h2>
+        <p>वेबसाइट के कुछ अनुभागों, जिनमें गहन उद्योग रिपोर्ट, विशेष सीईओ साक्षात्कार, और विज्ञापन-मुक्त ब्राउज़िंग शामिल हैं, के लिए प्रीमियम सदस्यता आवश्यक है।</p>
+        <p>सदस्यता लेकर, आप वर्तमान, पूर्ण, और सटीक खरीद तथा खाता जानकारी प्रदान करने के लिए सहमत होते हैं। सदस्यता शुल्क आपके निर्धारित भुगतान माध्यम से नवीनीकरण तिथि से पहले रद्द न किए जाने पर स्वतः ही आवर्ती आधार (मासिक या वार्षिक) पर बिल किया जाएगा। कानून द्वारा आवश्यक होने के अलावा सभी शुल्क अप्रतिदेय हैं।</p>
+      </section>
+
+      <section id="disclaimers" class="ci-legal-section">
+        <h2>5. वित्तीय एवं पत्रकारिता संबंधी अस्वीकरण</h2>
+        <p>Corporate Impact पर प्रदान की गई सामग्री केवल सूचनात्मक और पत्रकारिता प्रयोजनों के लिए है। <strong>यह वित्तीय, निवेश, कानूनी, या अन्य पेशेवर सलाह नहीं मानी जाएगी।</strong></p>
+        <p>यद्यपि हम पूर्ण सटीकता और तथ्यात्मक शुद्धता के लिए प्रयासरत रहते हैं, हम वेबसाइट या वेबसाइट पर मौजूद जानकारी, उत्पादों, सेवाओं, या संबंधित ग्राफ़िक्स की पूर्णता, सटीकता, विश्वसनीयता, या किसी भी प्रयोजन के लिए उपयुक्तता के संबंध में किसी भी प्रकार की, स्पष्ट या निहित, प्रस्तुति या वारंटी नहीं देते।</p>
+      </section>
+
+      <section id="limitation-of-liability" class="ci-legal-section">
+        <h2>6. दायित्व की सीमा</h2>
+        <p>किसी भी स्थिति में Corporate Impact, न ही इसके निदेशक, कर्मचारी, साझेदार, एजेंट, आपूर्तिकर्ता, या सहयोगी, किसी भी अप्रत्यक्ष, आकस्मिक, विशेष, परिणामी, या दंडात्मक क्षतियों के लिए उत्तरदायी होंगे, जिनमें बिना किसी सीमा के, लाभ, डेटा, उपयोग, सद्भावना, या अन्य अमूर्त हानियों की क्षति शामिल है, जो (i) सेवा तक आपकी पहुंच या उपयोग या पहुंच/उपयोग में असमर्थता से; (ii) सेवा पर किसी तृतीय पक्ष के किसी भी आचरण या सामग्री से; और (iii) आपके प्रसारण या सामग्री तक अनधिकृत पहुंच, उपयोग, या परिवर्तन से उत्पन्न हों।</p>
+      </section>
+
+      <section id="contact" class="ci-legal-section">
+        <h2>7. संपर्क जानकारी</h2>
+        <p>यदि आपके इन शर्तों के बारे में कोई प्रश्न हैं, आप किसी उल्लंघन की रिपोर्ट करना चाहते हैं, या लाइसेंसिंग और सिंडिकेशन के संबंध में हमारी कानूनी टीम से संपर्क करने की आवश्यकता है, तो कृपया हमसे यहां संपर्क करें:</p>
+        <p><strong>ईमेल:</strong> <a href="mailto:connect@corporateimpact.in">connect@corporateimpact.in</a></p>
+        <p>Corporate Impact Media Network<br>
+      </section>
+
+    </article>
+  </div>
+</main>
+{% endblock 'body' %}
+
+{% block 'script' %}
+<script>
+  /* =========================================
+     SCROLL SPY FOR SIDEBAR NAVIGATION
+     ========================================= */
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.ci-legal-section');
+    const navLinks = document.querySelectorAll('.ci-legal-nav-link');
+
+    // Highlight active link based on scroll position
+    window.addEventListener('scroll', () => {
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        // Offset by 150px to account for sticky headers and trigger point
+        if (scrollY >= (sectionTop - 150)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current) && current !== '') {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    navLinks.forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 100, // Offset for sticky topbars
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+</script>
+{% endblock 'script' %}

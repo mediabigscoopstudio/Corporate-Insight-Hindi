@@ -1,0 +1,306 @@
+{% extends "main/base.html" %}
+
+{% block 'title' %}कुकी नीति | Corporate Impact{% endblock 'title' %}
+
+{% block 'meta' %}
+<meta name="description" content="Corporate Impact के लिए कुकी नीति। जानें कि हम आपके पढ़ने के अनुभव को बेहतर बनाने के लिए कुकीज़ और ट्रैकिंग तकनीकों का उपयोग कैसे करते हैं।">
+{% endblock 'meta' %}
+
+{% block 'css' %}
+<style>
+  /* =========================================
+     LEGAL PAGE SPECIFIC STYLES
+     ========================================= */
+  .ci-legal-wrapper {
+    padding: 64px 40px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  /* Page Header */
+  .ci-legal-header {
+    margin-bottom: 48px;
+    border-bottom: 2px solid var(--ci-black);
+    padding-bottom: 24px;
+  }
+  .ci-legal-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ci-red);
+    margin-bottom: 12px;
+  }
+  .ci-legal-title {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ci-black);
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .ci-legal-meta {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ci-slate);
+  }
+
+  /* Layout Grid */
+  .ci-legal-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* Sticky Sidebar Navigation */
+  .ci-legal-nav {
+    position: sticky;
+    top: 100px;
+    background: var(--ci-white);
+    border: 0.5px solid var(--ci-mist);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .ci-legal-nav-title {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ci-slate);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--ci-mist);
+  }
+  .ci-legal-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .ci-legal-nav-link {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ci-graphite);
+    text-decoration: none;
+    transition: color 0.15s, transform 0.15s;
+    display: inline-block;
+  }
+  .ci-legal-nav-link:hover,
+  .ci-legal-nav-link.active {
+    color: var(--ci-red);
+    transform: translateX(4px);
+  }
+
+  /* Document Content */
+  .ci-legal-content {
+    font-family: var(--font-sans);
+    color: var(--ci-graphite);
+    line-height: 1.7;
+    font-size: 15px;
+    max-width: 760px;
+  }
+  .ci-legal-section {
+    margin-bottom: 48px;
+    scroll-margin-top: 100px;
+  }
+  .ci-legal-section h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ci-black);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ci-legal-section h2::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 20px;
+    background: var(--ci-red);
+    border-radius: 2px;
+  }
+  .ci-legal-section p {
+    margin-bottom: 16px;
+  }
+  .ci-legal-section ul {
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+  .ci-legal-section li {
+    margin-bottom: 8px;
+  }
+  .ci-legal-section a {
+    color: var(--ci-red);
+    text-decoration: underline;
+    text-decoration-color: var(--ci-mist);
+    transition: text-decoration-color 0.15s;
+  }
+  .ci-legal-section a:hover {
+    text-decoration-color: var(--ci-red);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .ci-legal-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .ci-legal-nav {
+      position: static;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      background: transparent;
+      padding: 24px 0;
+    }
+  }
+  @media (max-width: 768px) {
+    .ci-legal-wrapper {
+      padding: 40px 20px;
+    }
+    .ci-legal-title {
+      font-size: 36px;
+    }
+  }
+</style>
+{% endblock 'css' %}
+
+{% block 'body' %}
+<main class="ci-legal-wrapper">
+  
+  <header class="ci-legal-header">
+    <div class="ci-legal-eyebrow">कानूनी जानकारी</div>
+    <h1 class="ci-legal-title">कुकी नीति</h1>
+    <div class="ci-legal-meta">अंतिम अद्यतन: 12 मई, 2026</div>
+  </header>
+
+  <div class="ci-legal-layout">
+
+    <aside class="ci-legal-nav">
+      <div class="ci-legal-nav-title">विषय सूची</div>
+      <ul class="ci-legal-nav-list">
+        <li><a href="#what-are-cookies" class="ci-legal-nav-link active">1. कुकीज़ क्या हैं?</a></li>
+        <li><a href="#how-we-use" class="ci-legal-nav-link">2. हम कुकीज़ का उपयोग कैसे करते हैं</a></li>
+        <li><a href="#types-of-cookies" class="ci-legal-nav-link">3. हम जिन प्रकार की कुकीज़ का उपयोग करते हैं</a></li>
+        <li><a href="#third-party" class="ci-legal-nav-link">4. तृतीय-पक्ष कुकीज़</a></li>
+        <li><a href="#manage-preferences" class="ci-legal-nav-link">5. अपनी प्राथमिकताएं प्रबंधित करना</a></li>
+        <li><a href="#contact" class="ci-legal-nav-link">6. हमसे संपर्क करें</a></li>
+      </ul>
+    </aside>
+
+    <article class="ci-legal-content">
+      
+      <section id="what-are-cookies" class="ci-legal-section">
+        <h2>1. कुकीज़ क्या हैं?</h2>
+        <p>कुकीज़ छोटी टेक्स्ट फ़ाइलें होती हैं जो किसी वेबसाइट पर जाने पर आपके कंप्यूटर, स्मार्टफ़ोन, या अन्य डिवाइस पर रखी जाती हैं। इनका व्यापक रूप से वेबसाइट स्वामियों द्वारा अपनी वेबसाइटों को कार्यशील बनाने, या अधिक कुशलता से कार्य करने के साथ-साथ रिपोर्टिंग जानकारी प्रदान करने के लिए उपयोग किया जाता है।</p>
+        <p>वेबसाइट स्वामी (इस मामले में, Corporate Impact) द्वारा सेट की गई कुकीज़ को "प्रथम-पक्ष कुकीज़" कहा जाता है। वेबसाइट स्वामी के अलावा अन्य पक्षों द्वारा सेट की गई कुकीज़ को "तृतीय-पक्ष कुकीज़" कहा जाता है।</p>
+      </section>
+
+      <section id="how-we-use" class="ci-legal-section">
+        <h2>2. हम कुकीज़ का उपयोग कैसे करते हैं</h2>
+        <p><strong>corporateimpact.in</strong> पर, हम एक निर्बाध, प्रीमियम पठन अनुभव प्रदान करने के लिए कुकीज़ का उपयोग करते हैं। हम इनका उपयोग निम्नलिखित के लिए करते हैं:</p>
+        <ul>
+          <li>आपके लॉगिन और प्रीमियम सदस्यता स्थिति को याद रखना ताकि आपको हर पेज पर लॉग इन न करना पड़े।</li>
+          <li>यह सुनिश्चित करना कि हमारे लाइव मार्केट टिकर और ब्रेकिंग न्यूज़ अलर्ट कुशलता से लोड हों।</li>
+          <li>यह समझना कि आप हमारे प्लेटफ़ॉर्म का उपयोग कैसे करते हैं ताकि हम अपने संपादकीय लेआउट और सामग्री वितरण को बेहतर बना सकें।</li>
+          <li>आपकी पढ़ने की प्राथमिकताओं को सहेजना, जैसे डार्क मोड सेटिंग्स या पसंदीदा श्रेणियां (जैसे, मार्केट्स, नीति)।</li>
+        </ul>
+      </section>
+
+      <section id="types-of-cookies" class="ci-legal-section">
+        <h2>3. हम जिन प्रकार की कुकीज़ का उपयोग करते हैं</h2>
+        <p>हम अपनी कुकीज़ को निम्नलिखित श्रेणियों में वर्गीकृत करते हैं:</p>
+        <ul>
+          <li><strong>अत्यंत आवश्यक कुकीज़:</strong> ये हमारी वेबसाइट के संचालन के लिए आवश्यक हैं। इनमें, उदाहरण के लिए, ऐसी कुकीज़ शामिल हैं जो आपको हमारी साइट के सुरक्षित सदस्यता क्षेत्रों में लॉग इन करने या बिलिंग सेवाओं का उपयोग करने में सक्षम बनाती हैं।</li>
+          <li><strong>प्रदर्शन और विश्लेषण कुकीज़:</strong> ये हमें आगंतुकों की संख्या पहचानने और गिनने, तथा यह देखने में सक्षम बनाती हैं कि आगंतुक हमारी वेबसाइट पर कैसे घूमते हैं। इससे हमें अपनी वेबसाइट के कार्य करने के तरीके को बेहतर बनाने में मदद मिलती है, जिससे पाठकों को जो चाहिए वह आसानी से मिल सके।</li>
+          <li><strong>कार्यक्षमता कुकीज़:</strong> इनका उपयोग तब आपको पहचानने के लिए किया जाता है जब आप हमारी वेबसाइट पर वापस आते हैं। यह हमें आपके लिए हमारी सामग्री को व्यक्तिगत बनाने और आपकी प्राथमिकताओं को याद रखने में सक्षम बनाता है।</li>
+        </ul>
+      </section>
+
+      <section id="third-party" class="ci-legal-section">
+        <h2>4. तृतीय-पक्ष कुकीज़</h2>
+        <p>अपनी स्वयं की कुकीज़ के अतिरिक्त, हम सेवा के उपयोग के आंकड़ों की रिपोर्ट करने, सेवा पर और उसके माध्यम से विज्ञापन प्रदान करने, आदि के लिए विभिन्न तृतीय-पक्ष कुकीज़ का भी उपयोग कर सकते हैं। इन तृतीय पक्षों में शामिल हैं:</p>
+        <ul>
+          <li><strong>भुगतान प्रोसेसर:</strong> सदस्यता लेनदेन को सुरक्षित रूप से संभालने के लिए।</li>
+          <li><strong>विश्लेषण प्रदाता:</strong> जैसे Google Analytics, जो हमें अपने दर्शकों की जनसांख्यिकी और पढ़ने की आदतों को समझने में मदद करते हैं।</li>
+          <li><strong>एम्बेडेड सामग्री:</strong> YouTube या Twitter जैसे मीडिया प्लेटफ़ॉर्म, जो हमारे लेखों में एम्बेड की गई सामग्री के साथ आपकी बातचीत के दौरान कुकीज़ सेट कर सकते हैं।</li>
+        </ul>
+      </section>
+
+      <section id="manage-preferences" class="ci-legal-section">
+        <h2>5. अपनी कुकी प्राथमिकताएं प्रबंधित करना</h2>
+        <p>आपको कुकीज़ स्वीकार करने या अस्वीकार करने का निर्णय लेने का अधिकार है। आप कुकीज़ स्वीकार करने या अस्वीकार करने के लिए अपने वेब ब्राउज़र नियंत्रणों को सेट या संशोधित करके अपने कुकी अधिकारों का प्रयोग कर सकते हैं। यदि आप कुकीज़ अस्वीकार करना चुनते हैं, तो भी आप हमारी वेबसाइट का उपयोग कर सकते हैं, हालांकि हमारी वेबसाइट की कुछ कार्यक्षमताओं और क्षेत्रों (विशेष रूप से प्रीमियम सदस्यता क्षेत्रों) तक आपकी पहुंच सीमित हो सकती है।</p>
+        <p>लोकप्रिय ब्राउज़रों पर कुकीज़ प्रबंधित करने का तरीका जानने के लिए, कृपया अपने संबंधित ब्राउज़र (Chrome, Safari, Firefox, Edge) के सहायता पृष्ठों पर जाएं।</p>
+      </section>
+
+      <section id="contact" class="ci-legal-section">
+        <h2>6. हमसे संपर्क करें</h2>
+        <p>यदि कुकीज़ या अन्य तकनीकों के हमारे उपयोग के बारे में आपके कोई प्रश्न हैं, तो कृपया हमें यहां ईमेल करें:</p>
+        <p><strong>ईमेल:</strong> <a href="mailto:connect@corporateimpact.in">connect@corporateimpact.in</a></p>
+        <p>Corporate Impact Media Network<br>
+        मुंबई | नई दिल्ली | बेंगलुरु</p>
+      </section>
+
+    </article>
+  </div>
+</main>
+{% endblock 'body' %}
+
+{% block 'script' %}
+<script>
+  /* =========================================
+     SCROLL SPY FOR SIDEBAR NAVIGATION
+     ========================================= */
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.ci-legal-section');
+    const navLinks = document.querySelectorAll('.ci-legal-nav-link');
+
+    // Highlight active link based on scroll position
+    window.addEventListener('scroll', () => {
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        // Offset by 150px to account for sticky headers and trigger point
+        if (scrollY >= (sectionTop - 150)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current) && current !== '') {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    navLinks.forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 100, // Offset for sticky topbars
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+</script>
+{% endblock 'script' %}
