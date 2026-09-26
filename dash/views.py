@@ -655,6 +655,9 @@ def content_management(request):
     'display_order'
     )
 
+    # Gallery
+    galleries = Gallery.objects.all().order_by('display_order')
+
     # Articles
     articles = Article.objects.filter(
         status="Enabled"
@@ -677,6 +680,9 @@ def content_management(request):
                 elif action == 'ajax_update_category_order':
                     for item in order_data:
                         Category.objects.filter(id=item['id']).update(display_order=item['order'])
+                elif action == 'ajax_update_gallery_order':
+                    for item in order_data:
+                        Gallery.objects.filter(id=item['id']).update(display_order=item['order'])
                 elif action == 'ajax_update_banner_order':
                     for item in order_data:
                         HomepageBanner.objects.filter(id=item['id']).update(display_order=item['order'])
@@ -832,6 +838,8 @@ def content_management(request):
             'banners': banners,
 
             'ads': ads,
+
+            'galleries': galleries,
 
             'articles': articles,
         }

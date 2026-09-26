@@ -89,6 +89,31 @@
 
 
 
+    <!-- GALLERY ORDER -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-0">Gallery Order</h5>
+                <small class="text-muted">Drag and drop gallery images to reorder. Changes are saved automatically.</small>
+            </div>
+            <span id="gallery-save-status" class="badge bg-success" style="display: none; transition: opacity 0.5s ease;">Saved!</span>
+        </div>
+        <div class="card-body">
+            <div class="row" id="gallery-sortable-list">
+                {% for i in galleries %}
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3 gallery-item" style="cursor: grab;" data-id="{{ i.id }}">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="{{ i.image.url }}" class="card-img-top" alt="{{ i.alt_text }}" style="height: 120px; object-fit: cover;">
+                        <div class="card-body p-2 text-center">
+                            <small class="text-truncate d-block fw-semibold" title="{{ i.title }}">{{ i.title }}</small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
     <!-- HOMEPAGE BANNERS -->
     <div class="card border-0 shadow-sm mb-4">
 
@@ -724,6 +749,24 @@ document.addEventListener('DOMContentLoaded', function () {
             toggle.addEventListener('change', function() {
                 sendSortRequest('ajax_update_category_order', getCategoryOrderData(), 'category-save-status');
             });
+        });
+    }
+
+    // 2.5. Gallery Order
+    var galleryEl = document.getElementById('gallery-sortable-list');
+    if(galleryEl) {
+        Sortable.create(galleryEl, {
+            animation: 150,
+            ghostClass: 'bg-light',
+            draggable: '.gallery-item',
+            onEnd: function (evt) {
+                let items = galleryEl.querySelectorAll('.gallery-item');
+                let orderData = [];
+                items.forEach((item, index) => {
+                    orderData.push({ id: item.getAttribute('data-id'), order: index + 1 });
+                });
+                sendSortRequest('ajax_update_gallery_order', orderData, 'gallery-save-status');
+            }
         });
     }
 

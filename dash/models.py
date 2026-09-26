@@ -333,6 +333,7 @@ class Gallery(models.Model):
     alt_text = models.CharField(max_length=255)
     image = models.ImageField(upload_to='gallery/')
     created_at = models.DateTimeField(auto_now_add=True)
+    display_order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
