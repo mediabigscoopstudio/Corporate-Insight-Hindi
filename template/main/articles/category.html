@@ -3,25 +3,7 @@
 {% block 'title' %}{{ data.title }} | Corporate Impact{% endblock 'title' %}
 
 {% block 'meta' %}
-<!-- Primary Meta Tags -->
-<meta name="title" content="{{ data.title }} | Corporate Impact">
-<meta name="description" content="{{ data.description|default:'कॉर्पोरेट इम्पैक्ट पर पढ़ें '|add:data.title|add:' से जुड़ी ताज़ा खबरें।'|striptags|truncatechars:160 }}">
-<meta name="keywords" content="{{ data.title }}, Corporate Impact, News in Hindi">
-<link rel="canonical" href="{{ request.build_absolute_uri }}">
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="{{ request.build_absolute_uri }}">
-<meta property="og:title" content="{{ data.title }} | Corporate Impact">
-<meta property="og:description" content="{{ data.description|default:'कॉर्पोरेट इम्पैक्ट पर पढ़ें '|add:data.title|add:' से जुड़ी ताज़ा खबरें।'|striptags|truncatechars:160 }}">
-<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
-<meta property="twitter:title" content="{{ data.title }} | Corporate Impact">
-<meta property="twitter:description" content="{{ data.description|default:'कॉर्पोरेट इम्पैक्ट पर पढ़ें '|add:data.title|add:' से जुड़ी ताज़ा खबरें।'|striptags|truncatechars:160 }}">
-<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/images/og_graph.webp">
+<meta name="description" content="{{ data.description }}">
 {% endblock 'meta' %}
 
 {% block 'css' %}
