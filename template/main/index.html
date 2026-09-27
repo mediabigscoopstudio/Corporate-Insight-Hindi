@@ -1,6 +1,26 @@
 {% extends "main/base.html" %}
 
-{% block 'title' %}Corporate Impact | जहां हर कहानी कुछ बदल देती है{% endblock 'title' %}
+{% block 'meta' %}
+<meta name="description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta name="keywords" content="Corporate news, Business updates, Indian market trends, Business analysis, Hindi business news">
+<meta name="author" content="Corporate Insight">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="Corporate Insight | जहां हर कहानी कुछ बदल देती है">
+<meta property="og:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="Corporate Insight | जहां हर कहानी कुछ बदल देती है">
+<meta property="twitter:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
+{% endblock 'meta' %}
+
+{% block 'title' %}Corporate Insight | जहां हर कहानी कुछ बदल देती है{% endblock 'title' %}
 
 {% block 'css' %}
 <style>
@@ -603,14 +623,14 @@
                   {% if banner.image %}
                     <img src="{{ banner.image.url }}" class="hero-split-img" alt="{{ banner.title }}">
                   {% else %}
-                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Impact">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Insight">
                   {% endif %}
                 </a>
               </div>
               {% empty %}
               <div class="carousel-item active h-100">
                 <a href="#" class="hero-split-item">
-                  <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Impact">
+                  <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Insight">
                 </a>
               </div>
               {% endfor %}
@@ -667,7 +687,7 @@
     <!-- Group 1 -->
     <div class="ci-marquee-group">
       {% for article in latest_articles|slice:":12" %}
-      <a href="/article/{{ article.slug }}/" class="ci-marquee-card">
+      <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="ci-marquee-card">
         {% if article.thumbnail_image %}
           <img src="{{ article.thumbnail_image.url }}" class="ci-marquee-img" alt="{{ article.title }}">
         {% else %}
@@ -685,7 +705,7 @@
     <!-- Group 2 — exact duplicate for seamless loop -->
     <div class="ci-marquee-group" aria-hidden="true">
       {% for article in latest_articles|slice:":12" %}
-      <a href="/article/{{ article.slug }}/" class="ci-marquee-card" tabindex="-1">
+      <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="ci-marquee-card" tabindex="-1">
         {% if article.thumbnail_image %}
           <img src="{{ article.thumbnail_image.url }}" class="ci-marquee-img" alt="{{ article.title }}">
         {% else %}
@@ -780,7 +800,7 @@
 
             </blockquote>
 
-            <a href="/article/{{simply_two_main_grid.featured_article.slug}}"
+            <a href="/{{ simply_two_main_grid.featured_article.category.slug }}/{{ simply_two_main_grid.featured_article.slug }}/"
                class="st-read-link">
 
               इंटरव्यू पढ़ें
@@ -807,7 +827,7 @@
 
           <div class="col-md-6">
 
-            <a href="/article/{{simply_two_main_grid.editor_choice_1.slug}}"
+            <a href="/{{ simply_two_main_grid.editor_choice_1.category.slug }}/{{ simply_two_main_grid.editor_choice_1.slug }}/"
                class="st-card"
                style="min-height:250px;">
 
@@ -860,7 +880,7 @@
 
           <div class="col-md-6">
 
-            <a href="/article/{{simply_two_main_grid.editor_choice_2.slug}}"
+            <a href="/{{ simply_two_main_grid.editor_choice_2.category.slug }}/{{ simply_two_main_grid.editor_choice_2.slug }}/"
                class="st-card"
                style="min-height:250px;">
 
@@ -913,7 +933,7 @@
 
           <div class="col-md-6">
 
-            <a href="/article/{{simply_two_main_grid.editor_choice_3.slug}}"
+            <a href="/{{ simply_two_main_grid.editor_choice_3.category.slug }}/{{ simply_two_main_grid.editor_choice_3.slug }}/"
                class="st-card"
                style="min-height:250px;">
 
@@ -966,7 +986,7 @@
 
           <div class="col-md-6">
 
-            <a href="/article/{{simply_two_main_grid.editor_choice_4.slug}}"
+            <a href="/{{ simply_two_main_grid.editor_choice_4.category.slug }}/{{ simply_two_main_grid.editor_choice_4.slug }}/"
                class="st-card"
                style="min-height:250px;">
 
@@ -1041,7 +1061,7 @@
           <div class="row g-4">
             {% for article in news_views_articles|slice:":3" %}
             <div class="col-sm-6 col-lg-4">
-              <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+              <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
                 <div class="agc-img-wrap">
                   {% if article.thumbnail_image %}
                     <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
@@ -1074,7 +1094,7 @@
           <div class="row g-4">
             {% for article in news_views_articles|slice:"3:6" %}
             <div class="col-sm-6 col-lg-4">
-              <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+              <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
                 <div class="agc-img-wrap">
                   {% if article.thumbnail_image %}
                     <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
@@ -1104,7 +1124,7 @@
           <div class="row g-4">
             {% for article in news_views_articles|slice:"6:9" %}
             <div class="col-sm-6 col-lg-4">
-              <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+              <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
                 <div class="agc-img-wrap">
                   {% if article.thumbnail_image %}
                     <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
@@ -1134,7 +1154,7 @@
           <div class="row g-4">
             {% for article in news_views_articles|slice:"9:10" %}
             <div class="col-sm-6 col-lg-4">
-              <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+              <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
                 <div class="agc-img-wrap">
                   {% if article.thumbnail_image %}
                     <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
@@ -1231,7 +1251,7 @@
     <div class="row g-4">
       {% for article in latest_articles|slice:":6" %}
       <div class="col-sm-6 col-lg-4">
-        <a href="/article/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
+        <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
           <div class="agc-img-wrap">
             {% if article.thumbnail_image %}
               <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
@@ -1277,7 +1297,7 @@
           <div class="ci-eyebrow">प्रकाशक पोर्टल</div>
           <h2 class="byline-main-title">आपकी पहली बायलाइन।<br/>एक असली पत्रिका में।</h2>
 
-          <p class="byline-main-desc">आपके पास कहने के लिए कुछ है। Corporate Impact आपको इसे कहने का मंच देता है — आपके नाम के साथ, एक असली प्रकाशित पत्रिका में जिसे असली लोग पढ़ते हैं। थॉट लीडरशिप बनाने वाले कार्यकारियों से लेकर अपनी पहली बायलाइन अर्जित करने वाले छात्रों तक, हर महत्वपूर्ण आवाज़ के लिए हमारे पास जगह है।</p>
+          <p class="byline-main-desc">आपके पास कहने के लिए कुछ है। Corporate Insight आपको इसे कहने का मंच देता है — आपके नाम के साथ, एक असली प्रकाशित पत्रिका में जिसे असली लोग पढ़ते हैं। थॉट लीडरशिप बनाने वाले कार्यकारियों से लेकर अपनी पहली बायलाइन अर्जित करने वाले छात्रों तक, हर महत्वपूर्ण आवाज़ के लिए हमारे पास जगह है।</p>
 
           <p class="byline-main-desc">पूरे भारत के कार्यकारियों, उद्यमियों, पत्रकारों और छात्रों के लिए खुला है। हिंदी और अंग्रेज़ी। प्रिंट और डिजिटल।</p>
 
@@ -1292,7 +1312,7 @@
 
       <div class="col-lg-6 fade-in-up delay-1">
         <div class="byline-image-wrapper">
-          <img src="https://images.pexels.com/photos/4144096/pexels-photo-4144096.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Corporate Impact में प्रकाशित करता छात्र शोधकर्ता">
+          <img src="https://images.pexels.com/photos/4144096/pexels-photo-4144096.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Corporate Insight में प्रकाशित करता छात्र शोधकर्ता">
         </div>
       </div>
 
@@ -1310,7 +1330,7 @@
       <div class="hm-left">
         <div class="ci-eyebrow" style="color:var(--ci-red); margin-bottom:16px;">नया कॉलम</div>
         <h2 class="hm-main-title">उसने घर चलाया।<br/>अब वह <em>सब कुछ</em> चलाती है।</h2>
-        <p class="hm-body-text">गृहिणी की कहानी कभी वैसे नहीं बताई गई जैसी उसे बतानी चाहिए थी। Corporate Impact इसे बदल रहा है। हमारा मानना है कि परिवार को संभालना, बच्चों की परवरिश करना, और घर को एक साथ रखना ही नेतृत्व है — और हम इसे पहचानने के लिए यहां हैं।</p>
+        <p class="hm-body-text">गृहिणी की कहानी कभी वैसे नहीं बताई गई जैसी उसे बतानी चाहिए थी। Corporate Insight इसे बदल रहा है। हमारा मानना है कि परिवार को संभालना, बच्चों की परवरिश करना, और घर को एक साथ रखना ही नेतृत्व है — और हम इसे पहचानने के लिए यहां हैं।</p>
         <p class="hm-body-text"><strong style="color:rgba(255,255,255,0.85);">होममेकर स्पॉटलाइट</strong> उन महिलाओं का उत्सव मनाता है जिन्होंने अपने घरों के भीतर कुछ असाधारण बनाया — और उन लोगों का भी जिन्होंने उस शक्ति को लेकर दरवाज़े से बाहर कदम रखा।</p>
         <div class="hm-hindi">
           "घर संभालना भी एक कला है। और हर कला को पहचान मिलनी चाहिए।"<br>
@@ -1418,7 +1438,7 @@
       <div>
         <div class="ci-eyebrow" style="color:var(--ci-red); margin-bottom:20px;">न्यूज़लेटर</div>
         <h2 class="nl-headline">आपके इनबॉक्स में कहानियां।<br/><em>हर हफ़्ते।</em></h2>
-        <p class="nl-sub">Corporate Impact Weekly — भारत का एकमात्र द्विभाषी व्यापार न्यूज़लेटर। हिंदी। अंग्रेज़ी। एक तीक्ष्ण अंतर्दृष्टि, एक व्यक्तित्व, एक कहानी जो आपको कहीं और नहीं मिलेगी। 50,000+ उद्योग जगत के नेताओं का भरोसा।</p>
+        <p class="nl-sub">Corporate Insight Weekly — भारत का एकमात्र द्विभाषी व्यापार न्यूज़लेटर। हिंदी। अंग्रेज़ी। एक तीक्ष्ण अंतर्दृष्टि, एक व्यक्तित्व, एक कहानी जो आपको कहीं और नहीं मिलेगी। 50,000+ उद्योग जगत के नेताओं का भरोसा।</p>
         <form action="/subscribe_form" method="POST" class="nl-input-row">
           {% csrf_token %}
           <input type="email" name="email" placeholder="अपना ईमेल पता दर्ज करें" required autocomplete="email">

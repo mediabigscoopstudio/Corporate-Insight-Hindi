@@ -14,7 +14,7 @@ urlpatterns = [
     path("privacy",views.privacy,name='privacy'),
     path("cookies",views.cookies,name='cookies'),
     #content
-    path("article/<slug:slug>/",views.article,name='article'),
+    path("<slug:category_slug>/<slug:article_slug>/",views.article,name='article'),
     path("category/<slug:slug>/",views.category,name='category'),
     path("author/<slug:slug>/",views.author,name='author'),
     #support and newsletter

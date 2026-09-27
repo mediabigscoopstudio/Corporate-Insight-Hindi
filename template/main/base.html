@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block 'title' %}Corporate Impact{% endblock 'title' %}</title>
+  <title>{% block 'title' %}Corporate Insight{% endblock 'title' %}</title>
   <link rel="shortcut icon" href="/static/main/logo/Vector.webp" type="image/x-icon">
   {% block 'meta' %}{% endblock 'meta' %}
 
@@ -518,7 +518,7 @@
 
     <div class="ci-logo-container">
       <a href="/">
-        <img src="/static/main/logo/logo.webp" alt="Corporate Impact">
+        <img src="/static/main/logo/logo.webp" alt="Corporate Insight">
       </a>
     </div>
 
@@ -539,7 +539,7 @@
       <div class="ci-megamenu-panel" id="panel-{{ item.category.slug }}">
         <div class="ci-menu-grid">
           {% for article in item.articles %}
-          <a href="/article/{{ article.slug }}/" class="ci-menu-card">
+          <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="ci-menu-card">
             <div class="ci-menu-card-img">
               {% if article.thumbnail_image %}
                 <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}">
@@ -569,9 +569,9 @@
 
       <div class="ci-footer-brand">
         <div class="ci-footer-logo">
-          <img src="/static/main/logo/logo.png" alt="Corporate Impact">
+          <img src="/static/main/logo/logo.png" alt="Corporate Insight">
         </div>
-        <p class="ci-footer-tagline">Corporate Impact भारत की प्रमुख द्विभाषी व्यापार पत्रिका है, जो व्यापार, वित्त और उद्योग को नया आकार देने वाली शक्तियों का प्रामाणिक विश्लेषण प्रस्तुत करती है। भारतीय उद्योग जगत की निर्णायक आवाज़।</p>
+        <p class="ci-footer-tagline">Corporate Insight भारत की प्रमुख द्विभाषी व्यापार पत्रिका है, जो व्यापार, वित्त और उद्योग को नया आकार देने वाली शक्तियों का प्रामाणिक विश्लेषण प्रस्तुत करती है। भारतीय उद्योग जगत की निर्णायक आवाज़।</p>
         
         <div style="margin-top: 24px; display: flex; gap: 16px;">
           <a href="#" aria-label="LinkedIn" class="ci-footer-link" style="font-size: 18px; margin: 0;"><i class="bi bi-linkedin"></i></a>
@@ -640,7 +640,7 @@
     </div>
 
     <div class="ci-footer-bottom">
-      <span>&copy; 2026 Corporate Impact Media Network. सर्वाधिकार सुरक्षित।</span>
+      <span>&copy; 2026 Corporate Insight Media Network. सर्वाधिकार सुरक्षित।</span>
       <span>डिज़ाइन द्वारा <a href="#" data-bs-toggle="modal" data-bs-target="#pinecodeModal">Pinecode</a></span>
     </div>
   </footer>

@@ -1,9 +1,23 @@
 {% extends "main/base.html" %}
 
-{% block 'title' %}कुकी नीति | Corporate Impact{% endblock 'title' %}
+{% block 'title' %}कुकी नीति | Corporate Insight{% endblock 'title' %}
 
 {% block 'meta' %}
-<meta name="description" content="Corporate Impact के लिए कुकी नीति। जानें कि हम आपके पढ़ने के अनुभव को बेहतर बनाने के लिए कुकीज़ और ट्रैकिंग तकनीकों का उपयोग कैसे करते हैं।">
+<meta name="description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="Corporate Insight">
+<meta property="og:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="Corporate Insight">
+<meta property="twitter:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
 {% endblock 'meta' %}
 
 {% block 'css' %}
@@ -202,7 +216,7 @@
       <section id="what-are-cookies" class="ci-legal-section">
         <h2>1. कुकीज़ क्या हैं?</h2>
         <p>कुकीज़ छोटी टेक्स्ट फ़ाइलें होती हैं जो किसी वेबसाइट पर जाने पर आपके कंप्यूटर, स्मार्टफ़ोन, या अन्य डिवाइस पर रखी जाती हैं। इनका व्यापक रूप से वेबसाइट स्वामियों द्वारा अपनी वेबसाइटों को कार्यशील बनाने, या अधिक कुशलता से कार्य करने के साथ-साथ रिपोर्टिंग जानकारी प्रदान करने के लिए उपयोग किया जाता है।</p>
-        <p>वेबसाइट स्वामी (इस मामले में, Corporate Impact) द्वारा सेट की गई कुकीज़ को "प्रथम-पक्ष कुकीज़" कहा जाता है। वेबसाइट स्वामी के अलावा अन्य पक्षों द्वारा सेट की गई कुकीज़ को "तृतीय-पक्ष कुकीज़" कहा जाता है।</p>
+        <p>वेबसाइट स्वामी (इस मामले में, Corporate Insight) द्वारा सेट की गई कुकीज़ को "प्रथम-पक्ष कुकीज़" कहा जाता है। वेबसाइट स्वामी के अलावा अन्य पक्षों द्वारा सेट की गई कुकीज़ को "तृतीय-पक्ष कुकीज़" कहा जाता है।</p>
       </section>
 
       <section id="how-we-use" class="ci-legal-section">
@@ -246,7 +260,7 @@
         <h2>6. हमसे संपर्क करें</h2>
         <p>यदि कुकीज़ या अन्य तकनीकों के हमारे उपयोग के बारे में आपके कोई प्रश्न हैं, तो कृपया हमें यहां ईमेल करें:</p>
         <p><strong>ईमेल:</strong> <a href="mailto:connect@corporateimpact.in">connect@corporateimpact.in</a></p>
-        <p>Corporate Impact Media Network<br>
+        <p>Corporate Insight Media Network<br>
         मुंबई | नई दिल्ली | बेंगलुरु</p>
       </section>
 

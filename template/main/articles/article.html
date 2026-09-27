@@ -1,11 +1,33 @@
 {% extends "main/base.html" %}
 
-{% block 'title' %}{{ data.title }} | Corporate Impact{% endblock 'title' %}
+{% block 'title' %}{{ data.title }} | Corporate Insight{% endblock 'title' %}
 
 {% block 'meta' %}
 <meta name="description" content="{{ data.meta_description|default:data.tldr }}">
 <meta name="keywords" content="{{ data.meta_keywords }}">
-<meta name="author" content="{{ data.author.name }}">
+<meta name="author" content="{{ data.author.name|default:'संपादकीय' }}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="{{ data.title }} | Corporate Insight">
+<meta property="og:description" content="{{ data.meta_description|default:data.tldr }}">
+{% if data.thumbnail_image %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ data.thumbnail_image.url }}">
+{% else %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
+{% endif %}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="{{ data.title }} | Corporate Insight">
+<meta property="twitter:description" content="{{ data.meta_description|default:data.tldr }}">
+{% if data.thumbnail_image %}
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ data.thumbnail_image.url }}">
+{% else %}
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
+{% endif %}
 {% endblock 'meta' %}
 
 {% block 'css' %}
@@ -720,7 +742,7 @@
           <img src="{{ data.banner_image.url }}" alt="{{ data.title }}">
         {% else %}
           <div style="width: 100%; height: 100%; background: var(--ci-black); display:flex; align-items:center; justify-content:center;">
-             <span style="color:var(--ci-white); font-family:var(--font-display); font-size: 24px; opacity:0.2;">Corporate Impact</span>
+             <span style="color:var(--ci-white); font-family:var(--font-display); font-size: 24px; opacity:0.2;">Corporate Insight</span>
           </div>
         {% endif %}
       </div>
@@ -778,7 +800,7 @@
           </div>
           <div class="ci-related-grid">
             {% for i in related_articles|slice:":3" %}
-            <a href="/article/{{i.slug}}/" class="ci-related-card">
+            <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="ci-related-card">
               <div class="ci-related-img">
                 {% if i.thumbnail_image %}
                   <img src="{{ i.thumbnail_image.url }}" alt="{{ i.title }}">

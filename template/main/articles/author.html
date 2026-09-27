@@ -1,9 +1,9 @@
 {% extends "main/base.html" %}
 
-{% block 'title' %}{{ data.name }} | Corporate Impact{% endblock 'title' %}
+{% block 'title' %}{{ data.name }} | Corporate Insight{% endblock 'title' %}
 
 {% block 'meta' %}
-<meta name="description" content="Corporate Impact पर {{ data.name }}, {{ data.designation }} द्वारा लेख और विचार पढ़ें।">
+<meta name="description" content="Corporate Insight पर {{ data.name }}, {{ data.designation }} द्वारा लेख और विचार पढ़ें।">
 {% endblock 'meta' %}
 
 {% block 'css' %}
@@ -545,7 +545,7 @@
                     {% for i in articles %}
                     <div class="col">
                         <article class="card-editorial">
-                            <a href="/article/{{ i.slug }}" class="card-img-wrapper">
+                            <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="card-img-wrapper">
                                 {% if i.thumbnail_image %}
                                     <img src="{{ i.thumbnail_image.url }}" alt="{{ i.title }}">
                                 {% else %}
@@ -554,7 +554,7 @@
                                 <span class="badge-category">{{ i.category.title }}</span>
                             </a>
                             <div class="card-body-editorial">
-                                <a href="/article/{{ i.slug }}" class="card-title-editorial">{{ i.title }}</a>
+                                <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="card-title-editorial">{{ i.title }}</a>
                                 <p class="card-desc-editorial">{{ i.description }}</p>
                                 <div class="card-meta">
                                     <span><i class="bi bi-calendar3 me-1"></i> {{ i.created_at|date:"M d, Y" }}</span>
@@ -603,7 +603,7 @@
                         <ul class="sidebar-list">
                             {% for i in trending_articles|slice:":5" %}
                             <li class="sidebar-list-item trending-item">
-                                <a href="/article/{{ i.slug }}" class="sidebar-article-title">{{ i.title }}</a>
+                                <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="sidebar-article-title">{{ i.title }}</a>
                                 <div class="sidebar-meta">{{ i.views }} व्यूज़</div>
                             </li>
                             {% endfor %}
@@ -617,7 +617,7 @@
                         <ul class="sidebar-list">
                             {% for i in latest_articles|slice:":5" %}
                             <li class="sidebar-list-item">
-                                <a href="/article/{{ i.slug }}" class="sidebar-article-title">{{ i.title }}</a>
+                                <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="sidebar-article-title">{{ i.title }}</a>
                                 <div class="sidebar-meta">{{ i.created_at|date:"M d, Y" }} · {{ i.category.title }}</div>
                             </li>
                             {% endfor %}

@@ -1,9 +1,23 @@
 {% extends "main/base.html" %}
 
-{% block 'title' %}सहायता और संपर्क | Corporate Impact{% endblock 'title' %}
+{% block 'title' %}सहायता और संपर्क | Corporate Insight{% endblock 'title' %}
 
 {% block 'meta' %}
-<meta name="description" content="संपादकीय सहयोग, साझेदारी, विज्ञापन, सहायता या मीडिया अवसरों के लिए Corporate Impact से संपर्क करें। आइए एक सार्थक बातचीत शुरू करें।">
+<meta name="description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="Corporate Insight">
+<meta property="og:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="Corporate Insight">
+<meta property="twitter:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
 {% endblock 'meta' %}
 
 {% block 'css' %}
@@ -366,7 +380,7 @@
     <div class="hero-gradient-mesh"></div>
     <div class="container hero-content text-center">
         <h1 class="hero-title fade-in-up">आइए एक<br>सार्थक बातचीत शुरू करें</h1>
-        <p class="hero-subtitle mx-auto fade-in-up delay-1">संपादकीय सहयोग, साझेदारी, विज्ञापन, सहायता या विशेष मीडिया अवसरों के लिए Corporate Impact से संपर्क करें।</p>
+        <p class="hero-subtitle mx-auto fade-in-up delay-1">संपादकीय सहयोग, साझेदारी, विज्ञापन, सहायता या विशेष मीडिया अवसरों के लिए Corporate Insight से संपर्क करें।</p>
 
         <div class="d-flex flex-wrap justify-content-center gap-4 mt-5 fade-in-up delay-2">
             <div class="trust-indicator">
@@ -526,7 +540,7 @@
 <section class="authority-section fade-in-up delay-1">
     <div class="container">
         <h2 class="authority-quote">
-            <span class="authority-mark">“</span>Corporate Impact भारत के व्यावसायिक पारिस्थितिकी तंत्र के भविष्य को आकार देने वाली प्रामाणिक पत्रकारिता, अंतर्दृष्टि और बातचीत प्रस्तुत करता है।<span class="authority-mark">”</span>
+            <span class="authority-mark">“</span>Corporate Insight भारत के व्यावसायिक पारिस्थितिकी तंत्र के भविष्य को आकार देने वाली प्रामाणिक पत्रकारिता, अंतर्दृष्टि और बातचीत प्रस्तुत करता है।<span class="authority-mark">”</span>
         </h2>
     </div>
 </section>
@@ -575,10 +589,10 @@
     <div class="container">
         <div style="margin-bottom: 16px;">
             <a href="/" class="footer-brand">
-                Corporate Impact
+                Corporate Insight
             </a>
         </div>
-        <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin-bottom: 0;">&copy; 2026 Corporate Impact Media Network. सर्वाधिकार सुरक्षित।</p>
+        <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin-bottom: 0;">&copy; 2026 Corporate Insight Media Network. सर्वाधिकार सुरक्षित।</p>
     </div>
 </footer>
 

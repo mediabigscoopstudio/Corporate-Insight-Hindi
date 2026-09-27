@@ -1,9 +1,24 @@
 {% extends "main/base.html" %}
 
-{% block 'title' %}{{ data.title }} | Corporate Impact{% endblock 'title' %}
+{% block 'title' %}{{ data.title }} | Corporate Insight{% endblock 'title' %}
 
 {% block 'meta' %}
-<meta name="description" content="{{ data.description }}">
+<meta name="description" content="{{ data.meta_description|default:data.title|add:' से जुड़ी नवीनतम खबरें और विस्तृत कवरेज।' }}">
+<meta name="keywords" content="{{ data.meta_keywords|default:data.title|add:', Corporate Insight, News, Business' }}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="{{ data.title }} | Corporate Insight">
+<meta property="og:description" content="{{ data.meta_description|default:data.title|add:' से जुड़ी नवीनतम खबरें और विस्तृत कवरेज।' }}">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="{{ data.title }} | Corporate Insight">
+<meta property="twitter:description" content="{{ data.meta_description|default:data.title|add:' से जुड़ी नवीनतम खबरें और विस्तृत कवरेज।' }}">
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
 {% endblock 'meta' %}
 
 {% block 'css' %}
@@ -11,7 +26,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
     :root {
-        --ci-primary: #CC1B1B; /* Corporate Impact Red */
+        --ci-primary: #CC1B1B; /* Corporate Insight Red */
         --ci-dark: #212529;
         --ci-paper: #F8F9FA;
         --ci-gray-light: #DEE2E6;
@@ -225,7 +240,7 @@
         <div class="row g-4">
             <div class="col-lg-7">
                 {% if main_grid.featured_article %}
-                <a href="/article/{{ main_grid.featured_article.slug }}" class="text-decoration-none d-block h-100">
+                <a href="/{{ main_grid.featured_article.category.slug }}/{{ main_grid.featured_article.slug }}/" class="text-decoration-none d-block h-100">
                     <div class="featured-main-card img-hover-zoom hover-lift">
                         <img src="{{ main_grid.featured_article.thumbnail_image.url }}" class="featured-main-img" alt="{{ main_grid.featured_article.title }}">
                         <div class="featured-overlay">
@@ -251,7 +266,7 @@
                 <div class="d-flex flex-column gap-3">
                     
                     {% if main_grid.editor_choice_1 %}
-                    <a href="/article/{{ main_grid.editor_choice_1.slug }}/" class="text-decoration-none article-title d-flex align-items-center group">
+                    <a href="/{{ main_grid.editor_choice_1.category.slug }}/{{ main_grid.editor_choice_1.slug }}/" class="text-decoration-none article-title d-flex align-items-center group">
                         <div class="img-hover-zoom rounded flex-shrink-0 me-3">
                             <img src="{{ main_grid.editor_choice_1.thumbnail_image.url }}" class="featured-side-img" alt="{{ main_grid.editor_choice_1.title }}">
                         </div>
@@ -264,7 +279,7 @@
                     {% endif %}
 
                     {% if main_grid.editor_choice_2 %}
-                    <a href="/article/{{ main_grid.editor_choice_2.slug }}" class="text-decoration-none article-title d-flex align-items-center group border-top pt-3">
+                    <a href="/{{ main_grid.editor_choice_2.category.slug }}/{{ main_grid.editor_choice_2.slug }}/" class="text-decoration-none article-title d-flex align-items-center group border-top pt-3">
                         <div class="img-hover-zoom rounded flex-shrink-0 me-3">
                             <img src="{{ main_grid.editor_choice_2.thumbnail_image.url }}" class="featured-side-img" alt="{{ main_grid.editor_choice_2.title }}">
                         </div>
@@ -277,7 +292,7 @@
                     {% endif %}
 
                     {% if main_grid.editor_choice_3 %}
-                    <a href="/article/{{ main_grid.editor_choice_3.slug }}" class="text-decoration-none article-title d-flex align-items-center group border-top pt-3">
+                    <a href="/{{ main_grid.editor_choice_3.category.slug }}/{{ main_grid.editor_choice_3.slug }}/" class="text-decoration-none article-title d-flex align-items-center group border-top pt-3">
                         <div class="img-hover-zoom rounded flex-shrink-0 me-3">
                             <img src="{{ main_grid.editor_choice_3.thumbnail_image.url }}" class="featured-side-img" alt="{{ main_grid.editor_choice_3.title }}">
                         </div>
@@ -290,7 +305,7 @@
                     {% endif %}
 
                     {% if main_grid.editor_choice_4 %}
-                    <a href="/article/{{ main_grid.editor_choice_4.slug }}" class="text-decoration-none article-title d-flex align-items-center group border-top pt-3">
+                    <a href="/{{ main_grid.editor_choice_4.category.slug }}/{{ main_grid.editor_choice_4.slug }}/" class="text-decoration-none article-title d-flex align-items-center group border-top pt-3">
                         <div class="img-hover-zoom rounded flex-shrink-0 me-3">
                             <img src="{{ main_grid.editor_choice_4.thumbnail_image.url }}" class="featured-side-img" alt="{{ main_grid.editor_choice_4.title }}">
                         </div>
@@ -320,7 +335,7 @@
                     {% for i in articles %}
                     <div class="col">
                         <div class="card card-editorial d-flex flex-column">
-                            <a href="/article/{{ i.slug }}" class="img-hover-zoom position-relative">
+                            <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="img-hover-zoom position-relative">
                                 {% if i.thumbnail_image %}
                                 <img src="{{ i.thumbnail_image.url }}" class="card-img-top object-fit-cover" style="height: 180px;" alt="{{ i.title }}">
                                 {% endif %}
@@ -329,7 +344,7 @@
                                 <div class="mb-2">
                                     <span class="badge-editorial">{{ i.category.title }}</span>
                                 </div>
-                                <a href="/article/{{ i.slug }}" class="article-title">
+                                <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="article-title">
                                     <h5 class="card-title font-serif fw-bold fs-5 text-truncate-3 mb-2">{{ i.title }}</h5>
                                 </a>
                                 <p class="card-text text-muted small text-truncate-2 mb-3 flex-grow-1">{{ i.description }}</p>
@@ -380,7 +395,7 @@
                         <ul class="trending-list">
                             {% for i in trending_articles|slice:":5" %}
                             <li class="trending-item">
-                                <a href="/article/{{ i.slug }}" class="article-title font-serif fw-bold d-block mb-1">{{ i.title }}</a>
+                                <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="article-title font-serif fw-bold d-block mb-1">{{ i.title }}</a>
                                 <span class="meta-text">{{ i.views }} व्यूज़</span>
                             </li>
                             {% endfor %}
@@ -411,7 +426,7 @@
     <div class="container py-4">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8">
-                <span class="badge bg-danger text-uppercase letter-spacing-1 mb-3">Corporate Impact डेली</span>
+                <span class="badge bg-danger text-uppercase letter-spacing-1 mb-3">Corporate Insight डेली</span>
                 <h2 class="font-serif fw-bold mb-3 display-5">हमेशा एक कदम आगे रहें।</h2>
                 <p class="lead text-white-50 mb-4">आधिकारिक विश्लेषण, विशेष साक्षात्कार और डेली ब्रीफ सीधे अपने इनबॉक्स में पाएं।</p>
 

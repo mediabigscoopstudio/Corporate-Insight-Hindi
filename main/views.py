@@ -117,12 +117,13 @@ def cookies(request):
 
 # Articles & Content 
 from dash.models import Article,Category,CategoryMainGrid,HomepageBanner
-def article(request, slug):
+def article(request, category_slug, article_slug):
 
     # Main Article
     data = get_object_or_404(
         Article,
-        slug=slug,
+        slug=article_slug,
+        category__slug=category_slug,
         status="Enabled"
     )
 

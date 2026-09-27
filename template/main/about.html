@@ -1,9 +1,23 @@
 {% extends "main/base.html" %}
 
-{% block 'title' %}हमारे बारे में | Corporate Impact{% endblock 'title' %}
+{% block 'title' %}हमारे बारे में | Corporate Insight{% endblock 'title' %}
 
 {% block 'meta' %}
-<meta name="description" content="Corporate Impact भारत का सबसे भरोसेमंद मंच है, जहां महत्वाकांक्षा जवाबदेही से मिलती है, और नेतृत्व मानवीय मूल्यों से मिलता है। हमारी कहानी, मिशन और टीम के बारे में जानें।">
+<meta name="description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="Corporate Insight">
+<meta property="og:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="Corporate Insight">
+<meta property="twitter:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
 {% endblock 'meta' %}
 
 {% block 'css' %}
@@ -520,7 +534,7 @@
             <div class="col-lg-10 col-xl-9">
                 <span class="section-eyebrow fade-in-up">निर्णायक आवाज़</span>
                 <h1 class="hero-title fade-in-up delay-1">वे कहानियां जो भारत के भविष्य को आकार देती हैं।</h1>
-                <p class="hero-subtitle fade-in-up delay-2">हम महत्वाकांक्षा और जवाबदेही के संगम पर मौजूद हैं। Corporate Impact ऐसी प्रामाणिक पत्रकारिता प्रस्तुत करता है जो आधुनिक नेतृत्व को परिभाषित करने वाले लोगों, नीतियों और विचारों की पड़ताल करती है।</p>
+                <p class="hero-subtitle fade-in-up delay-2">हम महत्वाकांक्षा और जवाबदेही के संगम पर मौजूद हैं। Corporate Insight ऐसी प्रामाणिक पत्रकारिता प्रस्तुत करता है जो आधुनिक नेतृत्व को परिभाषित करने वाले लोगों, नीतियों और विचारों की पड़ताल करती है।</p>
                 <div class="d-flex flex-wrap gap-3 fade-in-up delay-3">
                     <a href="#our-story" class="btn-premium-primary">हमारी कहानी पढ़ें <i class="bi bi-arrow-down"></i></a>
                     <a href="/contact" class="btn-premium-outline">नेटवर्क से जुड़ें</a>
@@ -542,7 +556,7 @@
                 <div style="width: 60px; height: 3px; background: var(--ci-red); margin-bottom: 2rem;"></div>
             </div>
             <div class="col-lg-7 fade-in-up delay-1">
-                <p class="story-lead">अनंत शोर और बिखरी हुई खबरों के इस दौर में, नेतृत्व को स्पष्टता की आवश्यकता है। Corporate Impact की स्थापना इसी उलझन को दूर कर निर्णयकर्ताओं के लिए वास्तव में महत्वपूर्ण पत्रकारिता प्रस्तुत करने के लिए की गई थी।</p>
+                <p class="story-lead">अनंत शोर और बिखरी हुई खबरों के इस दौर में, नेतृत्व को स्पष्टता की आवश्यकता है। Corporate Insight की स्थापना इसी उलझन को दूर कर निर्णयकर्ताओं के लिए वास्तव में महत्वपूर्ण पत्रकारिता प्रस्तुत करने के लिए की गई थी।</p>
                 <p class="story-text">हमने आधुनिक मीडिया में एक कमी को पहचाना: व्यावसायिक रिपोर्टिंग अत्यधिक कॉर्पोरेट और मानवीय पहलू से कटी हुई हो गई थी। हमारा मानना है कि हर बाज़ार बदलाव, नीतिगत परिवर्तन और विघटनकारी स्टार्टअप के पीछे एक मानवीय कहानी होती है। महत्वाकांक्षा, संघर्ष और दृष्टि की कहानी।</p>
 
                 <div class="story-quote">
@@ -640,7 +654,7 @@
             <div class="col-lg-6 fade-in-up">
                 <span class="section-eyebrow text-gold">मानदंड</span>
                 <h2 class="font-display fw-bold mb-4" style="font-size: 3rem;">नेता हम पर भरोसा क्यों करते हैं</h2>
-                <p class="font-sans mb-4" style="color: rgba(255,255,255,0.7); font-size: 1.1rem; line-height: 1.8;">Corporate Impact संपादकीय स्वतंत्रता की एक सख्त नींव पर काम करता है। हम क्लिकबेट के पीछे नहीं भागते। हम गहन, शोधपरक और सार्थक व्यावसायिक कथावाचन में संलग्न हैं जिस पर अधिकारी भरोसा करते हैं।</p>
+                <p class="font-sans mb-4" style="color: rgba(255,255,255,0.7); font-size: 1.1rem; line-height: 1.8;">Corporate Insight संपादकीय स्वतंत्रता की एक सख्त नींव पर काम करता है। हम क्लिकबेट के पीछे नहीं भागते। हम गहन, शोधपरक और सार्थक व्यावसायिक कथावाचन में संलग्न हैं जिस पर अधिकारी भरोसा करते हैं।</p>
                 <div class="d-flex gap-5 mt-5">
                     <div>
                         <div class="why-stat">1M+</div>
@@ -688,7 +702,7 @@
     <div class="container">
         <div class="fade-in-up">
             <h2 class="final-statement">
-                "Corporate Impact केवल भारत के भविष्य की रिपोर्टिंग नहीं कर रहा है। <span class="text-red">हम उन लोगों का दस्तावेज़ीकरण कर रहे हैं जो इसका निर्माण कर रहे हैं।</span>"
+                "Corporate Insight केवल भारत के भविष्य की रिपोर्टिंग नहीं कर रहा है। <span class="text-red">हम उन लोगों का दस्तावेज़ीकरण कर रहे हैं जो इसका निर्माण कर रहे हैं।</span>"
             </h2>
         </div>
 

@@ -1,6 +1,6 @@
 {% extends "main/base.html" %}
 
-{% block 'title' %}पेज नहीं मिला | Corporate Impact{% endblock 'title' %}
+{% block 'title' %}पेज नहीं मिला | Corporate Insight{% endblock 'title' %}
 
 {% block 'css' %}
 <style>
@@ -357,7 +357,7 @@
     <div class="row g-4">
       {% for i in latest_articles|slice:":6" %}
       <div class="col-md-6 col-lg-4 ep-fade-up" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
-        <a href="/article/{{ i.slug }}" class="ep-article-card">
+        <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="ep-article-card">
           <div class="ep-article-img-wrapper">
             {% if i.thumbnail_image %}
               <img src="{{ i.thumbnail_image.url }}" alt="{{ i.title }}" class="ep-article-img" loading="lazy">

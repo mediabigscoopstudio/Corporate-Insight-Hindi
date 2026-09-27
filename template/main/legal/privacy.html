@@ -1,9 +1,23 @@
 {% extends "main/base.html" %}
 
-{% block 'title' %}गोपनीयता नीति | Corporate Impact{% endblock 'title' %}
+{% block 'title' %}गोपनीयता नीति | Corporate Insight{% endblock 'title' %}
 
 {% block 'meta' %}
-<meta name="description" content="Corporate Impact के लिए गोपनीयता नीति। जानें कि हम अपने डिजिटल मीडिया नेटवर्क में आपके डेटा को कैसे एकत्र, उपयोग और सुरक्षित करते हैं।">
+<meta name="description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="Corporate Insight">
+<meta property="og:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="Corporate Insight">
+<meta property="twitter:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
 {% endblock 'meta' %}
 
 {% block 'css' %}
@@ -202,7 +216,7 @@
       
       <section id="information-we-collect" class="ci-legal-section">
         <h2>1. हम जो जानकारी एकत्र करते हैं</h2>
-        <p>Corporate Impact Media Network में, हम आपको प्रीमियम व्यावसायिक पत्रकारिता प्रदान करने के लिए एकत्र किए जाने वाले डेटा के संबंध में पारदर्शिता में विश्वास रखते हैं। हम निम्नलिखित प्रकार की जानकारी एकत्र कर सकते हैं:</p>
+        <p>Corporate Insight Media Network में, हम आपको प्रीमियम व्यावसायिक पत्रकारिता प्रदान करने के लिए एकत्र किए जाने वाले डेटा के संबंध में पारदर्शिता में विश्वास रखते हैं। हम निम्नलिखित प्रकार की जानकारी एकत्र कर सकते हैं:</p>
         <ul>
           <li><strong>व्यक्तिगत जानकारी:</strong> नाम, ईमेल पता, पद का नाम, कंपनी का नाम, और बिलिंग विवरण जो आपके द्वारा हमारे न्यूज़लेटर, प्रीमियम सामग्री की सदस्यता लेने, या हमारे कार्यक्रमों में भाग लेने पर प्रदान किए जाते हैं।</li>
           <li><strong>उपयोग डेटा:</strong> आप <em>corporateimpact.in</em> के साथ कैसे बातचीत करते हैं, इस बारे में जानकारी, जिसमें पढ़ने का इतिहास, लेखों पर बिताया गया समय, आईपी पता, ब्राउज़र प्रकार, और डिवाइस जानकारी शामिल है।</li>
@@ -223,7 +237,7 @@
 
       <section id="information-sharing" class="ci-legal-section">
         <h2>3. जानकारी साझा करना और प्रकटीकरण</h2>
-        <p>Corporate Impact आपका व्यक्तिगत डेटा तृतीय-पक्ष डेटा दलालों को नहीं बेचता है। हम केवल निम्नलिखित परिस्थितियों में जानकारी साझा करते हैं:</p>
+        <p>Corporate Insight आपका व्यक्तिगत डेटा तृतीय-पक्ष डेटा दलालों को नहीं बेचता है। हम केवल निम्नलिखित परिस्थितियों में जानकारी साझा करते हैं:</p>
         <ul>
           <li><strong>सेवा प्रदाता:</strong> हम अपनी वेबसाइट को सुगम बनाने के लिए विश्वसनीय तृतीय-पक्ष कंपनियों को नियुक्त करते हैं (जैसे, Stripe के माध्यम से भुगतान प्रसंस्करण, ईमेल वितरण, होस्टिंग, और विश्लेषण)। इन साझेदारों को आपके डेटा तक पहुंच केवल हमारी ओर से विशिष्ट कार्य करने के लिए है और वे इसे अन्य प्रयोजनों के लिए प्रकट या उपयोग न करने के लिए बाध्य हैं।</li>
           <li><strong>कानूनी आवश्यकताएं:</strong> यदि कानून द्वारा आवश्यक हो या सार्वजनिक अधिकारियों (जैसे, अदालत या सरकारी एजेंसी) के वैध अनुरोधों के जवाब में हम आपकी जानकारी प्रकट कर सकते हैं।</li>
@@ -258,7 +272,7 @@
         <h2>7. हमसे संपर्क करें</h2>
         <p>यदि इस गोपनीयता नीति या हम आपके डेटा को कैसे संभालते हैं, इस बारे में आपके कोई प्रश्न, चिंताएं, या अनुरोध हैं, तो कृपया हमारे डेटा संरक्षण अधिकारी से यहां संपर्क करें:</p>
         <p><strong>ईमेल:</strong> <a href="mailto:connect@corporateimpact.in">connect@corporateimpact.in</a></p>
-        <p>Corporate Impact Media Network<br>
+        <p>Corporate Insight Media Network<br>
         मुंबई | नई दिल्ली | बेंगलुरु</p>
       </section>
 
