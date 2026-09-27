@@ -1157,3 +1157,9 @@ def delete_featured_video(request, id):
     data.delete()
     return redirect('/featured_videos')
 
+
+def custom_404(request, exception):
+    return render(request, 'dash/errors/404.html', status=404)
+
+def custom_500(request):
+    return render(request, 'dash/errors/500.html', status=500)

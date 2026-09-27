@@ -1,0 +1,49 @@
+{% extends "dash/base.html" %}
+
+{% block 'title' %}404 - Page Not Found | Dashboard{% endblock 'title' %}
+
+{% block 'body' %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-10 text-center">
+        <h1 class="display-1 fw-bold text-danger mb-0" style="font-size: 100px;">404</h1>
+        <h3 class="text-uppercase fw-bold mb-3">पेज नहीं मिला</h3>
+        <p class="text-muted mb-5 fs-5">जिस पेज को आप ढूंढ रहे हैं वह मौजूद नहीं है या उसका नाम बदल दिया गया है।</p>
+        
+        <h5 class="text-muted mb-4">त्वरित नेविगेशन (Quick Links)</h5>
+        <div class="row g-3 justify-content-center mb-5">
+            <div class="col-6 col-md-3">
+                <a href="{% url 'index' %}" class="card shadow-sm text-decoration-none border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-house-door text-danger fs-2 mb-2 d-block"></i>
+                        <span class="text-dark fw-bold">डैशबोर्ड</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="{% url 'articles' %}" class="card shadow-sm text-decoration-none border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-journal-text text-danger fs-2 mb-2 d-block"></i>
+                        <span class="text-dark fw-bold">कहानियां</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="{% url 'categories' %}" class="card shadow-sm text-decoration-none border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-grid text-danger fs-2 mb-2 d-block"></i>
+                        <span class="text-dark fw-bold">श्रेणियाँ</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="{% url 'content_management' %}" class="card shadow-sm text-decoration-none border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-gear text-danger fs-2 mb-2 d-block"></i>
+                        <span class="text-dark fw-bold">प्रबंधन</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock 'body' %}

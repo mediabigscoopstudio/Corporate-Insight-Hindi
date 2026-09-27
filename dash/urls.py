@@ -6,6 +6,9 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 
+handler404 = 'dash.views.custom_404'
+handler500 = 'dash.views.custom_500'
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     
