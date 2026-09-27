@@ -73,7 +73,7 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
 
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.title, allow_unicode=True)
 
         # Auto append new categories at end
         if not self.pk:
@@ -115,7 +115,7 @@ class Author(models.Model):
     status = models.CharField(max_length=100,blank=True, null=True)
     def save(self, *args, **kwargs):
         if not self.slug or self.slug == '':  # Generate slug only if it's empty
-            base_slug = slugify(self.name)
+            base_slug = slugify(self.name, allow_unicode=True)
             slug = base_slug
             count = 1
             while Author.objects.filter(slug=slug).exclude(pk=self.pk).exists():
@@ -174,7 +174,7 @@ class Article(models.Model):
     content = models.TextField(blank=True, null=True)
     likes = models.PositiveIntegerField(default=0)
     views = models.PositiveIntegerField(default=0)
-    slug = models.SlugField(unique=True, blank=True,max_length=1500)
+    slug = models.SlugField(unique=True, blank=True, max_length=1500, allow_unicode=True)
     created_at = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=100,blank=True, null=True,default="Enabled")
     title_colour = models.CharField(max_length=100,blank=True)
@@ -188,7 +188,7 @@ class Article(models.Model):
     def save(self, *args, **kwargs):
         # Create slug if missing
         if not self.slug:
-            base_slug = slugify(self.title)
+            base_slug = slugify(self.title, allow_unicode=True)
             slug = base_slug
             count = 1
             while Article.objects.filter(slug=slug).exclude(pk=self.pk).exists():
@@ -233,7 +233,7 @@ class youtube(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            base_slug = slugify(self.title)
+            base_slug = slugify(self.title, allow_unicode=True)
             slug = base_slug
             count = 1
             while Article.objects.filter(slug=slug).exists():

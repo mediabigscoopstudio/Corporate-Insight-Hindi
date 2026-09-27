@@ -15,9 +15,9 @@ urlpatterns = [
     path("privacy",views.privacy,name='privacy'),
     path("cookies",views.cookies,name='cookies'),
     #content
-    path("<slug:category_slug>/<slug:article_slug>/",views.article,name='article'),
-    path("category/<slug:slug>/",views.category,name='category'),
-    path("author/<slug:slug>/",views.author,name='author'),
+    path("<str:category_slug>/<str:article_slug>/",views.article,name='article'),
+    path("category/<str:slug>/",views.category,name='category'),
+    path("author/<str:slug>/",views.author,name='author'),
     #support and newsletter
     path("subscribe_form",views.subscribe_form,name='subscribe_form'),
     path("homemaker_form",views.homemaker_form,name='homemaker_form'),
