@@ -2,7 +2,7 @@
 {% load cache %}
 
 {% block 'meta' %}
-<meta name="description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta name="description" content="Corporate Insight भारत की प्रमुख हिंदी बिजनेस न्यूज़ वेबसाइट है। यहाँ पाएं शेयर बाज़ार, स्टार्टअप्स, अर्थव्यवस्था, निवेश और कॉर्पोरेट जगत की ताज़ा खबरें व सटीक विश्लेषण।">
 <meta name="keywords" content="Corporate news, Business updates, Indian market trends, Business analysis, Hindi business news">
 <meta name="author" content="Corporate Insight">
 
@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:title" content="Corporate Insight | जहां हर कहानी कुछ बदल देती है">
-<meta property="og:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="og:description" content="Corporate Insight भारत की प्रमुख हिंदी बिजनेस न्यूज़ वेबसाइट है। यहाँ पाएं शेयर बाज़ार, स्टार्टअप्स, अर्थव्यवस्था, निवेश और कॉर्पोरेट जगत की ताज़ा खबरें व सटीक विश्लेषण।">
 <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
 
 
@@ -21,7 +21,7 @@
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta property="twitter:title" content="Corporate Insight | जहां हर कहानी कुछ बदल देती है">
-<meta property="twitter:description" content="Corporate Insight: व्यापार और उद्योग जगत की ताज़ा खबरें, बाज़ार के रुझान, और कॉर्पोरेट जगत के अंदरूनी विश्लेषण।">
+<meta property="twitter:description" content="Corporate Insight भारत की प्रमुख हिंदी बिजनेस न्यूज़ वेबसाइट है। यहाँ पाएं शेयर बाज़ार, स्टार्टअप्स, अर्थव्यवस्था, निवेश और कॉर्पोरेट जगत की ताज़ा खबरें व सटीक विश्लेषण।">
 <meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/main/logo/logo.webp">
 {% endblock 'meta' %}
 
@@ -577,6 +577,7 @@
 
 
 {% block 'body' %}
+<h1 class="visually-hidden">Corporate Insight - भारत की अग्रणी हिंदी बिजनेस न्यूज़ पत्रिका</h1>
 
 <!-- =============================================
      0. FEATURED VIDEOS ("WATCH" STRIP)
@@ -596,7 +597,7 @@
          rel="noopener noreferrer"
          aria-label="यूट्यूब पर देखें: {{ video.title }}">
         <div class="ci-watch-thumb">
-          <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}"
+          <img loading="lazy" src="{{ video.thumbnail_url }}" alt="{{ video.title }}"
                onerror="this.onerror=null;this.src='{{ video.thumbnail_fallback_url }}';"
                alt="{{ video.title }}"
                loading="lazy">
@@ -626,16 +627,16 @@
               <div class="carousel-item h-100 {% if forloop.first %}active{% endif %}">
                 <a href="{{ banner.redirect_url }}" target="_blank" class="hero-split-item">
                   {% if banner.image %}
-                    <img src="{{ banner.image.url }}" class="hero-split-img" alt="{{ banner.title }}">
+                    <img loading="lazy" src="{{ banner.image.url }}" class="hero-split-img" alt="{{ banner.title }}">
                   {% else %}
-                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Insight">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Insight">
                   {% endif %}
                 </a>
               </div>
               {% empty %}
               <div class="carousel-item active h-100">
                 <a href="#" class="hero-split-item">
-                  <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Insight">
+                  <img loading="lazy" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="Corporate Insight">
                 </a>
               </div>
               {% endfor %}
@@ -655,16 +656,16 @@
               <div class="carousel-item h-100 {% if forloop.first %}active{% endif %}">
                 <a href="{{ i.redirect_url }}" target="_blank" class="hero-split-item">
                   {% if i.image %}
-                    <img src="{{ i.image.url }}" class="hero-split-img" alt="{{ i.title }}">
+                    <img loading="lazy" src="{{ i.image.url }}" class="hero-split-img" alt="{{ i.title }}">
                   {% else %}
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="विज्ञापन">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="विज्ञापन">
                   {% endif %}
                 </a>
               </div>
               {% empty %}
               <div class="carousel-item active h-100">
                 <a href="#" class="hero-split-item">
-                  <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="विज्ञापन">
+                  <img loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=450&h=650" class="hero-split-img" alt="विज्ञापन">
                 </a>
               </div>
               {% endfor %}
@@ -694,7 +695,7 @@
       {% for article in latest_articles|slice:":12" %}
       <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="ci-marquee-card">
         {% if article.thumbnail_image %}
-          <img src="{{ article.thumbnail_image.url }}" class="ci-marquee-img" alt="{{ article.title }}">
+          <img loading="lazy" src="{{ article.thumbnail_image.url }}" class="ci-marquee-img" alt="{{ article.title }}">
         {% else %}
           <div class="ci-marquee-img"></div>
         {% endif %}
@@ -712,7 +713,7 @@
       {% for article in latest_articles|slice:":12" %}
       <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="ci-marquee-card" tabindex="-1">
         {% if article.thumbnail_image %}
-          <img src="{{ article.thumbnail_image.url }}" class="ci-marquee-img" alt="{{ article.title }}">
+          <img loading="lazy" src="{{ article.thumbnail_image.url }}" class="ci-marquee-img" alt="{{ article.title }}">
         {% else %}
           <div class="ci-marquee-img"></div>
         {% endif %}
@@ -761,7 +762,7 @@
             position:relative;
             overflow:hidden;">
 
-    <img src="{{simply_two_main_grid.featured_article.thumbnail_image.url}}" alt="{{simply_two_main_grid.featured_article.title}}"
+    <img loading="lazy" src="{{simply_two_main_grid.featured_article.thumbnail_image.url}}" alt="{{simply_two_main_grid.featured_article.title}}"
          alt="{{simply_two_main_grid.featured_article.title}}"
          style="
             position:absolute;
@@ -1069,7 +1070,7 @@
               <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
                 <div class="agc-img-wrap">
                   {% if article.thumbnail_image %}
-                    <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+                    <img loading="lazy" src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
                   {% else %}
                     <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
                   {% endif %}
@@ -1087,9 +1088,9 @@
               </a>
             </div>
             {% empty %}
-            <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">समाचार और विचार</div><div class="agc-title">कॉर्पोरेट अपडेट: उद्योग रुझान और बाज़ार की चालें</div><div class="agc-desc">भारतीय उद्योग जगत को आकार देने वाले नवीनतम समाचारों, बाज़ार अपडेट और व्यावसायिक अंतर्दृष्टि से अवगत रहें।</div><div class="agc-meta"><span>संपादकीय</span><span style="color:var(--ci-silver);">&bull;</span><span>May 14, 2026</span></div></div></a></div>
-            <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">समाचार और विचार</div><div class="agc-title">ब्रेकिंग न्यूज़: प्रमुख कॉर्पोरेट घोषणाएं</div><div class="agc-desc">भारत की अग्रणी कंपनियों और उद्यमियों के हालिया घटनाक्रम और रणनीतिक फैसले।</div><div class="agc-meta"><span>संपादकीय</span><span style="color:var(--ci-silver);">&bull;</span><span>May 13, 2026</span></div></div></a></div>
-            <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">समाचार और विचार</div><div class="agc-title">मार्केट स्नैपशॉट: भारतीय व्यापार में यह सप्ताह</div><div class="agc-desc">कॉर्पोरेट भारत को प्रभावित करने वाली घटनाओं, सौदों और फैसलों की त्वरित झलक।</div><div class="agc-meta"><span>संपादकीय</span><span style="color:var(--ci-silver);">&bull;</span><span>May 12, 2026</span></div></div></a></div>
+            <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">समाचार और विचार</div><div class="agc-title">कॉर्पोरेट अपडेट: उद्योग रुझान और बाज़ार की चालें</div><div class="agc-desc">भारतीय उद्योग जगत को आकार देने वाले नवीनतम समाचारों, बाज़ार अपडेट और व्यावसायिक अंतर्दृष्टि से अवगत रहें।</div><div class="agc-meta"><span>संपादकीय</span><span style="color:var(--ci-silver);">&bull;</span><span>May 14, 2026</span></div></div></a></div>
+            <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">समाचार और विचार</div><div class="agc-title">ब्रेकिंग न्यूज़: प्रमुख कॉर्पोरेट घोषणाएं</div><div class="agc-desc">भारत की अग्रणी कंपनियों और उद्यमियों के हालिया घटनाक्रम और रणनीतिक फैसले।</div><div class="agc-meta"><span>संपादकीय</span><span style="color:var(--ci-silver);">&bull;</span><span>May 13, 2026</span></div></div></a></div>
+            <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">समाचार और विचार</div><div class="agc-title">मार्केट स्नैपशॉट: भारतीय व्यापार में यह सप्ताह</div><div class="agc-desc">कॉर्पोरेट भारत को प्रभावित करने वाली घटनाओं, सौदों और फैसलों की त्वरित झलक।</div><div class="agc-meta"><span>संपादकीय</span><span style="color:var(--ci-silver);">&bull;</span><span>May 12, 2026</span></div></div></a></div>
             {% endfor %}
           </div>
         </div>
@@ -1102,7 +1103,7 @@
               <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
                 <div class="agc-img-wrap">
                   {% if article.thumbnail_image %}
-                    <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+                    <img loading="lazy" src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
                   {% else %}
                     <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
                   {% endif %}
@@ -1132,7 +1133,7 @@
               <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
                 <div class="agc-img-wrap">
                   {% if article.thumbnail_image %}
-                    <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+                    <img loading="lazy" src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
                   {% else %}
                     <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
                   {% endif %}
@@ -1162,7 +1163,7 @@
               <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
                 <div class="agc-img-wrap">
                   {% if article.thumbnail_image %}
-                    <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+                    <img loading="lazy" src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
                   {% else %}
                     <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
                   {% endif %}
@@ -1199,13 +1200,13 @@
     <div class="gallery-marquee-track">
       <div class="gallery-marquee-group">
         {% for img in galleries %}
-          <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:img.title }}" class="gallery-marquee-img" title="{{ img.title }}">
+          <img loading="lazy" src="{{ img.image.url }}" alt="{{ img.alt_text|default:img.title }}" class="gallery-marquee-img" title="{{ img.title }}">
         {% endfor %}
       </div>
       <!-- Seamless duplicate -->
       <div class="gallery-marquee-group" aria-hidden="true">
         {% for img in galleries %}
-          <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:img.title }}" class="gallery-marquee-img" title="{{ img.title }}">
+          <img loading="lazy" src="{{ img.image.url }}" alt="{{ img.alt_text|default:img.title }}" class="gallery-marquee-img" title="{{ img.title }}">
         {% endfor %}
       </div>
     </div>
@@ -1259,7 +1260,7 @@
         <a href="/{{ article.category.slug }}/{{ article.slug }}/" class="article-grid-card d-block text-decoration-none">
           <div class="agc-img-wrap">
             {% if article.thumbnail_image %}
-              <img src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
+              <img loading="lazy" src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}" loading="lazy">
             {% else %}
               <div style="width:100%;height:100%;background:var(--ci-mist);"></div>
             {% endif %}
@@ -1278,12 +1279,12 @@
       </div>
       {% empty %}
       <!-- Fallback article cards — shows until articles are published -->
-      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">बाज़ार</div><div class="agc-title">सेंसेक्स की तेज़ी पूरी कहानी क्यों नहीं है — और निवेशक क्या चूक रहे हैं</div><div class="agc-desc">हेडलाइन के आंकड़ों के पीछे क्षेत्रीय विचलन और विदेशी पूंजी के व्यवहार की एक अधिक जटिल तस्वीर छिपी है।</div><div class="agc-meta"><span>Priya Sharma</span><span style="color:var(--ci-silver);">&bull;</span><span>May 14, 2026</span></div></div></a></div>
-      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">स्टार्टअप्स</div><div class="agc-title">₹500 करोड़ के उस दांव के भीतर जो भारत के एग्री-टेक क्षेत्र को अपरिचित बना सकता है</div><div class="agc-desc">तीन संस्थापक, एक विचार, और एक आपूर्ति श्रृंखला चुनौती जिसने इससे पहले कोशिश करने वाले हर किसी को हरा दिया।</div><div class="agc-meta"><span>Arjun Kapoor</span><span style="color:var(--ci-silver);">&bull;</span><span>May 13, 2026</span></div></div></a></div>
-      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">नीति</div><div class="agc-title">तीसरे वर्ष में PLI योजना: क्या काम आया, क्या विफल रहा, और आगे क्या है</div><div class="agc-desc">एक पीढ़ी की सबसे महत्वाकांक्षी औद्योगिक नीति का क्षेत्र-दर-क्षेत्र ऑडिट।</div><div class="agc-meta"><span>Editorial Board</span><span style="color:var(--ci-silver);">&bull;</span><span>May 12, 2026</span></div></div></a></div>
-      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">नेतृत्व</div><div class="agc-title">वह CEO जिसने 18 महीनों में ₹30 करोड़ के घाटे को ₹400 करोड़ के टर्नअराउंड में बदल दिया</div><div class="agc-desc">निधि अग्रवाल कट्टरपंथी पारदर्शिता, पुरानी प्रणालियों को छोड़ने, और लगभग छह बार नौकरी छोड़ने के करीब पहुंचने के बारे में बात करती हैं।</div><div class="agc-meta"><span>Rajiv Menon</span><span style="color:var(--ci-silver);">&bull;</span><span>May 11, 2026</span></div></div></a></div>
-      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">डीप टेक</div><div class="agc-title">भारत की AI टैलेंट पाइपलाइन में एक अंतर है। यहां ठीक-ठीक बताया गया है कि यह कहां टूटता है</div><div class="agc-desc">हर साल 1.4 मिलियन इंजीनियरिंग स्नातकों के बावजूद, एंटरप्राइज़ AI अपनाना कार्यान्वयन स्तर पर अटक रहा है।</div><div class="agc-meta"><span>Suresh Pillai</span><span style="color:var(--ci-silver);">&bull;</span><span>May 10, 2026</span></div></div></a></div>
-      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">स्थिरता</div><div class="agc-title">ग्रीन बॉन्ड में उछाल आ रहा है। लेकिन क्या भारत की ESG रिपोर्टिंग इसे साबित करने के लिए तैयार है?</div><div class="agc-desc">कंपनियां जो दावा करती हैं और जो साबित कर सकती हैं, उसके बीच का अंतर भारत का अगला बड़ा गवर्नेंस संकट है।</div><div class="agc-meta"><span>Kavya Nair</span><span style="color:var(--ci-silver);">&bull;</span><span>May 9, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">बाज़ार</div><div class="agc-title">सेंसेक्स की तेज़ी पूरी कहानी क्यों नहीं है — और निवेशक क्या चूक रहे हैं</div><div class="agc-desc">हेडलाइन के आंकड़ों के पीछे क्षेत्रीय विचलन और विदेशी पूंजी के व्यवहार की एक अधिक जटिल तस्वीर छिपी है।</div><div class="agc-meta"><span>Priya Sharma</span><span style="color:var(--ci-silver);">&bull;</span><span>May 14, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">स्टार्टअप्स</div><div class="agc-title">₹500 करोड़ के उस दांव के भीतर जो भारत के एग्री-टेक क्षेत्र को अपरिचित बना सकता है</div><div class="agc-desc">तीन संस्थापक, एक विचार, और एक आपूर्ति श्रृंखला चुनौती जिसने इससे पहले कोशिश करने वाले हर किसी को हरा दिया।</div><div class="agc-meta"><span>Arjun Kapoor</span><span style="color:var(--ci-silver);">&bull;</span><span>May 13, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">नीति</div><div class="agc-title">तीसरे वर्ष में PLI योजना: क्या काम आया, क्या विफल रहा, और आगे क्या है</div><div class="agc-desc">एक पीढ़ी की सबसे महत्वाकांक्षी औद्योगिक नीति का क्षेत्र-दर-क्षेत्र ऑडिट।</div><div class="agc-meta"><span>Editorial Board</span><span style="color:var(--ci-silver);">&bull;</span><span>May 12, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">नेतृत्व</div><div class="agc-title">वह CEO जिसने 18 महीनों में ₹30 करोड़ के घाटे को ₹400 करोड़ के टर्नअराउंड में बदल दिया</div><div class="agc-desc">निधि अग्रवाल कट्टरपंथी पारदर्शिता, पुरानी प्रणालियों को छोड़ने, और लगभग छह बार नौकरी छोड़ने के करीब पहुंचने के बारे में बात करती हैं।</div><div class="agc-meta"><span>Rajiv Menon</span><span style="color:var(--ci-silver);">&bull;</span><span>May 11, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">डीप टेक</div><div class="agc-title">भारत की AI टैलेंट पाइपलाइन में एक अंतर है। यहां ठीक-ठीक बताया गया है कि यह कहां टूटता है</div><div class="agc-desc">हर साल 1.4 मिलियन इंजीनियरिंग स्नातकों के बावजूद, एंटरप्राइज़ AI अपनाना कार्यान्वयन स्तर पर अटक रहा है।</div><div class="agc-meta"><span>Suresh Pillai</span><span style="color:var(--ci-silver);">&bull;</span><span>May 10, 2026</span></div></div></a></div>
+      <div class="col-sm-6 col-lg-4"><a href="#" class="article-grid-card d-block text-decoration-none"><div class="agc-img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=600" alt="Corporate Insight Image" loading="lazy"></div><div class="agc-body"><div class="agc-cat">स्थिरता</div><div class="agc-title">ग्रीन बॉन्ड में उछाल आ रहा है। लेकिन क्या भारत की ESG रिपोर्टिंग इसे साबित करने के लिए तैयार है?</div><div class="agc-desc">कंपनियां जो दावा करती हैं और जो साबित कर सकती हैं, उसके बीच का अंतर भारत का अगला बड़ा गवर्नेंस संकट है।</div><div class="agc-meta"><span>Kavya Nair</span><span style="color:var(--ci-silver);">&bull;</span><span>May 9, 2026</span></div></div></a></div>
       {% endfor %}
     </div>
   </div>
@@ -1317,7 +1318,7 @@
 
       <div class="col-lg-6 fade-in-up delay-1">
         <div class="byline-image-wrapper">
-          <img src="https://images.pexels.com/photos/4144096/pexels-photo-4144096.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Corporate Insight में प्रकाशित करता छात्र शोधकर्ता">
+          <img loading="lazy" src="https://images.pexels.com/photos/4144096/pexels-photo-4144096.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Corporate Insight में प्रकाशित करता छात्र शोधकर्ता">
         </div>
       </div>
 
@@ -1412,9 +1413,9 @@
       <div class="team-card">
         <div class="team-card__img-wrap">
           {% if member.image %}
-            <img src="{{ member.image.url }}" alt="{{ member.name }}">
+            <img loading="lazy" src="{{ member.image.url }}" alt="{{ member.name }}">
           {% else %}
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="{{ member.name }}">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="{{ member.name }}">
           {% endif %}
         </div>
         <div class="team-card__body">
@@ -1424,11 +1425,11 @@
       </div>
       {% empty %}
       <!-- Fallback team cards — replace with your actual team model data -->
-      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="Rajiv Menon"></div><div class="team-card__body"><div class="team-card__name">Rajiv Menon</div><div class="team-card__role">प्रधान संपादक</div></div></div>
-      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400" alt="Priya Sharma"></div><div class="team-card__body"><div class="team-card__name">Priya Sharma</div><div class="team-card__role">प्रबंध संपादक</div></div></div>
-      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" alt="Arjun Kapoor"></div><div class="team-card__body"><div class="team-card__name">Arjun Kapoor</div><div class="team-card__role">वरिष्ठ संवाददाता</div></div></div>
-      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400" alt="Kavya Nair"></div><div class="team-card__body"><div class="team-card__name">Kavya Nair</div><div class="team-card__role">डिज़ाइन प्रमुख</div></div></div>
-      <div class="team-card"><div class="team-card__img-wrap"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" alt="Suresh Pillai"></div><div class="team-card__body"><div class="team-card__name">Suresh Pillai</div><div class="team-card__role">डिजिटल निदेशक</div></div></div>
+      <div class="team-card"><div class="team-card__img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="Rajiv Menon"></div><div class="team-card__body"><div class="team-card__name">Rajiv Menon</div><div class="team-card__role">प्रधान संपादक</div></div></div>
+      <div class="team-card"><div class="team-card__img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400" alt="Priya Sharma"></div><div class="team-card__body"><div class="team-card__name">Priya Sharma</div><div class="team-card__role">प्रबंध संपादक</div></div></div>
+      <div class="team-card"><div class="team-card__img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" alt="Arjun Kapoor"></div><div class="team-card__body"><div class="team-card__name">Arjun Kapoor</div><div class="team-card__role">वरिष्ठ संवाददाता</div></div></div>
+      <div class="team-card"><div class="team-card__img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400" alt="Kavya Nair"></div><div class="team-card__body"><div class="team-card__name">Kavya Nair</div><div class="team-card__role">डिज़ाइन प्रमुख</div></div></div>
+      <div class="team-card"><div class="team-card__img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" alt="Suresh Pillai"></div><div class="team-card__body"><div class="team-card__name">Suresh Pillai</div><div class="team-card__role">डिजिटल निदेशक</div></div></div>
       {% endfor %}
     </div>
   </div>
