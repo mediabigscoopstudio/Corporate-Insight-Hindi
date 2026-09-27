@@ -275,6 +275,7 @@ def add_article(request):
 
         article = Article.objects.create(
             title=title,
+            slug=request.POST.get('slug', ''),
             author=author,
             category=category,
             description=description,
@@ -364,6 +365,8 @@ def edit_article(request, id):
     if request.method == 'POST':
         # Update article main fields...
         data.title = request.POST.get('title')
+        if request.POST.get('slug'):
+            data.slug = request.POST.get('slug')
         data.description = request.POST.get('description')
         data.tldr_title = request.POST.get('tldr_title')
         data.tldr = request.POST.get('tldr')
