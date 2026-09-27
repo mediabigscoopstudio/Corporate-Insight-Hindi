@@ -51,7 +51,7 @@ class Category(models.Model):
     meta_description = models.TextField()
     meta_keywords = models.CharField(max_length=255)
 
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.CharField(max_length=1500, unique=True, blank=True)
 
     created_at = models.DateTimeField(default=timezone.now)
 
@@ -110,7 +110,7 @@ class Author(models.Model):
     instagram_url = models.URLField(blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
     twitter_url = models.URLField(blank=True, null=True)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.CharField(max_length=1500, unique=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=100,blank=True, null=True)
     def save(self, *args, **kwargs):
@@ -174,7 +174,7 @@ class Article(models.Model):
     content = models.TextField(blank=True, null=True)
     likes = models.PositiveIntegerField(default=0)
     views = models.PositiveIntegerField(default=0)
-    slug = models.SlugField(unique=True, blank=True, max_length=1500, allow_unicode=True)
+    slug = models.CharField(max_length=1500, unique=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=100,blank=True, null=True,default="Enabled")
     title_colour = models.CharField(max_length=100,blank=True)
@@ -228,7 +228,7 @@ class youtube(models.Model):
     type = models.CharField(max_length=255,default="Reel")
     description = models.TextField()
     status = models.CharField(max_length=100,blank=True, null=True,default="Enabled")
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.CharField(max_length=1500, unique=True, blank=True)
     thumbnail_image = models.ImageField(upload_to='bstv/thumbnails/', blank=True, null=True)
 
     def save(self, *args, **kwargs):
