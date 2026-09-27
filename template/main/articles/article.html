@@ -840,7 +840,7 @@
           <ul class="ci-trending-list">
             {% for i in trending_articles|slice:":5" %}
             <li class="ci-trending-item">
-              <a href="{% url 'article' slug=i.slug %}" class="ci-trending-link">{{ i.title }}</a>
+              <a href="/{{ i.category.slug }}/{{ i.slug }}/" class="ci-trending-link">{{ i.title }}</a>
             </li>
             {% endfor %}
           </ul>
