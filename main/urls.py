@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
 from main import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,6 +24,8 @@ urlpatterns = [
     path("byline_form",views.byline_form,name='byline_form'),
     path("thank_you",views.thank_you,name='thank_you'),
     path("contact",views.support,name='contact'),
+    #robots.txt
+    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
     #leads
     path("byline",views.byline,name='byline'),
     path("homemaker",views.homemaker,name='homemaker'),
